@@ -1,0 +1,105 @@
+\chapter{Introduction}
+
+\textit{Vidjil} est une plateforme open-source \cite{giraudFastMulticlonalClusterization2014}
+permettant l'analyse de données de séquençage à haut débit pour l'étude du répertoire des gènes \gls{vdj} des 
+cellules lymphoïdes. Ce processus de recombinaison somatique se produit au sein des précurseurs
+B et T lors de la lymphopoïèse, et permet de générer un vaste répertoire d'anticorps et de récepteurs,
+capables à leur tour de reconnaître une grande variété d'antigènes \cite{jonesTamingTransposonVDJ2004}.
+
+\section{Répertoire des gènes \gls{vdj}}
+
+Ce processus de recombinaison est complexe, et implique plusieurs étapes successives de réarrangement des segments
+\gls{vdj} au sein des loci des \glspl{ig} et des \glspl{tcr} \cite{rothVDJRecombinationMechanism2014}.
+Il débute par la sélection aléatoire de segments D et J, suivie de la sélection d'un segment V, au sein des chaînes
+dites « lourdes », sous l'action des recombinases \gls{vdj}. Un mécanisme identique est observé pour les chaînes « légères »,
+avec une recombinaison directe des segments V et J, sans étape D. À la suite de chaque recombinaison, des régions de diversité N 
+de quelques nucléotides sont insérées aléatoirement entre les segments, contribuant à la diversité potentielle du répertoire 
+(\autoref{fig:vdj}).
+
+\input{figures/vdj.tex}
+
+Par conséquent, si l'on considère les loci des \glspl{ig}, la recombinaison \gls{vdj} permet de générer théoriquement : 
+
+\begin{equation}
+    \label{eq:combinaisons}
+    \begin{aligned}
+    \text{Chaîne lourde : } & \underbrace{50}_{\text{\# VH}} \times \underbrace{30}_{\text{\# DH}} \times \underbrace{6}_{\text{\# JH}} = 9000 \\
+    \text{Chaîne légère } \kappa : & \underbrace{40}_{\text{\# Vk}} \times \underbrace{5}_{\text{\# Jk}} = 200 \\
+    \text{Chaîne légère } \lambda : & \underbrace{46}_{\text{\# Vl}} \times \underbrace{7}_{\text{\# Jl}} = 322 \\
+    \text{Total des combinaisons possibles : } & 9000 \times (200 + 322) = 4\,698\,000
+    \end{aligned}
+\end{equation}
+
+Soit près de 5 millions de combinaisons possibles, en sachant que l'ajout des régions de diversité N
+et des différentes régions constantes porte ce nombre à une valeur presque infinie (\autoref{eq:combinaisons}).
+
+Ainsi, \textit{Vidjil} permet l'analyse des réarrangements des \glspl{ig} présents sur les loci suivants : 
+\begin{itemize}
+    \item \gls{igh} sur le chromosome 14, 
+    \item \gls{igk} sur le chromosome 2, 
+    \item \gls{igl} sur le chromosome 22.
+\end{itemize}
+
+Le répertoire des cellules T est également analysable, via les loci des \glspl{tcr} :
+\begin{itemize}
+    \item \gls{tra} et \gls{trd} sur le chromosome 14, 
+    \item \gls{trb} et \gls{trg} sur le chromosome 7.
+\end{itemize}
+
+\vspace{1em}
+
+Dans le cadre de ce travail, seules les recombinaisons des \gls{igh} seront considérées,
+pour des raisons qui apparaîtront par la suite comme rapidement évidentes.
+Si l'on s'intéresse plus en détail à la scructure des remaniements \gls{vdj} des \gls{igh},
+on peut noter que les segments codant la région variable de la chaîne lourde (V, D et J)
+incluent plusieurs sous-régions fonctionnelles. En amont du segment V, on trouve la région leader et 
+le segment V lui-même est divisé en \glspl{fr} 1,2 et 3, qui assurent le repliement structural du domaine variable, 
+(et servent de matrice pour la conception d'amorces d'amplification par PCR), 
+et les \glspl{cdr}. Parmi celles-ci, la région \gls{cdr}3, située à la jonction des segments V, D et J 
+est la plus variable et joue un rôle central dans la reconnaissance de l'antigène, et l'unicité du réarrangement.
+
+\vspace{1em}
+
+La diversité de cette région \gls{cdr}3 est générée par plusieurs mécanismes :
+la recombinaison somatique entre les segments V, D et J, et l'ajout des domaines de N-diversité 
+mentionnés précédemment, mais aussi l'excision de nucléotides en 3' et 5' des segments V, D et J.
+À cela s'ajoute un processus appelé hypermutation somatique, qui affecte principalement le segment V 
+après activation des lymphocytes B naïf, introduisant des mutations ponctuelles supplémentaires,
+notamment dans les région \glspl{cdr}, afin d'augmenter l'affinité de l'anticorps pour son antigène (\autoref{fig:igh}).
+
+\input{figures/igh.tex}
+
+Chaque réarrangement \gls{vdj} peut être décrit à l'aide d'une nomenclature standardisée, 
+permettant une identification unique et reproductible \cite{laneIMGTONTOLOGYIMGTLIGMotif2010,lefrancIMGT30Years2019}. 
+Cette notation précise la nature du locus considéré, le segment V utilisé, les nucléotides excisés à son extrémité 3', 
+la séquence ou longueur de la première région N insérée, le segment D (le cas présent) avec ses excisions en 3' et 5' 
+et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\autoref{tab:nomenclature-vdj}).
+
+\begin{table}[H]
+    \centering
+    \caption{Nomenclature d’un réarrangement \gls{vdj}, BE : Bases excisées.}.
+    \label{tab:nomenclature-vdj}
+    \begin{tabular}{c c c c c c c c c c}
+        \toprule
+        \textbf{Locus} & \textbf{VH} & \textbf{BE V3'} & \textbf{N1} & \textbf{BE D5'} & 
+        \textbf{D Nom} & \textbf{BE D3'} & \textbf{N2} & \textbf{BE J5'} & \textbf{J Nom} \\        
+        \midrule IGH & VH3-30 & 1 & 12 & 2 & D3-3 & 4 & TCG & 12 & J4*02 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+
+\section{Applications en oncohématologie}
+
+L'analyse du répertoire des gènes \gls{vdj} est particulièrement utile en oncohématologie, 
+où la quasi unicité de chaque réarrangement \gls{vdj} peut servir de marqueur clonal hautement 
+spécifique des cellules tumorales et ainsi permettre leur détection et leur suivi. 
+
+Avant tout chose, il peut être utile de dresser un panorama rapide des hémopathies malignes 
+pour saisir l'importance de l'analyse du répertoire des gènes \gls{vdj} dans certaines pathologies.
+Ces pathologies regroupent ce qu'on appèle communément les « cancers du sang » et peuvent se séparer selon
+leur origine en quatres grandes catégories. Une première séparation peut être établié entre les hémopathies
+
+\section{Maladie résiduelle et ADNc}
+
+\section{Problématique et objectifs}

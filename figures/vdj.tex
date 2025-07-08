@@ -1,0 +1,120 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=0.3cm and 0cm, >=Stealth, thick, font=\small]
+
+    % Chaîne lourde : segments germinaux 
+    \foreach \name/\label/\i in {v1/V1/0, v2/V2/1, v3/V3/2, v4/V\dots/3, vn/Vn/4} {
+        \node[rectangle, draw, fill=blue!20, minimum width=1.3cm, minimum height=0.8cm]
+            (\name) at ($(0,0)+(1.4*\i,0)$) {\label};
+    }
+
+    \foreach \name/\label/\i in {d1/D1/0, d2/D\dots/1, dn/DN/2} {
+        \node[rectangle, draw, fill=green!30, minimum width=0.4cm, minimum height=0.8cm]
+            (\name) at ($(vn.east)+(1.1+0.8*\i,0)$) {\label};
+    }
+
+    \foreach \name/\label/\i in {j1/J1/0, j2/J2/1, j3/J\dots/2, jn/JN/3} {
+        \node[rectangle, draw, fill=orange!30, minimum width=0.6cm, minimum height=0.8cm]
+            (\name) at ($(dn.east)+(1.1+0.8*\i,0)$) {\label};
+    }
+
+    \node[rectangle, draw, right=0.5cm of jn, fill=gray!30, minimum width=2cm, minimum height=0.8cm] (c) {C};
+
+    \draw[thick] ($(vn.east)+(0,-0.1)$) -- ($(d1.west)+(0,-0.1)$);
+    \draw[thick] ($(dn.east)+(0,-0.1)$) -- ($(j1.west)+(0,-0.1)$);
+    \draw[thick] ($(jn.east)+(0,-0.1)$) -- ($(c.west)+(0,-0.1)$);
+
+    \node[anchor=west] at ($(v1.north west)+(0,0.4cm)$) {\textbf{Segments germinaux - chaîne lourde}};
+
+    \node at ($(v1.west)+(-0.3,0)$) {\textbf{5'}};
+    \node at ($(c.east)+(0.3,0)$) {\textbf{3'}};
+
+    % Recombinaison D-J 
+    \node[rectangle, draw, below=2cm of c, fill=gray!30, minimum width=2cm, minimum height=0.8cm] (c_bis) {C};
+    \node[rectangle, draw, left=0.5cm of c_bis, fill=orange!30, minimum width=0.6cm, minimum height=0.8cm] (j_recomb) {J};
+    \node[rectangle, draw, left=of j_recomb, fill=red!20, dashed, minimum width=0.3cm, minimum height=0.8cm] (n1) {N};
+    \node[rectangle, draw, left=of n1, fill=green!30, minimum width=0.4cm, minimum height=0.8cm] (d_recomb) {D};
+
+    \foreach \name/\label/\i in {v1_bis/V1/0, v2_bis/V2/1, v3_bis/V3/2, v4_bis/V\dots/3, vn_bis/Vn/4} {
+        \node[rectangle, draw, fill=blue!20, minimum width=1.3cm, minimum height=0.8cm]
+            (\name) at ($(d_recomb.east)+(-7.5+1.4*\i,0)$) {\label};
+    }
+
+    \draw[thick] ($(vn_bis.east)+(0,-0.1)$) -- ($(d_recomb.west)+(0,-0.1)$);
+    \draw[thick] ($(j_recomb.east)+(0,-0.1)$) -- ($(c_bis.west)+(0,-0.1)$);
+
+    \draw[->, thick] (d2.south) -- (d_recomb.north);
+    \draw[->, thick] (j2.south) -- (j_recomb.north);
+
+    \node[anchor=west] at ($(v1_bis.north west)+(0,0.4cm)$) {\textbf{Recombinaison D-J}};
+
+    % Recombinaison V-DJ 
+    \node[rectangle, draw, below=2cm of c_bis, fill=gray!30, minimum width=2cm, minimum height=0.8cm] (c_bis2) {C};
+    \node[rectangle, draw, left=of c_bis2, fill=orange!30, minimum width=0.6cm, minimum height=0.8cm] (j_final) {J};
+    \node[rectangle, draw, left=of j_final, fill=red!20, dashed, minimum width=0.3cm, minimum height=0.8cm] (n2) {N};
+    \node[rectangle, draw, left=of n2, fill=green!30, minimum width=0.4cm, minimum height=0.8cm] (d_final) {D};
+    \node[rectangle, draw, left=of d_final, fill=red!20, dashed, minimum width=0.3cm, minimum height=0.8cm] (n3) {N};
+    \node[rectangle, draw, left=of n3, fill=blue!20, minimum width=1.3cm, minimum height=0.8cm] (v_final) {V};
+
+    \draw[thick] ($(j_final.east)+(0,-0.1)$) -- ($(c_bis2.west)+(0,-0.1)$);
+    \draw[->, thick] (v2_bis.south) -- (v_final.north);
+
+    \node[anchor=west] at ($(v_final.north west)+(0,0.4cm)$) {\textbf{Recombinaison V-(D)J}};
+
+    %  Chaîne légère : segments germinaux 
+    \foreach \name/\label/\i in {vl1/V1/0, vl2/V2/1, vl3/V3/2, vl4/V\dots/3, vln/Vn/4} {
+        \node[rectangle, draw, fill=blue!5, rotate=90, minimum width=1.3cm, minimum height=0.8cm]
+            (\name) at ($(0,-2.5)+(0,-1.4*\i)$) {\label};
+    }
+
+    \foreach \name/\label/\i in {jl1/J1/0, jl2/J2/1, jl3/J\dots/2, jln/JN/3} {
+        \node[rectangle, draw, fill=orange!5, rotate=90, minimum width=0.6cm, minimum height=0.8cm]
+            (\name) at ($(vln.east)+(0,-2)+(0,-0.8*\i)$) {\label};
+    }
+
+    \draw[thick] ($(vln.west)+(0,0)$) -- ($(jl1.east)+(0,0)$);
+
+    \node[rectangle, draw, rotate=90, left=of jln, fill=gray!5, minimum width=3cm, minimum height=0.8cm] (cl) {C};
+    \node[anchor=east, rotate=90] at ($(jl1.north west)+(-0.4,3cm)$) {\textbf{Segments germinaux - chaîne légère}};
+
+    \node[rotate=90] at ($(vl1.east)+(0,0.3)$) {\textbf{5'}};
+    \node[rotate=90] at ($(cl.west)+(0,-0.3)$) {\textbf{3'}};
+
+    % Recombinaison V-J (chaine légère) 
+    \node[rectangle, draw, right=3cm of cl, rotate=90, fill=gray!5, minimum width=3cm, minimum height=0.8cm] (cl_bis) {C};
+    \node[rectangle, draw, right=of cl_bis, rotate=90, fill=orange!5, minimum width=0.6cm, minimum height=0.8cm] (jl_final) {J};
+    \node[rectangle, draw, right=of jl_final, rotate=90, fill=red!5, dashed, minimum width=0.3cm, minimum height=0.8cm] (nl) {N};
+    \node[rectangle, draw, right=of nl, rotate=90, fill=blue!5, minimum width=1.3cm, minimum height=0.8cm] (vl_final) {V};
+
+    \draw[->, thick] (vl3.south) -- (vl_final.north);
+    \draw[->, thick] (jl1.south) -- (jl_final.north);
+
+    \node[anchor=west, rotate=90] at ($(cl_bis.north west)+(-0.4,0cm)$) {\textbf{Recombinaison V-J}};
+
+    % Assemblage final : fragment d'immunoglobuline 
+    \node[draw, fill=orange!30, rounded corners=8pt, rotate=45, minimum width=0.3cm, minimum height=1cm] at (7.5,-8) (j_ig) {J};
+    \node[draw, fill=green!30, rounded corners=8pt, rotate=45, minimum width=0.3cm, minimum height=1cm, right=of j_ig] (d_ig) {D};
+    \node[draw, fill=blue!20, rounded corners=8pt, rotate=45, minimum width=0.3cm, minimum height=1cm, right=of d_ig] (v_small_ig) {V};
+    \node[draw, fill=blue!20, rounded corners=8pt, rotate=-45, minimum width=1.5cm, minimum height=1.3cm] at (8.8,-8.6) (v_ig) {VH};
+    \node[draw, fill=gray!20, rounded corners=8pt, rotate=-45, minimum width=2cm, minimum height=1.3cm, right=of v_ig] (ch1) {CH1};
+    \node[draw, fill=gray!20, rounded corners=8pt, rotate=-90, minimum width=2cm, minimum height=1.3cm] at (11,-12) (ch2) {CH2};
+    \node[draw, fill=gray!20, rounded corners=8pt, rotate=-90, minimum width=2cm, minimum height=1.3cm, right=of ch2] (ch3) {CH3};
+    \node[draw, fill=gray!5, below=0cm of ch1, rounded corners=8pt, rotate=-45, minimum width=2cm, minimum height=0.7cm] (clf) {CL};
+    \node[draw, fill=blue!5, left=of clf, rounded corners=8pt, rotate=-45, minimum width=2.6cm, minimum height=0.7cm] (vj) {VL-JL};
+
+    \draw[->, thick] (v_final.south) -- (v_small_ig.north);
+    \draw[->, thick] (d_final.south) -- (d_ig.north);
+    \draw[->, thick] (j_final.south) -- (j_ig.north);
+    \draw[->, thick] (vl_final.south) -- (vj.west);
+    \draw[->, thick] (jl_final.south) -- (vj.west);
+
+    \end{tikzpicture}
+
+    \caption{Étapes successives de la recombinaison \gls{vdj} des loci des \glspl{ig}.
+    V, D, J : segments \textbf{Variables}, \textbf{Diversité} et \textbf{Jonction} ; 
+    C : régions \textbf{Constante} ; N : régions de \textbf{N-diversité} ;
+    H : parties lourdes (\textbf{Heavy}) et L : parties légères (\textbf{Light}). 
+    En haut : chaîne lourde ; à gauche : chaîne légère ; 
+    en bas : schéma d'un fragment d'\gls{ig} complète.}
+    \label{fig:vdj}
+\end{figure}

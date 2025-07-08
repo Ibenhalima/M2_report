@@ -1,0 +1,58 @@
+\documentclass[11pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\usepackage[scaled=0.90]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{geometry}
+\geometry{
+  a4paper,
+  left=30mm,
+  right=20mm,
+  top=25mm,
+  bottom=25mm,
+}
+
+\usepackage{titlesec}
+\titleformat{\chapter}{}{}{0em}{\bfseries\LARGE}
+
+\usepackage{setspace}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
+
+\usepackage{hyperref}
+
+\usepackage[acronym]{glossaries}
+\makeglossaries
+\input{glossary}
+
+\usepackage[backend=biber, style=numeric]{biblatex}
+\addbibresource{references.bib}
+
+\begin{document}
+
+\onehalfspacing
+
+\input{titlepage}
+
+\tableofcontents
+
+\printglossaries
+
+\input{sections/preambule}
+\input{sections/intro}
+\input{sections/material}
+
+\printbibliography
+
+\end{document}

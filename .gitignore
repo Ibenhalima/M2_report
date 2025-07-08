@@ -1,0 +1,34 @@
+# LaTeX intermediate files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.out
+*.toc
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.run.xml
+*.glo
+*.gls
+*.glg
+*.ist
+*.alg
+*.acr
+*.acn
+
+# Backup and swap files
+*~
+*.bak
+*.backup
+*.swp
+*.swo
+*.save
+*-SAVE-ERROR
+
+# PDF output
+rapport.pdf
+
+# latexmk config 
+latexmkrc
