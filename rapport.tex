@@ -30,13 +30,19 @@
 \usepackage{tikz}
 \usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
 
+\usepackage[most]{tcolorbox}
+\tcbset{colback=blue!5, colframe=blue!70, boxrule=0.5pt, arc=4pt, left=6pt, right=6pt, top=6pt, bottom=6pt}
+\newtcolorbox[auto counter, number within=section]{examplebox}[1][]{%
+  title=Example~\thetcbcounter, #1
+}
+
 \usepackage{hyperref}
 
 \usepackage[acronym]{glossaries}
 \makeglossaries
 \input{glossary}
 
-\usepackage[backend=biber, style=numeric]{biblatex}
+\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
 \addbibresource{references.bib}
 
 \begin{document}

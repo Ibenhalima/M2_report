@@ -1,6 +1,6 @@
 \chapter{Introduction}
 
-\textit{Vidjil} est une plateforme open-source \cite{giraudFastMulticlonalClusterization2014}
+\textit{Vidjil} est une plateforme open-source \cite{giraudFastMulticlonalClusterization2014b}
 permettant l'analyse de données de séquençage à haut débit pour l'étude du répertoire des gènes \gls{vdj} des 
 cellules lymphoïdes. Ce processus de recombinaison somatique se produit au sein des précurseurs
 B et T lors de la lymphopoïèse, et permet de générer un vaste répertoire d'anticorps et de récepteurs,
@@ -52,7 +52,7 @@ Dans le cadre de ce travail, seules les recombinaisons des \gls{igh} seront cons
 pour des raisons qui apparaîtront par la suite comme rapidement évidentes.
 Si l'on s'intéresse plus en détail à la scructure des remaniements \gls{vdj} des \gls{igh},
 on peut noter que les segments codant la région variable de la chaîne lourde (V, D et J)
-incluent plusieurs sous-régions fonctionnelles. En amont du segment V, on trouve la région leader et 
+incluent plusieurs sous-régions fonctionnelles. En amont du segment V, on trouve la région \textit{leader} et 
 le segment V lui-même est divisé en \glspl{fr} 1,2 et 3, qui assurent le repliement structural du domaine variable, 
 (et servent de matrice pour la conception d'amorces d'amplification par PCR), 
 et les \glspl{cdr}. Parmi celles-ci, la région \gls{cdr}3, située à la jonction des segments V, D et J 
@@ -77,7 +77,7 @@ et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\a
 
 \begin{table}[H]
     \centering
-    \caption{Nomenclature d’un réarrangement \gls{vdj}, BE : Bases excisées.}.
+    \caption{Nomenclature d'un réarrangement \gls{vdj}, BE : Bases excisées.}.
     \label{tab:nomenclature-vdj}
     \begin{tabular}{c c c c c c c c c c}
         \toprule
@@ -88,6 +88,42 @@ et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\a
     \end{tabular}
 \end{table}
 
+\section{Fonctionnement de \textit{Vidjil}}
+
+La plateforme \textit{Vidjil} qui permet donc l'étude de ces réarrangements \gls{vdj} est développée et maintenue 
+conjointement par l'équipe Bonsai du laboratoire \gls{cristal} et par le consortium \textit{VidjilNet}. 
+Elle regroupe d'une par l'algorithimique \textit{vidjil-algo} une heuristique de détection des réarrangement \gls{vdj} 
+\cite{giraudFastMulticlonalClusterization2014b} et d'autre part une interface web permettant de visualiser les 
+résultats ainsi produits \cite{duezVidjilWebPlatform2016}.
+
+\vspace{1em}
+
+La première composante, \textit{vidjil-algo} est un programme écrit en \texttt{C++}, dont la fonction est d'extraire 
+les jonctions \gls{vdj} à partir des \textit{reads} (lectures) issues du séquençage à haut débit. Pour ce faire, l'algorithme 
+repose sur une heuristique originale qui détecte des fenêtres caractéristiques chevauchant les régions CDR3, 
+sans recourir à un alignement exhaustif contre les séquences germinales. Une première étape consiste à constuire un index 
+des séquences germinales V et J à partir de \textit{k-mers} (ou mots de taille $\mathbf{k}$), où $\mathbf{k}$ est choisi de façon à 
+minimiser les \textit{k-mers} communs aux deux segments. L'utilisation de \textit{k-mers} espacées permet d'améliorer la sensibilité 
+nottament en cas de subsitutions (example \ref{ex:spaced-seed}).
+
+\begin{examplebox}[label={ex:spaced-seed}]
+    Le mot \texttt{ATTCG-CAGGT} issue de la graine \texttt{\#\#\#\#\#\#-\#\#\#\#\#} 
+    est présent dans la séquence \texttt{ATTCG\textcolor{gray}{G}CAGGT} ou \texttt{ATTCG\textcolor{gray}{T}CAGGT} 
+    mais pas \texttt{A\textcolor{red}{C}TCG\textcolor{gray}{A}CAGGT}.
+\end{examplebox}
+
+\vspace{1em}
+    
+La seconde étape consiste à traverser l'ensemble des \textit{reads} en recherchant des fenêtres $\mathbf{w}$ qui recouvrent 
+la région \gls{cdr}3 par comparaison de chacun des \textit{k-mer} du \textit{read} à ceux des index générés. Brièvement cette 
+approche consiste à conserver les \textit{reads} qui contiennent les \textit{k-mer} d'une séquence V et ceux d'une séquence J, 
+de façon à former une une fenêtre $\mathbf{w}$ débutant par les derniers \textit{k-mer} de la séquence V et se terminant 
+par les premiers \textit{k-mer} de la séquence J (\autoref{fig:vidjil-algo}).
+Cette approche permet une détection rapide (qui croit linéairement avec le nombre de nucléotides), robuste et efficace 
+des séquences recombinées. Une fois les fenêtres détectées, \textit{vidjil-algo} regroupe les \textit{reads} en clones, 
+puis procède à une segmentation et une annotation des séquences identifiées.
+
+\input{figures/vidjil-algo.tex}
 
 \section{Applications en oncohématologie}
 

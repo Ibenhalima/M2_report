@@ -1,0 +1,122 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[node distance=0cm, thick, font=\small]
+
+    % Première ligne
+    \node[
+        rectangle, 
+        fill=blue!30, 
+        text width=4cm, 
+        align=left,
+        minimum width=4cm, 
+        minimum height=0.6cm
+        ] at (0,0) (v_predicted1) {VVVVVV};
+
+    \node[right=of v_predicted1] (sub) {\textcolor{red}{X}};
+
+    \node[
+        rectangle, 
+        right=of sub, 
+        fill=blue!30, 
+        text width=3cm, 
+        align=left,
+        minimum width=3cm, 
+        minimum height=0.6cm
+        ] (v_predicted2) {VVVVVVVVVV};
+
+    \node[
+        rectangle, 
+        right=2cm of v_predicted2, 
+        fill=orange!30, 
+        text width=5cm, 
+        align=left,
+        minimum width=5cm, 
+        minimum height=0.6cm
+        ] (j_predicted) {JJJJJJJJJJJJJJJJJJ};
+
+    % Fenêtre w
+    \draw[draw=violet, thick]
+        ($(v_predicted2.west)!0.5!(v_predicted2.east) + (0,0.35)$) rectangle
+        ($(j_predicted.west)!0.5!(j_predicted.east) + (0,-0.35)$);
+
+    % Annotations
+    \node[anchor=north west] at ([yshift=-1pt]v_predicted1.south west) 
+        {\scriptsize \textbf{\textcolor{blue}{V prédit}}};
+
+    \draw[thick, blue] ($(v_predicted1.west)+(0,-0.8)$) -- ($(v_predicted2.east)+(0,-0.8)$) 
+        node[anchor=north west] at ([yshift=-0.5cm]v_predicted1.south west) 
+        {\scriptsize \textcolor{blue}{V réel}};
+
+    \node[anchor=north east] at ([yshift=-1pt]j_predicted.south east) 
+        {\scriptsize \textbf{\textcolor{orange}{J prédit}}};
+
+    \draw[thick, orange] ($(j_predicted.west)+(0,-0.8)$) -- ($(j_predicted.east)+(0,-0.8)$) 
+        node[anchor=north east] at ([yshift=-0.5cm]j_predicted.south east) 
+        {\scriptsize \textcolor{orange}{J réel}};
+        
+    \node[above=3pt of sub] {\scriptsize \textbf{\textcolor{red}{Substitution}}};
+
+    \node at ($(v_predicted2)!0.5!(j_predicted)+(0,0.6)$) {\scriptsize \textbf{\textcolor{violet}{Fenêtre extraite w}}};
+
+    % Deuxième ligne
+    \begin{scope}[yshift=-2cm]
+
+    \node[
+        rectangle, 
+        fill=blue!30, 
+        text width=4cm, 
+        align=left,
+        minimum width=4cm, 
+        minimum height=0.6cm
+        ] at (0,0) (v_predicted1b) {VVVVVVVVVVVV};
+
+    \node[
+        rectangle, 
+        right=-0.5 cm of v_predicted1b, 
+        fill=blue!30,
+        minimum width=2.5cm, 
+        minimum height=0.6cm
+        ] (v_predicted2b) {};
+
+    \node[right=of v_predicted2b] (subb) {\textcolor{red}{X}};
+
+    \node[
+        rectangle, 
+        right=3.7cm of v_predicted2b, 
+        fill=orange!30, 
+        text width=5cm, 
+        align=left,
+        minimum width=5cm, 
+        minimum height=0.6cm
+        ] (j_predictedb) {JJJJJJJJJJJJJJJJJJ};
+
+    % Fenêtre w
+    \draw[draw=violet, thick]
+        ($(v_predicted2b.west)!0.5!(v_predicted2b.east) + (0,0.35)$) rectangle
+        ($(j_predictedb.west)!0.4!(j_predictedb.east) + (0,-0.35)$);
+
+    % Annotations
+    \node[anchor=north west] at ([yshift=-1pt]v_predicted1b.south west) 
+        {\scriptsize \textbf{\textcolor{blue}{V prédit}}};
+
+    \draw[thick, blue] ($(v_predicted1b.west)+(0,-0.8)$) -- ($(v_predicted2b.east)+(1.7,-0.8)$) 
+        node[anchor=north west] at ([yshift=-0.5cm]v_predicted1b.south west) 
+        {\scriptsize \textcolor{blue}{V réel}};
+
+    \node[anchor=north east] at ([yshift=-1pt]j_predictedb.south east) 
+        {\scriptsize \textbf{\textcolor{orange}{J prédit}}};
+
+    \draw[thick, orange] ($(j_predictedb.west)+(0,-0.8)$) -- ($(j_predictedb.east)+(0,-0.8)$) 
+        node[anchor=north east] at ([yshift=-0.5cm]j_predictedb.south east) 
+        {\scriptsize \textcolor{orange}{J réel}};
+        
+    \node[above=3pt of subb] {\scriptsize \textbf{\textcolor{red}{Substitution}}};
+
+    \node at ($(v_predicted2b)!0.7!(j_predictedb)+(0,0.6)$) {\scriptsize \textbf{\textcolor{violet}{Fenêtre extraite w}}};
+
+    \end{scope}
+
+    \end{tikzpicture}
+    \caption{Illustration du fonctionnement de \textit{vidjil-algo} sur deux lectures successives.}
+    \label{fig:vidjil-algo}
+\end{figure}
