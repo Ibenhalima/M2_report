@@ -16,7 +16,7 @@ avec une recombinaison directe des segments V et J, sans étape D. À la suite d
 de quelques nucléotides sont insérées aléatoirement entre les segments, contribuant à la diversité potentielle du répertoire 
 (\autoref{fig:vdj}).
 
-\input{figures/vdj.tex}
+\vspace{1em}
 
 Par conséquent, si l'on considère les loci des \glspl{ig}, la recombinaison \gls{vdj} permet de générer théoriquement : 
 
@@ -33,6 +33,8 @@ Par conséquent, si l'on considère les loci des \glspl{ig}, la recombinaison \g
 Soit près de 5 millions de combinaisons possibles, en sachant que l'ajout des régions de diversité N
 et des différentes régions constantes porte ce nombre à une valeur presque infinie (\autoref{eq:combinaisons}).
 
+\vspace{1em}
+
 Ainsi, \textit{Vidjil} permet l'analyse des réarrangements des \glspl{ig} présents sur les loci suivants : 
 \begin{itemize}
     \item \gls{igh} sur le chromosome 14, 
@@ -40,21 +42,23 @@ Ainsi, \textit{Vidjil} permet l'analyse des réarrangements des \glspl{ig} prés
     \item \gls{igl} sur le chromosome 22.
 \end{itemize}
 
+\vspace{1em}
+
 Le répertoire des cellules T est également analysable, via les loci des \glspl{tcr} :
 \begin{itemize}
     \item \gls{tra} et \gls{trd} sur le chromosome 14, 
     \item \gls{trb} et \gls{trg} sur le chromosome 7.
 \end{itemize}
 
-\vspace{1em}
+\input{figures/vdj.tex}
 
 Dans le cadre de ce travail, seules les recombinaisons des \gls{igh} seront considérées,
 pour des raisons qui apparaîtront par la suite comme rapidement évidentes.
 Si l'on s'intéresse plus en détail à la scructure des remaniements \gls{vdj} des \gls{igh},
 on peut noter que les segments codant la région variable de la chaîne lourde (V, D et J)
 incluent plusieurs sous-régions fonctionnelles. En amont du segment V, on trouve la région \textit{leader} et 
-le segment V lui-même est divisé en \glspl{fr} 1,2 et 3, qui assurent le repliement structural du domaine variable, 
-(et servent de matrice pour la conception d'amorces d'amplification par PCR), 
+le segment V lui-même est divisé en \glspl{fr} 1, 2 et 3, qui assurent le repliement structural du domaine variable, 
+(et servent de matrice pour la conception d'amorces d'amplification par \gls{pcr}), 
 et les \glspl{cdr}. Parmi celles-ci, la région \gls{cdr}3, située à la jonction des segments V, D et J 
 est la plus variable et joue un rôle central dans la reconnaissance de l'antigène, et l'unicité du réarrangement.
 
@@ -65,7 +69,7 @@ la recombinaison somatique entre les segments V, D et J, et l'ajout des domaines
 mentionnés précédemment, mais aussi l'excision de nucléotides en 3' et 5' des segments V, D et J.
 À cela s'ajoute un processus appelé hypermutation somatique, qui affecte principalement le segment V 
 après activation des lymphocytes B naïf, introduisant des mutations ponctuelles supplémentaires,
-notamment dans les région \glspl{cdr}, afin d'augmenter l'affinité de l'anticorps pour son antigène (\autoref{fig:igh}).
+notamment dans les régions \glspl{cdr}, afin d'augmenter l'affinité de l'anticorps pour son antigène (\autoref{fig:igh}).
 
 \input{figures/igh.tex}
 
@@ -88,22 +92,25 @@ et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\a
     \end{tabular}
 \end{table}
 
+
 \section{Fonctionnement de \textit{Vidjil}}
 
 La plateforme \textit{Vidjil} qui permet donc l'étude de ces réarrangements \gls{vdj} est développée et maintenue 
 conjointement par l'équipe Bonsai du laboratoire \gls{cristal} et par le consortium \textit{VidjilNet}. 
 Elle regroupe d'une par l'algorithimique \textit{vidjil-algo} une heuristique de détection des réarrangement \gls{vdj} 
 \cite{giraudFastMulticlonalClusterization2014b} et d'autre part une interface web permettant de visualiser les 
-résultats ainsi produits \cite{duezVidjilWebPlatform2016}.
+résultats ainsi produits \cite{duezVidjilWebPlatform2016}. L'ensemble du code source est disponible sur le dépot gitlab 
+public suivant \href{https://gitlab.inria.fr/vidjil/vidjil}{gitlab.inria.fr/vidjil/vidjil}.
 
 \vspace{1em}
 
 La première composante, \textit{vidjil-algo} est un programme écrit en \texttt{C++}, dont la fonction est d'extraire 
-les jonctions \gls{vdj} à partir des \textit{reads} (lectures) issues du séquençage à haut débit. Pour ce faire, l'algorithme 
+les jonctions \gls{vdj} à partir des \textit{reads} (lectures) issues du séquençage à haut débit dans des fichiers de séquences 
+brutes au format FASTQ ou bien préalablements alignées au format \gls{bam}. Pour ce faire, l'algorithme 
 repose sur une heuristique originale qui détecte des fenêtres caractéristiques chevauchant les régions CDR3, 
 sans recourir à un alignement exhaustif contre les séquences germinales. Une première étape consiste à constuire un index 
 des séquences germinales V et J à partir de \textit{k-mers} (ou mots de taille $\mathbf{k}$), où $\mathbf{k}$ est choisi de façon à 
-minimiser les \textit{k-mers} communs aux deux segments. L'utilisation de \textit{k-mers} espacées permet d'améliorer la sensibilité 
+minimiser les \textit{k-mers} communs aux deux segments (\autoref{fig:index}). L'utilisation de \textit{k-mers} espacées permet d'améliorer la sensibilité 
 nottament en cas de subsitutions (example \ref{ex:spaced-seed}).
 
 \begin{examplebox}[label={ex:spaced-seed}]
@@ -112,7 +119,7 @@ nottament en cas de subsitutions (example \ref{ex:spaced-seed}).
     mais pas \texttt{A\textcolor{red}{C}TCG\textcolor{gray}{A}CAGGT}.
 \end{examplebox}
 
-\vspace{1em}
+\input{figures/index.tex}
     
 La seconde étape consiste à traverser l'ensemble des \textit{reads} en recherchant des fenêtres $\mathbf{w}$ qui recouvrent 
 la région \gls{cdr}3 par comparaison de chacun des \textit{k-mer} du \textit{read} à ceux des index générés. Brièvement cette 
@@ -125,16 +132,75 @@ puis procède à une segmentation et une annotation des séquences identifiées.
 
 \input{figures/vidjil-algo.tex}
 
+Les résultats ainsi générés par \textit{vidil-algo} sont rassemblés dans un fichier \textit{.vidjil} au format \gls{json} où 
+l'on retrouvera des métadonnées en lien avec l'échantillon analysé et un ensemble de données relatif à chaque clone 
+identifié par \textit{vidjil-algo} (\autoref{lst:json-vidjil}).
+
+\begin{lstlisting}[language=json, 
+    caption={Extrait d'une sortie de \textit{vidjil-algo}.},
+    label={lst:json-vidjil}]
+    "clones": [
+        {
+          "_average_read_length": ["151.80"],
+          "_coverage_info": [ "132 bp (86% of 151.8 bp)"],
+          "germline": "IGH",
+          "id": "GGGGATAAATTACGATTTTTGGAGTGGTTATTAT...GGGGGTT",
+          "name": "IGHV1-8*01 0/CGGGGGGATAA/2 IGHD3-3*01 0/GGTATGGGGGGTTTTAG/7 IGHJ4*02",
+          "reads": [498126],
+          ...
+        }
+    ]
+\end{lstlisting}
+
+\vspace{1em}
+
+En parallèle, \textit{Vidjil} désigne également l'application web (\href{https://app.vidjil.org/}{démo publique accessible ici}) 
+permettant de visualiser et de manipuler les résultats produits par \textit{vidjil-algo}. 
+Elle prend également en charge la création et la gestion des comptes utilisateurs, des profils patients, etc. (\autoref{fig:vidjil-web}). 
+L'application est développée côté serveur en \texttt{Python}, à l'aide du \textit{framework} \href{https://py4web.com}{\texttt{py4web}} 
+(anciennement \texttt{web2py}), et côté client en \texttt{JavaScript}. La base de données utilisée est \texttt{MySQL}, 
+le tout étant orchestré via le déploiement de conteneurs \texttt{Docker}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/vidjil-web.png}
+    \caption{Interface de la plateforme web \textit{Vidjil}. 
+    Liste des clones identifiés à gauche, visualisation de la cinétique des clones en haut à gauche, 
+    familles \gls{vdj} en bas à droite, et séquences des clones sélectionnés en bas.}
+    \label{fig:vidjil-web}
+\end{figure}
+
 \section{Applications en oncohématologie}
 
 L'analyse du répertoire des gènes \gls{vdj} est particulièrement utile en oncohématologie, 
 où la quasi unicité de chaque réarrangement \gls{vdj} peut servir de marqueur clonal hautement 
-spécifique des cellules tumorales et ainsi permettre leur détection et leur suivi. 
+spécifique des cellules tumorales et ainsi permettre leur détection et leur suivi \cite{hultcrantzBaselineVDJClonotype2020}.
 
-Avant tout chose, il peut être utile de dresser un panorama rapide des hémopathies malignes 
-pour saisir l'importance de l'analyse du répertoire des gènes \gls{vdj} dans certaines pathologies.
-Ces pathologies regroupent ce qu'on appèle communément les « cancers du sang » et peuvent se séparer selon
-leur origine en quatres grandes catégories. Une première séparation peut être établié entre les hémopathies
+\vspace{1em}
+ 
+Avant toute chose, il peut être utile de dresser un panorama rapide des hémopathies malignes afin de 
+mieux comprendre l'importance de l'analyse du répertoire des gènes \gls{vdj} dans certaines situations.  
+Ces pathologies regroupent ce qu'on appelle communément les « cancers du sang » et peuvent se séparer selon
+leur origine en quatre grandes catégories. Une première séparation peut être établie entre les hémopathies 
+myéloïdes et lymphoïdes selon l'origine des cellules. Brièvement, les cellules du sang et de la moelle sont soit de 
+lignée lymphoïde pour les lymphocytes (B, T, NK et autres non conventionnels) et précurseurs, soit de lignée myéloïde 
+pour le reste des cellules (hématies, plaquettes, polynucléaires, monocytes) et leurs précurseurs. Une seconde séparation 
+est établie selon la maturité des cellules : on parle alors de \glspl{lam} et de \glspl{lal} lorsque la cellule 
+tumorale dérive d'un précurseur, et de \glspl{smp} et de \glspl{slp}/\glspl{lnh} lorsque la cellule est mature 
+\cite{alaggio5thEditionWorld2022a, khoury5thEditionWorld2022}.
+
+\input{figures/hemopathies.tex}
+
+Dès lors \textit{Vidjil} trouve son utilité dans les hémopathies lymphoïdes, principalement dans les \glspl{lal} et les 
+\glspl{llc} où il permet l'identification des réarrangements \gls{vdj} des \glspl{ig} et des \glspl{tcr} à des fins diverses.
+Par exemple, dans les \glspl{llc} il permet d'identifier et d'annoter le segment V du réarrangement \gls{igh} du clone tumoral, pour 
+ensuite étudier le taux de mutations face aux séquences germinales, servant de marqueur pronostique fort de la pathologie
+\cite{crombieIGHVMutationalStatus2017}.
+
+\vspace{1em}
+
+Dans le cadre de ce travail, nous nous sommes intéréssés à une pathologie en particulier, le \gls{mm} qu'il est possible 
+de rattacher au groupes des hémopathies lymphoïdes matures. Cette pathologie 
 
 \section{Maladie résiduelle et ADNc}
 

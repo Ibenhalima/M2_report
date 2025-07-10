@@ -56,7 +56,8 @@
         
     \node[above=3pt of sub] {\scriptsize \textbf{\textcolor{red}{Substitution}}};
 
-    \node at ($(v_predicted2)!0.5!(j_predicted)+(0,0.6)$) {\scriptsize \textbf{\textcolor{violet}{Fenêtre extraite w}}};
+    \node at ($(v_predicted2)!0.5!(j_predicted)+(0,0.6)$) 
+        {\scriptsize \textbf{\textcolor{violet}{Fenêtre extraite w}}};
 
     % Deuxième ligne
     \begin{scope}[yshift=-2cm]
@@ -93,7 +94,7 @@
     % Fenêtre w
     \draw[draw=violet, thick]
         ($(v_predicted2b.west)!0.5!(v_predicted2b.east) + (0,0.35)$) rectangle
-        ($(j_predictedb.west)!0.4!(j_predictedb.east) + (0,-0.35)$);
+        ($(j_predictedb.west)!0.3!(j_predictedb.east) + (0,-0.35)$);
 
     % Annotations
     \node[anchor=north west] at ([yshift=-1pt]v_predicted1b.south west) 
@@ -112,11 +113,12 @@
         
     \node[above=3pt of subb] {\scriptsize \textbf{\textcolor{red}{Substitution}}};
 
-    \node at ($(v_predicted2b)!0.7!(j_predictedb)+(0,0.6)$) {\scriptsize \textbf{\textcolor{violet}{Fenêtre extraite w}}};
+    \node at ($(v_predicted2b)!0.6!(j_predictedb)+(0,0.6)$) {\scriptsize \textbf{\textcolor{violet}{Fenêtre extraite w}}};
 
     \end{scope}
 
     \end{tikzpicture}
-    \caption{Illustration du fonctionnement de \textit{vidjil-algo} sur deux lectures successives.}
+    \caption{Illustration du fonctionnement de l'heuristique de 
+    \textit{vidjil-algo} sur deux lectures successives.}
     \label{fig:vidjil-algo}
 \end{figure}
