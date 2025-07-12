@@ -69,6 +69,10 @@
 \usepackage{tikz}
 \usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
 
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
+
 \usepackage[most]{tcolorbox}
 \tcbset{colback=blue!5, colframe=blue!70, boxrule=0.5pt, arc=4pt, left=6pt, right=6pt, top=6pt, bottom=6pt}
 \newtcolorbox[auto counter, number within=section]{examplebox}[1][]{%
@@ -82,6 +86,12 @@
 \usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
 \addbibresource{references.bib}
 
+\usepackage{caption}
+\captionsetup{
+    labelfont={color=gray},
+    textfont={color=gray}
+}
+
 \begin{document}
 
 \onehalfspacing
@@ -94,6 +104,7 @@
 
 \input{sections/preambule}
 \input{sections/intro}
+\input{sections/problematique}
 \input{sections/material}
 
 \printbibliography

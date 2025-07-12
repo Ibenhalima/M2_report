@@ -8,14 +8,14 @@
     
     % k-mer espacés séquence VH
     \foreach \i [count=\j from 0] in {
-        CATCC--CGAGC,
-        ATCCG--GAGCA,
-        TCCGC--AGCAC,
-        CCGCG--GCACA,
-        CGCGA--CACAG,
+        CATCC---CGAGC,
+        ATCCG---GAGCA,
+        TCCGC---AGCAC,
+        CCGCG---GCACA,
+        CGCGA---CACAG,
         \dots
     } {
-        \pgfmathsetmacro\xshift{\j*0.225}
+        \pgfmathsetmacro\xshift{\j*0.23}
         \pgfmathsetmacro\ypos{-0.5*(\j+1.1)}
         \node[anchor=west] at (\xshift,\ypos) {\i};
     }
@@ -26,14 +26,14 @@
 
     % k-mer espacés séquence JH
     \foreach \i [count=\j from 0] in {
-        TGATA--CTGGG,
-        GATAT--TGGGG,
-        ATATC--GGGGC,
-        TATCT--GGGCC,
-        ATCTG--GGCCA,
+        TGATA---CTGGG,
+        GATAT---TGGGG,
+        ATATC---GGGGC,
+        TATCT---GGGCC,
+        ATCTG---GGCCA,
         \dots
     } {
-        \pgfmathsetmacro\xshift{7 + \j*0.215}
+        \pgfmathsetmacro\xshift{7 + \j*0.22}
         \pgfmathsetmacro\ypos{-0.5*(\j+1.1)}
         \node[anchor=west] at (\xshift,\ypos) {\i};
     }

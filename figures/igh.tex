@@ -3,26 +3,24 @@
     \begin{tikzpicture}[node distance=0cm, thick, font=\tiny]
 
     % Segments avec séquences nucléotidiques
-    \node[rectangle, draw, fill=blue!20, minimum width=6cm, minimum height=0.8cm, anchor=west] (v_full) at (0,0)
+    \node[rectangle, fill=blue!20, minimum width=6cm, minimum height=0.8cm, anchor=west] (v_full) at (0,0)
         {\shortstack{\textbf{VH3-30} \\ \dots ATGAATAGCCTGAGGCCT\textcolor{red}{G}AGGACACGGCTG\textcolor{red}{TG}TATTAC\textcolor{red}{T}GTAC\sout{A}}};
 
-    \node[rectangle, draw, right=of v_full, fill=red!20, dashed, minimum width=0.6cm, minimum height=0.8cm] (n1_full)
+    \node[rectangle, right=of v_full, fill=red!20, dashed, minimum width=0.6cm, minimum height=0.8cm] (n1_full)
         {\shortstack{\textbf{N} \\ AAAGGGGTGGAC}};
 
-    \node[rectangle, draw, right=of n1_full, fill=green!20, minimum width=1.5cm, minimum height=0.8cm] (d_full)
+    \node[rectangle, right=of n1_full, fill=green!20, minimum width=1.5cm, minimum height=0.8cm] (d_full)
         {\shortstack{\textbf{D3-3} \\ \sout{CG}ATGTTTGGAGT\sout{GGTT}}};
 
-    \node[rectangle, draw, right=of d_full, fill=red!20, dashed, minimum width=0.6cm, minimum height=0.8cm] (n2_full)
+    \node[rectangle, right=of d_full, fill=red!20, dashed, minimum width=0.6cm, minimum height=0.8cm] (n2_full)
         {\shortstack{\textbf{N} \\ TCG}};
 
-    \node[rectangle, draw, right=of n2_full, fill=orange!20, minimum width=2cm, minimum height=0.8cm] (j_full)
+    \node[rectangle, right=of n2_full, fill=orange!20, minimum width=2cm, minimum height=0.8cm] (j_full)
         {\shortstack{\textbf{J4*02} \\ \sout{ACTGGGGCCAGG}GAACCCT\dots}};
-
-    \node[rectangle, draw, right=of j_full, fill=gray!20, minimum width=1cm, minimum height=0.8cm] (c_full) {C};
 
     % Régions 3' et 5'
     \node[left=0.2cm of v_full.west] {\scriptsize \textbf{5'}};
-    \node[right=0.2cm of c_full.east] {\scriptsize \textbf{3'}};
+    \node[right=0.2cm of j_full.east] {\scriptsize \textbf{3'}};
 
     % Régions fonctionnelles
     \draw[thick, blue] ($(v_full.west)+(-1,-0.6)$) -- ++(1,0) node[midway, below=2pt] {\scriptsize Leader};
@@ -47,7 +45,7 @@
     \end{tikzpicture}
     \caption{Illustration d'un réarrangement de la chaîne lourde des immunoglobulines \gls{igh}.
     Les bases rayées correspondent aux nucélotides excisés lors de la recombinaison. 
-    Les bases en rouge sont celles mutées par rapport aux séquences germinales lors du 
+    Les \textcolor{red}{bases en rouge} sont celles mutées par rapport aux séquences germinales lors du 
     processus d'hypermutation somatique.}
     \label{fig:igh}
 \end{figure}
