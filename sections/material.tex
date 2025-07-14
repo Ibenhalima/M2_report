@@ -1,1 +1,30 @@
-\chapter{Matériel et Méthode}
+\chapter{Matériels et Méthodes}
+
+\section{Echantillons biologiques}
+
+Les prélèvements sont issus d'une collaboration directe avec le laboratoire d'hématologie et la tumorothèque du 
+\gls{chu} de Lille (GCS-ALLIANCE CANCER). Des échantillons de moelle osseuse et de sang périphérique de patients 
+atteints de \gls{mm} et \gls{llc} ont été requalifiés à visée recherchée par le commité scientifique (n° d'avis CSTMT350). 
+Ces prélèvements ont été utilisés lors des étapes de mise au point technique. Par la suite 5 couples de prélèvements 
+au diagnostic et au suivi de patients traités pour un \gls{mm} ont été sélectionnés pour l'analyse de la \gls{mrd}.
+
+\section{Préparation et séquençage haut-débit}
+
+Les échantillons de moelle osseuse et de sang périphérique sont traités selon les procédures standards du laboratoire 
+d'hématologie : les prélèvements au diagnostic subissent un tri magnétique CD138+ pour isoler les plasmocytes puis l'ADN 
+est extrait et cryopréservé. Pour les prélèvements au suivi, l'ADN est extrait directement à partir du culot cellulaire 
+après lyse des hématies.
+
+La préparation de la librarie de séquençage est réalisé en une seule étape de \gls{pcr} via des amorces contenant les 
+régions spécifiques à amplfier, les adaptateurs pour le séquençage et les codes-barres pour l'identification des échantillons.
+L'ADN amplifié est ensuite purifié sur billes, analysé et dosé.
+En raison de l'objectif d'analyser \textit{in fine} des échantillons d'\gls{adnc} qui comme vu précédement sont de petite taille, 
+les amorces choisis cible la région \gls{fr}3 (cf \autoref{fig:igh}) des gènes \gls{igh} pour pouvoir séquencer l'ensemble de la 
+région \gls{cdr}3 porteuse de l'unicité du réarrangement.
+Les échantillons sont séquencés sur la plateforme Illumina MiSeq en \textit{paired-end} 2x300 bases.
+
+\section{Environnement d'analyse et de développement}
+
+L'analyse des données de séquençage est réalisée dans un premier temps sur \textit{Vidjil} via une machine virtuelle dédiée 
+au \gls{chu} de Lille. Par la suite une fois les données anonimisées elles sont transférées sur un s
+
