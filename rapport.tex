@@ -4,6 +4,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
 \usepackage{xcolor}
+\usepackage[dvipsnames]{xcolor}
 \usepackage[normalem]{ulem}
 
 \usepackage[scaled=0.90]{helvet}
@@ -66,6 +67,42 @@
       {]}{{{\color{delim}{]}}}}{1},
 }
 
+\lstdefinelanguage{custombash}{
+    sensitive=true,
+    morekeywords={
+        echo, tr, rev, grep, xargs, cat, cd, ls, mv, cp, rm, touch, mkdir, pwd, head, tail, awk, 
+        sed, cut, sort, uniq, find, chmod, chown, bash, sh, if, then, else, fi, for, while, in, do, done,
+        CGTCTCCTCAGGTAAG
+    },
+    otherkeywords={|, >, <, >>, <<, &, &&, ;, !, =, ~, *, \#, \$},
+    morecomment=[l]{\#},
+    morestring=[b]",
+    morestring=[b]',
+    showstringspaces=false,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red!70!black},
+    numberstyle=\tiny\color{gray},
+    numbers=left,
+    stepnumber=1,
+    numbersep=8pt,
+    backgroundcolor=\color{background},
+    breaklines=true,
+    frame=lines,
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1},
+}
+
 \usepackage{tikz}
 \usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
 
@@ -96,11 +133,11 @@
 \usepackage{rotating}
 \usepackage{fvextra}
 
-\newcommand{\A}{\textcolor{cyan}{A}}
-\newcommand{\T}{\textcolor{green}{T}}
-\newcommand{\Tb}{\textcolor{green}{\uline{T}}}
-\newcommand{\G}{\textcolor{pink}{G}}
-\newcommand{\C}{\textcolor{orange}{C}}
+\newcommand{\A}{\textcolor{Cyan}{A}}
+\newcommand{\T}{\textcolor{ForestGreen}{T}}
+\newcommand{\Tb}{\textcolor{OliveGreen}{\uline{T}}}
+\newcommand{\G}{\textcolor{Magenta}{G}}
+\newcommand{\C}{\textcolor{Orange}{C}}
 \newcommand{\Hbase}{H} 
 \newcommand{\N}{N}
 \newcommand{\Y}{Y}
