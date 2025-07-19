@@ -15,16 +15,24 @@ d'hématologie : les prélèvements au diagnostic subissent un tri magnétique C
 est extrait et cryopréservé. Pour les prélèvements au suivi, l'ADN est extrait directement à partir du culot cellulaire 
 après lyse des hématies.
 
-La préparation de la librarie de séquençage est réalisé en une seule étape de \gls{pcr} via des amorces contenant les 
-régions spécifiques à amplfier, les adaptateurs pour le séquençage et les codes-barres pour l'identification des échantillons.
-L'ADN amplifié est ensuite purifié sur billes, analysé et dosé.
+La préparation de la librarie de séquençage est réalisée en une seule étape de \gls{pcr} via des amorces contenant les 
+régions spécifiques à amplifier, les adaptateurs pour le séquençage et les codes-barres pour l'identification des échantillons 
+(\autoref{anx:primer-sequences}).
 En raison de l'objectif d'analyser \textit{in fine} des échantillons d'\gls{adnc} qui comme vu précédement sont de petite taille, 
 les amorces choisis cible la région \gls{fr}3 (cf \autoref{fig:igh}) des gènes \gls{igh} pour pouvoir séquencer l'ensemble de la 
-région \gls{cdr}3 porteuse de l'unicité du réarrangement.
-Les échantillons sont séquencés sur la plateforme Illumina MiSeq en \textit{paired-end} 2x300 bases.
+région \gls{cdr}3 porteuse de l'unicité du réarrangement. 
+Ces amorces sont adaptées des recommandations du groupe européen de l'EuroClonalité \cite{langerakEuroClonalityBIOMED2Guidelines2012} 
+et modifiées pour l'amplification d'\gls{adnc} par \citeauthor{pottCfDNABasedNGSIG2022a} \cite{pottCfDNABasedNGSIG2022a}.
+L'ADN amplifié est ensuite purifié sur billes, analysé et dosé puis séquencé sur plateforme Illumina MiSeq en \textit{paired-end} 2x300 bases.
 
 \section{Environnement d'analyse et de développement}
 
-L'analyse des données de séquençage est réalisée dans un premier temps sur \textit{Vidjil} via une machine virtuelle dédiée 
-au \gls{chu} de Lille. Par la suite une fois les données anonimisées elles sont transférées sur un s
+L'analyse des données de séquençage est réalisée dans un premier temps sur \textit{Vidjil}, via une machine virtuelle dédiée,
+hébergée au \gls{chu} de Lille. Par la suite, une fois les données anonymisées, elles sont transférées sur un environnement de 
+développement Ubuntu 24.04.2 LTS (autrement dit, un ordinateur personnel) pour la mise au point de l'analyse de la \gls{mrd}.
+L'ensemble des modifications et développements réalisés sur \textit{Vidjil} concerne la partie client, et, dans une moindre mesure,
+la partie serveur. Elles sont consultables sur le dépôt \href{https://gitlab.inria.fr/users/x-benha/activity}{\textit{GitLab}}
+de \textit{Vidjil}, et sont documentées dans les requêtes de fusion \href{https://gitlab.inria.fr/vidjil/vidjil/-/merge_requests/1610}{1610}
+et \href{https://gitlab.inria.fr/vidjil/vidjil/-/merge_requests/1631}{1631} associées.
+
 

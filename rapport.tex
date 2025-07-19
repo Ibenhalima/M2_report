@@ -92,6 +92,32 @@
     textfont={color=gray}
 }
 
+\usepackage{fontawesome5}
+\usepackage{rotating}
+\usepackage{fvextra}
+
+\newcommand{\A}{\textcolor{cyan}{A}}
+\newcommand{\T}{\textcolor{green}{T}}
+\newcommand{\Tb}{\textcolor{green}{\uline{T}}}
+\newcommand{\G}{\textcolor{pink}{G}}
+\newcommand{\C}{\textcolor{orange}{C}}
+\newcommand{\Hbase}{H} 
+\newcommand{\N}{N}
+\newcommand{\Y}{Y}
+
+\DefineVerbatimEnvironment{ColoredVerbatim}{Verbatim}{
+    fontsize=\small,
+    commandchars=\\\{\},
+    formatcom=\ttfamily
+}
+
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+    fileext=loa,
+    listname=Liste des annexes,
+    name=Annexe
+]{annex}
+
 \begin{document}
 
 \onehalfspacing
@@ -110,5 +136,10 @@
 \input{sections/chr.tex}
 
 \printbibliography
+
+\newpage
+
+\appendix
+\input{sections/appendix.tex}
 
 \end{document}
