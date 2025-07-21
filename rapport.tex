@@ -27,6 +27,7 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
+\usepackage{multirow}
 
 \usepackage{listings}
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=teal]{hyperref}
@@ -74,7 +75,7 @@
         sed, cut, sort, uniq, find, chmod, chown, bash, sh, if, then, else, fi, for, while, in, do, done,
         CGTCTCCTCAGGTAAG
     },
-    otherkeywords={|, >, <, >>, <<, &, &&, ;, !, =, ~, *, \#, \$},
+    otherkeywords={|, >, <, >>, <<, &, &&, ;, !, =, ~, *, \$},
     morecomment=[l]{\#},
     morestring=[b]",
     morestring=[b]',
@@ -115,6 +116,8 @@
 \newtcolorbox[auto counter, number within=section]{examplebox}[1][]{%
   title=Example~\thetcbcounter, #1
 }
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\renewcommand{\algorithmcfname}{Algorithme}
 
 \usepackage[acronym]{glossaries}
 \makeglossaries
@@ -132,6 +135,7 @@
 \usepackage{fontawesome5}
 \usepackage{rotating}
 \usepackage{fvextra}
+\usepackage{amssymb}
 
 \newcommand{\A}{\textcolor{Cyan}{A}}
 \newcommand{\T}{\textcolor{ForestGreen}{T}}
@@ -160,6 +164,7 @@
 \onehalfspacing
 
 \input{titlepage}
+\input{sections/remerciements.tex}
 
 \tableofcontents
 
@@ -171,6 +176,8 @@
 \input{sections/material}
 \input{sections/results.tex}
 \input{sections/chr.tex}
+\input{sections/discussion.tex}
+\input{sections/conclusion.tex}
 
 \printbibliography
 

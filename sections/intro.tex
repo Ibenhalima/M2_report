@@ -70,7 +70,7 @@ est la plus variable et joue un rôle central dans la reconnaissance de l'antig�
 La diversité de cette région \gls{cdr}3 est générée par plusieurs mécanismes :
 la recombinaison somatique entre les segments V, D et J, et l'ajout des domaines de N-diversité 
 mentionnés précédemment, mais aussi l'excision de nucléotides en 3' et 5' des segments V, D et J.
-À cela s'ajoute un processus appelé hypermutation somatique, qui affecte principalement le segment V 
+À cela s'ajoute un processus nommé hypermutation somatique, qui affecte principalement le segment V 
 après activation des lymphocytes B naïf, introduisant des mutations ponctuelles supplémentaires,
 notamment dans les régions \glspl{cdr}, afin d'augmenter l'affinité de l'anticorps pour son antigène (\autoref{fig:igh}).
 
@@ -102,19 +102,19 @@ La plateforme \textit{Vidjil} qui permet donc l'étude de ces réarrangements \g
 conjointement par l'équipe Bonsai du laboratoire \gls{cristal} et par le consortium \textit{VidjilNet}. 
 Elle regroupe d'une par l'algorithimique \textit{vidjil-algo} une heuristique de détection des réarrangement \gls{vdj} 
 \cite{giraudFastMulticlonalClusterization2014b} et d'autre part une interface web permettant de visualiser les 
-résultats ainsi produits \cite{duezVidjilWebPlatform2016}. L'ensemble du code source est disponible sur le dépot gitlab 
+résultats ainsi produits \cite{duezVidjilWebPlatform2016}. L'ensemble du code source est disponible sur le dépôt gitlab 
 public suivant \href{https://gitlab.inria.fr/vidjil/vidjil}{gitlab.inria.fr/vidjil/vidjil}.
 
 \vspace{1em}
 
 La première composante, \textit{vidjil-algo} est un programme écrit en \texttt{C++}, dont la fonction est d'extraire 
 les jonctions \gls{vdj} à partir des \textit{reads} (lectures) issues du \gls{ngs} dans des fichiers de séquences 
-brutes au format FASTQ ou bien préalablements alignées au format \gls{bam}. Pour ce faire, l'algorithme 
+brutes au format FASTQ ou bien préalablement alignées au format \gls{bam}. Pour ce faire, l'algorithme 
 repose sur une heuristique originale qui détecte des fenêtres caractéristiques chevauchant les régions CDR3, 
 sans recourir à un alignement exhaustif contre les séquences germinales. Une première étape consiste à constuire un index 
 des séquences germinales V et J à partir de \textit{k-mers} (ou mots de taille $\mathbf{k}$), où $\mathbf{k}$ est choisi de façon à 
 minimiser les \textit{k-mers} communs aux deux segments (\autoref{fig:index}). L'utilisation de \textit{k-mers} espacées permet d'améliorer la sensibilité 
-nottament en cas de subsitutions (example \ref{ex:spaced-seed}).
+notamment en cas de substitutions (example \ref{ex:spaced-seed}).
 
 \begin{examplebox}[label={ex:spaced-seed}]
     Le mot \texttt{ATTCG-CAGGT} issue de la graine \texttt{\#\#\#\#\#\#-\#\#\#\#\#} 
@@ -127,7 +127,7 @@ nottament en cas de subsitutions (example \ref{ex:spaced-seed}).
 La seconde étape consiste à traverser l'ensemble des \textit{reads} en recherchant des fenêtres $\mathbf{w}$ qui recouvrent 
 la région \gls{cdr}3 par comparaison de chacun des \textit{k-mer} du \textit{read} à ceux des index générés. Brièvement cette 
 approche consiste à conserver les \textit{reads} qui contiennent les \textit{k-mer} d'une séquence V et ceux d'une séquence J, 
-de façon à former une une fenêtre $\mathbf{w}$ débutant par les derniers \textit{k-mer} de la séquence V et se terminant 
+de façon à forme une fenêtre $\mathbf{w}$ débutant par les derniers \textit{k-mer} de la séquence V et se terminant 
 par les premiers \textit{k-mer} de la séquence J (\autoref{fig:vidjil-algo}).
 Cette approche permet une détection rapide (qui croit linéairement avec le nombre de nucléotides), robuste et efficace 
 des séquences recombinées. Une fois les fenêtres détectées, \textit{vidjil-algo} regroupe les \textit{reads} en clones, 
@@ -135,7 +135,7 @@ puis procède à une segmentation et une annotation des séquences identifiées.
 
 \input{figures/vidjil-algo.tex}
 
-Les résultats ainsi générés par \textit{vidil-algo} sont rassemblés dans un fichier \textit{.vidjil} au format \gls{json} où 
+Les résultats ainsi générés par \textit{vidjil-algo} sont rassemblés dans un fichier \textit{.vidjil} au format \gls{json} où 
 l'on retrouvera des métadonnées en lien avec l'échantillon analysé et un ensemble de données relatif à chaque clone 
 identifié par \textit{vidjil-algo} (\autoref{lst:json-vidjil}).
 
@@ -208,6 +208,8 @@ dérivées des lymphocytes B, responsables de la production et de la sécrétion
 Elles constituent le stade le plus mature de la lymphopoïèse B, à la suite de la différenciation des lymphocytes B naïfs 
 au contact de l'antigène, et sont les principaux acteurs de la réponse immunitaire humorale.
 
+\vspace{1em}
+
 Dans le \gls{mm}, les plasmocytes malins prolifèrent de manière incontrôlée, entraînant une altération du fonctionnement normal de la moelle osseuse,
 avec des anémies, un déficit immunitaire secondaire, des atteintes osseuses, et une insuffisance rénale. Une partie de ces symptômes est causée
 par la production d'une \gls{ig} monoclonale, dont la détection par électrophorèse constitue un élément diagnostique majeur, au même titre que la
@@ -226,13 +228,15 @@ prolifération médullaire des plasmocytes malins et les autres signes cliniques
     \end{minipage}
     \caption{Gauche : Prolifération de plasmocytes malins dans la moelle osseuse. 
     Droite : Electrophorèse des protéines sériques montrant la présence d'une \gls{ig} monoclonale (pic noir) 
-    superposéee à un profil normal en bleu.}
+    superposée à un profil normal en bleu.}
     \label{fig:mm-cells-ig}
 \end{figure}
 
 Le myélome multiple touche majoritairement les personnes âgées, avec un âge médian au diagnostic d'environ 70 ans. Il représente environ 10 \%
 des hémopathies malignes et près de 1 \% de l'ensemble des cancers. En France, on estime à environ 6 000 le nombre de nouveaux cas chaque année 
 \cite{spfSurviePersonnesAtteintes}.
+
+\vspace{1em}
 
 Sur le plan thérapeutique, les stratégies ont considérablement évolué ces dernières années. Le traitement repose sur une approche personnalisée
 selon l'âge et l'état général du patient. Chez les patients éligibles, une chimiothérapie d'induction est souvent suivie d'une autogreffe de cellules
@@ -243,7 +247,7 @@ maintenance et la surveillance à long terme permettent de prolonger la réponse
 
 \vspace{1em}
 
-En ce qui concerne le \gls{mm}, l'intêret de l'analyse du répertoire \gls{vdj} se rapproche de celui des \glspl{lal} ou l'identification 
+En ce qui concerne le \gls{mm}, l'intérêt de l'analyse du répertoire \gls{vdj} se rapproche de celui des \glspl{lal} ou l'identification 
 de réarrangement \gls{vdj} (en l'occurrence ici des \gls{igh} ou des \gls{igk} et \gls{igl}) sert de marqueur unique (dit de clonalité) 
 de la cellule tumorale, et permet ainsi de suivre l'évolution de la maladie.
 
@@ -255,20 +259,22 @@ la trajectoire de la maladie reste souvent difficile à prédire \cite{hanamuraM
 Dans ce contexte, un marqueur particulièrement pertinent de l'évolution de la maladie et de la réponse au traitement 
 est la présence d'une \gls{mrd} dite indétectable.
 
+\vspace{1em}
+
 La \gls{mrd} (maladie résiduelle minimale) désigne la persistance de cellules tumorales résiduelles non détectables 
 par les méthodes conventionnelles (telles que l'analyse morphologique ou biochimique), mais que l'on peut mettre en évidence 
 grâce à des techniques de haute sensibilité, comme la \gls{cmf} multiparamétrique ou la biologie moléculaire. Elle représentent 
 en quelque sorte la « face cachée de l'iceberg » de la maladie, qui persiste même lorsque les signes cliniques et biologiques 
 ont disparu \autoref{fig:mrd-techniques}.
 Dans le cas spécifique du \gls{mm}, l'évaluation de la \gls{mrd} repose souvent sur la détection de cellules présentant des 
-abberations phénotypiques par \gls{cmf} où sur la détection de réarrangements \gls{vdj} propres au clone tumoral, permettant un suivi très ciblé 
-mais plus complèxe à mettre en oeuvre \cite{bertaminiMRDAssessmentMultiple2021}.
+aberrations phénotypiques par \gls{cmf} ou sur la détection de réarrangements \gls{vdj} propres au clone tumoral, permettant un suivi très ciblé 
+mais plus complexe à mettre en oeuvre \cite{bertaminiMRDAssessmentMultiple2021}.
 
 \input{figures/mrd-techniques.tex}
 
 L'intérêt pronostique de la \gls{mrd} a été largement démontré dans d'autres hémopathies malignes, notamment dans les \gls{lal} et \gls{lam}, 
 où elle s'est imposée comme un outil essentiel pour guider et adapter les stratégies thérapeutiques. Dans le \gls{mm}, l'absence de \gls{mrd} 
-après traitement est également associée à une durée de rémission prolongée et à une survie globale améliorée. À l'inverse, une \gls{mrd} détectable, 
+après traitement est également associée à une durée de rémission prolongée et à une survie globale améliorée. A l'inverse, une \gls{mrd} détectable, 
 même à très faible niveau, constitue un facteur de risque important de rechute précoce \autoref{fig:mrd}
 \cite{munshiLargeMetaanalysisEstablishes2020}.
 
@@ -282,28 +288,38 @@ Pour autant, l'analyse de la \gls{mrd} pose certaines difficultés, notamment en
 Il faut pouvoir être en mesure de détecter un nombre extrêmement faible de cellules tumorales parmi une population très majoritaire de cellules normales,
 ce qui exige des méthodes à très haut pouvoir de résolutif et des échantillons de qualité et quantité suffisante.
 
+\vspace{1em}
+
 La \gls{cmf}, bien qu'accessible dans de nombreux centres, dépend fortement de l'expertise technique et de la standardisation
 des panels d'anticorps utilisés. De plus, son seuil de détection, généralement de l'ordre de $10^{-4}$ à $10^{-5}$, peut s'avérer insuffisant dans certains contextes
 thérapeutiques.
 
-Les approches moléculaires, comme le \gls{ngs} ciblant les réarrangements \gls{vdj}, offrent une sensibilité encore plus élevée (jusqu'a $10^{-6}$),
+\vspace{1em}
+
+Les approches moléculaires, comme le \gls{ngs} ciblant les réarrangements \gls{vdj}, offrent une sensibilité encore plus élevée (jusqu'à $10^{-6}$),
 mais nécessitent une connaissance préalable du profil clonotypique du patient, ainsi qu'un accès à des plateformes technologiques spécialisées et solutions 
 bioinformatiques dédiées. Par ailleurs, s'agissant du \gls{mm}, la détection des réarrangements \gls{vdj} peut être compliquée par la présence de nombreuses 
 mutations sur la région V des \glspl{ig} à la suite du phénomène d'hypermutation somatique, ce qui peut rendre difficile l'identification des séquences.
+
+\vspace{1em}
 
 Enfin, la représentativité de l'échantillon, souvent issu d'une ponction médullaire unique, peut aussi poser problème en raison de la distribution hétérogène
 des plasmocytes tumoraux dans la moelle osseuse. Cette variabilité peut conduire à une sous-estimation de la \gls{mrd} en cas de prélèvement non représentatif.
 Par ailleurs, la nécessité de prélèvements médullaires peut également constituer un frein à l'évaluation répétée de la \gls{mrd}, du fait de leur caractère
 invasif, et souvent inconfortable pour le patient.
 
+\vspace{1em}
+
 Dans ce contexte, l'analyse des acides nucléiques circulants, et en particulier de \gls{adnc}, suscite un intérêt croissant. Ces fragments d'ADN, libérés dans le sang 
 par les cellules tumorales et normales en apoptose ou en nécrose, peuvent refléter de manière globale la charge tumorale et permettre une évaluation non 
 invasive de la \gls{mrd} (\autoref{fig:ctdna}). Contrairement à la ponction médullaire, un simple prélèvement sanguin (ou « biopsie liquide ») permet de suivre plus facilement 
 et plus fréquemment l'évolution de la maladie.
 
+\vspace{1em}
+
 Bien que cette approche soit largement démocratisée dans le domaine de l'oncologie solide, elle reste encore en cours de validation en oncohématologie et demeure,
-pour le moment, marginale, avec quelques applications dans le cadre des \gls{lnh}. Dans les autres patholgies, les défis techniques liés à la faible concentration des 
-\gls{adnc} et à la taille faible des fragments ($\approx$ 200bp), à l'hétérogénéité génétique des hémopathies malignes et à l'absence de biomarqueurs universels 
+pour le moment, marginale, avec quelques applications dans le cadre des \gls{lnh}. Dans les autres pathologies, les défis techniques liés à la faible concentration des 
+\gls{adnc} et à la faible taille des fragments ($\approx$ 150 pb), à l'hétérogénéité génétique des hémopathies malignes et à l'absence de biomarqueurs universels 
 limitent encore son déploiement en routine clinique.
 
 \begin{figure}[H]
