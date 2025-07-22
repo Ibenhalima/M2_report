@@ -1,44 +1,117 @@
 \documentclass[11pt,a4paper]{report}
 
+% Encoding & Language 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[french]{babel}
-\usepackage{xcolor}
-\usepackage[dvipsnames]{xcolor}
-\usepackage[normalem]{ulem}
 
+% Fonts 
 \usepackage[scaled=0.90]{helvet}
 \renewcommand{\familydefault}{\sfdefault}
 
+% Page layout 
 \usepackage{geometry}
 \geometry{
   a4paper,
-  left=30mm,
-  right=20mm,
+  left=25mm,
+  right=25mm,
   top=25mm,
   bottom=25mm,
 }
-
 \usepackage{titlesec}
 \titleformat{\chapter}{}{}{0em}{\bfseries\LARGE}
-
 \usepackage{setspace}
 
+% Colors & Graphics 
+\usepackage[table,dvipsnames]{xcolor}
+\definecolor{mygreen}{RGB}{198,239,206}
+\definecolor{myyellow}{RGB}{255,255,204}
+\definecolor{myorange}{RGB}{255,204,153}
+\definecolor{myred}{RGB}{255,102,102}
+\definecolor{mydarkred}{RGB}{204,0,0}
+\definecolor{mydeepred}{RGB}{150,0,0}
+
+\usepackage[normalem]{ulem}
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage{booktabs}
 \usepackage{multirow}
 
+% Graphics and Plots
+\usepackage{tikz}
+\usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{fillbetween}
+
+% Listings for source code 
 \usepackage{listings}
+\usepackage{fvextra}
+
 \usepackage[colorlinks=true, linkcolor=blue, urlcolor=teal]{hyperref}
 
-\renewcommand{\lstlistingname}{Code}
+%  Glossaries & Bibliography 
+\usepackage[acronym]{glossaries}
+\makeglossaries
+\input{glossary} 
 
-\colorlet{punct}{red!60!black}
-\colorlet{background}{blue!5}
-\definecolor{delim}{RGB}{20,105,176}
-\colorlet{numb}{magenta!60!black}
+\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
+\addbibresource{references.bib}
 
+% Captions 
+\usepackage{caption}
+\captionsetup{
+    labelfont={color=gray},
+    textfont={color=gray}
+}
+
+% Other useful packages 
+\usepackage{fontawesome5}
+\usepackage{rotating}
+\usepackage{amssymb}
+
+% tcolorbox setup 
+\usepackage[most]{tcolorbox}
+\tcbset{colback=blue!5, colframe=blue!70, boxrule=0.5pt, arc=4pt,
+       left=6pt, right=6pt, top=6pt, bottom=6pt}
+\newtcolorbox[auto counter, number within=section]{examplebox}[1][]{%
+  title=Example~\thetcbcounter, #1
+}
+
+% Algorithm2e setup 
+\usepackage[french,linesnumbered,ruled,vlined]{algorithm2e}
+\SetKwInput{KwIn}{Entrée}
+\SetKwInput{KwOut}{Sortie}
+\SetKwData{KwData}{Donnée}
+\SetKwIF{If}{ElseIf}{Else}{si}{alors}{sinon si}{sinon}{fin si}
+\SetKwFor{For}{pour}{faire}{fin}
+
+% Custom commands for nucleotide coloring 
+\newcommand{\A}{\textcolor{Cyan}{A}}
+\newcommand{\T}{\textcolor{ForestGreen}{T}}
+\newcommand{\Tb}{\textcolor{OliveGreen}{\uline{T}}}
+\newcommand{\G}{\textcolor{Magenta}{G}}
+\newcommand{\C}{\textcolor{Orange}{C}}
+\newcommand{\Hbase}{H}
+\newcommand{\N}{N}
+\newcommand{\Y}{Y}
+
+% Verbatim environment with colors 
+\DefineVerbatimEnvironment{ColoredVerbatim}{Verbatim}{
+    fontsize=\small,
+    commandchars=\\\{\},
+    formatcom=\ttfamily
+}
+
+% Annex environment 
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+    fileext=loa,
+    listname=Liste des annexes,
+    name=Annexe
+]{annex}
+
+% Listings language definitions 
 \lstdefinelanguage{json}{
     basicstyle=\normalfont\ttfamily,
     numbers=left,
@@ -48,24 +121,24 @@
     showstringspaces=false,
     breaklines=true,
     frame=lines,
-    backgroundcolor=\color{background},
+    backgroundcolor=\color{blue!5},
     literate=
-     *{0}{{{\color{numb}0}}}{1}
-      {1}{{{\color{numb}1}}}{1}
-      {2}{{{\color{numb}2}}}{1}
-      {3}{{{\color{numb}3}}}{1}
-      {4}{{{\color{numb}4}}}{1}
-      {5}{{{\color{numb}5}}}{1}
-      {6}{{{\color{numb}6}}}{1}
-      {7}{{{\color{numb}7}}}{1}
-      {8}{{{\color{numb}8}}}{1}
-      {9}{{{\color{numb}9}}}{1}
-      {:}{{{\color{punct}{:}}}}{1}
-      {,}{{{\color{punct}{,}}}}{1}
-      {\{}{{{\color{delim}{\{}}}}{1}
-      {\}}{{{\color{delim}{\}}}}}{1}
-      {[}{{{\color{delim}{[}}}}{1}
-      {]}{{{\color{delim}{]}}}}{1},
+     *{0}{{{\color{magenta!60!black}0}}}{1}
+      {1}{{{\color{magenta!60!black}1}}}{1}
+      {2}{{{\color{magenta!60!black}2}}}{1}
+      {3}{{{\color{magenta!60!black}3}}}{1}
+      {4}{{{\color{magenta!60!black}4}}}{1}
+      {5}{{{\color{magenta!60!black}5}}}{1}
+      {6}{{{\color{magenta!60!black}6}}}{1}
+      {7}{{{\color{magenta!60!black}7}}}{1}
+      {8}{{{\color{magenta!60!black}8}}}{1}
+      {9}{{{\color{magenta!60!black}9}}}{1}
+      {:}{{{\color{red!60!black}{:}}}}{1}
+      {,}{{{\color{red!60!black}{,}}}}{1}
+      {\{}{{{\color{blue!60!black}{\{}}}}{1}
+      {\}}{{{\color{blue!60!black}{\}}}}}{1}
+      {[}{{{\color{blue!60!black}{[}}}}{1}
+      {]}{{{\color{blue!60!black}{]}}}}{1},
 }
 
 \lstdefinelanguage{custombash}{
@@ -88,77 +161,25 @@
     numbers=left,
     stepnumber=1,
     numbersep=8pt,
-    backgroundcolor=\color{background},
+    backgroundcolor=\color{blue!5},
     breaklines=true,
     frame=lines,
     literate=
-     *{0}{{{\color{numb}0}}}{1}
-      {1}{{{\color{numb}1}}}{1}
-      {2}{{{\color{numb}2}}}{1}
-      {3}{{{\color{numb}3}}}{1}
-      {4}{{{\color{numb}4}}}{1}
-      {5}{{{\color{numb}5}}}{1}
-      {6}{{{\color{numb}6}}}{1}
-      {7}{{{\color{numb}7}}}{1}
-      {8}{{{\color{numb}8}}}{1}
-      {9}{{{\color{numb}9}}}{1},
+     *{0}{{{\color{magenta!60!black}0}}}{1}
+      {1}{{{\color{magenta!60!black}1}}}{1}
+      {2}{{{\color{magenta!60!black}2}}}{1}
+      {3}{{{\color{magenta!60!black}3}}}{1}
+      {4}{{{\color{magenta!60!black}4}}}{1}
+      {5}{{{\color{magenta!60!black}5}}}{1}
+      {6}{{{\color{magenta!60!black}6}}}{1}
+      {7}{{{\color{magenta!60!black}7}}}{1}
+      {8}{{{\color{magenta!60!black}8}}}{1}
+      {9}{{{\color{magenta!60!black}9}}}{1},
 }
 
-\usepackage{tikz}
-\usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
+\renewcommand{\lstlistingname}{Code}
 
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.18}
-\usepgfplotslibrary{fillbetween}
-
-\usepackage[most]{tcolorbox}
-\tcbset{colback=blue!5, colframe=blue!70, boxrule=0.5pt, arc=4pt, left=6pt, right=6pt, top=6pt, bottom=6pt}
-\newtcolorbox[auto counter, number within=section]{examplebox}[1][]{%
-  title=Example~\thetcbcounter, #1
-}
-\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
-\renewcommand{\algorithmcfname}{Algorithme}
-
-\usepackage[acronym]{glossaries}
-\makeglossaries
-\input{glossary}
-
-\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
-\addbibresource{references.bib}
-
-\usepackage{caption}
-\captionsetup{
-    labelfont={color=gray},
-    textfont={color=gray}
-}
-
-\usepackage{fontawesome5}
-\usepackage{rotating}
-\usepackage{fvextra}
-\usepackage{amssymb}
-
-\newcommand{\A}{\textcolor{Cyan}{A}}
-\newcommand{\T}{\textcolor{ForestGreen}{T}}
-\newcommand{\Tb}{\textcolor{OliveGreen}{\uline{T}}}
-\newcommand{\G}{\textcolor{Magenta}{G}}
-\newcommand{\C}{\textcolor{Orange}{C}}
-\newcommand{\Hbase}{H} 
-\newcommand{\N}{N}
-\newcommand{\Y}{Y}
-
-\DefineVerbatimEnvironment{ColoredVerbatim}{Verbatim}{
-    fontsize=\small,
-    commandchars=\\\{\},
-    formatcom=\ttfamily
-}
-
-\usepackage{newfloat}
-\DeclareFloatingEnvironment[
-    fileext=loa,
-    listname=Liste des annexes,
-    name=Annexe
-]{annex}
-
+%  Document start 
 \begin{document}
 
 \onehalfspacing
@@ -180,8 +201,6 @@
 \input{sections/conclusion.tex}
 
 \printbibliography
-
-\newpage
 
 \appendix
 \input{sections/appendix.tex}

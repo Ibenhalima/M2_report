@@ -68,11 +68,11 @@ en \gls{fr}3, tandis que chez le patient 2, le réarrangement n'est pas amplifi�
         \G\A\G\G\A\C\A\C\G\G\C\T\G\T\G\T\A\T\T\A\C séquence IGHV3-30 patient 1
            150       160
 
-              10        20 
-        \G\G\A\C\A\C\N\G\C\Y\G\T\G\T\A\T\T\A\C amorce dégénérée VH commune
-        \textcolor{gray}{|||| |:| :   ||||||}
-        \G\G\A\C\Tb\C\A\G\G\C\A\C\Tb\T\A\T\T\A\C séquence IGHV2-5*04 patient 2
-             160       170
+                10        20 
+        \G\Hbase\G\G\A\C\A\C\N\G\C\Y\G\T\G\T\A\T\T\A\C amorce dégénérée VH commune
+        \textcolor{gray}{ :|||| |:| :   ||||||}
+        \A\T\G\G\A\C\Tb\C\A\G\G\C\A\C\Tb\T\A\T\T\A\C séquence IGHV2-5*04 patient 2
+              160       170
     \end{ColoredVerbatim}
     \caption{
         Alignement de l'amorce dégénéree VH commune utilisé pour l'amplification \gls{fr}3 
@@ -89,7 +89,7 @@ Un dernier problème, et non des moindre concerne l'amplification non spécifiqu
 ainsi que la présence de nombreux artéfacts dans les données de séquençage. Les amorces utilisées faisant de l'ordre de 100 bases 
 (cf \autoref{anx:primer-sequences}), elles ont tendance à se dimériser et ainsi être amplifiées et séquencées en l'état. 
 De plus, certaines amorces, notamment celle ciblant la région JH commune, amplfient des régions non ciblées dans 
-les conditions actuelles de \gls{pcr}. Pour illuster, chez le patient 1 sur le même prélèvement au diagnostic, on identifie 
+les conditions actuelles de \gls{pcr}. Pour illustrer, chez le patient 1 sur le même prélèvement au diagnostic, on identifie 
 un clone majoritaire qui represente près de 82 \% des clones identifiés en \textit{leader}, contre 32 \% en \gls{fr}3 au milieu 
 de nombreuses séquences artéfactuelles et hors-cibles (\autoref{fig:fr3-vs-leader}).
 
@@ -221,7 +221,7 @@ cf données figure CHR alignement.
 Pour pallier à ce problème, il est possible de filtrer les séquences en ajustant les paramètres de \textit{vidjil-algo}.
 Pour chaque clone, une \textit{e-value} (valeur E) est calculée, souvent de l'orde de $10^{-50}$ à $10^{-100}$, dans le 
 cadre de vrais réarrangements \gls{vdj}. En revanche, pour les séquences hors-cibles, cette valeur est de l'ordre de $10^{-5}$ à $10^{-10}$. 
-Ainsi, en filtrant les séquences avec une \textit{e-value} inférieure à $10^{-15}$, on peut éliminer la plupart des séquences hors-cibles, et 
+Ainsi, en filtrant les séquences avec une \textit{e-value} supérieure à $10^{-15}$, on peut éliminer la plupart des séquences hors-cibles, et 
 il suffit pour cela de modifier le paramètre \texttt{-e} contrôlant la \textit{e-value} maximale autorisée de la configuration \textit{multi+inc+xxx} 
 de \textit{vidjil-algo} correspondant à l'instruction \texttt{-c clones -z 100 -r 1 -g germline/homo-sapiens.g \textcolor{red}{-e 1} -2 -d -w 50} 
 en \textcolor{red}{-e 1e-15} (\autoref{fig:fr3-evalue}).
@@ -273,7 +273,7 @@ et métadonnées d'analyses, tandis que le second gère des objets \texttt{clone
 \vspace{1em}
 
 L'idée est donc la suivante : un nouvel attribut booléen \texttt{removed} (initialisé par défaut sur la valeur \texttt{false}) est ajouté à l'objet 
-\texttt{clone} pour indiquer si le clonotype doit être supprimé ou non. Cet attribus est contrôlé dans l'implémentation actuelle par un nouveau 
+\texttt{clone} pour indiquer si le clonotype doit être supprimé ou non. Cet attribut est contrôlé dans l'implémentation actuelle par un nouveau 
 tag utilisateur \texttt{removed\ clonotype}. Deux attributs \texttt{removed\_clones\_reads\_of\_active\_locus} et \texttt{removed\_clones\_reads\_total} sont 
 ajoutés à l'objet \texttt{model} pour stocker le nombre de \textit{reads} des clonotypes supprimés indéxé par le temps sous forme d'\textit{array} (tableau), 
 respectivement pour le locus actif et pour l'ensemble des loci (\autoref{algo:removed-reads}). 
@@ -327,12 +327,21 @@ Les clonotypes peuvent être restaurés en supprimant le tag \texttt{removed clo
 Enfin, des tests unitaires ont été ajoutés pour garantir le bon fonctionnement de cette fonctionnalité.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.7\textwidth]{images/removed_clonotypes.png}
+    \begin{minipage}{0.65\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/removed_clonotypes.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.3\textwidth}
+        \centering
+        \includegraphics[width=01\textwidth]{images/tag_menu.png}
+    \end{minipage}
     \caption{
         Capture d'écran de l'interface utilisateur de \textit{Vidjil} montrant les clonotypes supprimés. 
         Les clonotypes sont affichés en transparence et barrés, et un clonotype virtuel est ajouté pour 
-        comptabiliser le pourcentage de \textit{reads} supprimés par locus.
+        comptabiliser le pourcentage de \textit{reads} supprimés par locus (image de gauche).
+        Menu des tags permettant de supprimer les clonotypes en ajoutant le tag \texttt{removed clonotype} 
+        (image de droite).
     }
     \label{fig:removed-clonotypes}
 \end{figure}
@@ -348,7 +357,7 @@ au suivi, et nécessite de pouvoir détecter avec précision des quantité très
 En premier lieu, il est nécessaire de s'assurer que le matériel de départ est suffisant pour espérer détecter des quantités infimes de réarrangements 
 clonaux. Dans cette optique, il est possible de modéliser de façon assez simple la question par un problème d'échantillionnage statistique. Si l'on considère 
 l'organisme comme la population ou chaque cellule représente un individu, positif ou négatif (soit une cellule tumorale ou saine), avec une probabilité $p$ 
-qu'une cellule soit positive, en considérant chaque cellule comme un échantillon indépendant, le nombre $N$ de cellules positives parmis $n$ cellules analysés 
+qu'une cellule soit positive, en considérant chaque cellule comme un échantillon indépendant, le nombre $N$ de cellules positives parmis $n$ cellules analysées 
 suivra une loi binomiale de paramètres $n$ et $p$. Dans les faits, sachant que $p$ est très faible, on peut approximer la loi binomiale par une loi de Poisson de 
 paramètre $\lambda = n \cdot p$. 
 
@@ -378,12 +387,16 @@ un seuil de détection minimal $k$ de l'ordre de 10 à 100 cellules positives :
 On cherche donc a résoudre l'équation précédente en $n$, en sachant que $p$ est inconnu en pratique, mais estimé comme étant de l'ordre de $10^{-4}$ à $10^{-8}$, 
 valeur qui correspondrait à la proportion des cellules dites « initiatrices de leucémie ». En faisant donc varier $p$ sur cet intervalle, avec $\epsilon = 0.05$ et 
 $k = 10$ puis $100$, on peut résoudre l'équation précendente (de façon numérique et non algébrique, s'agissant d'une équation transcendante). En considérant également 
-la numération leucocytaire sanguine comme étant de l'ordre de $5\,\text{G/L}$ et médullaire de $50\,\text{G/L}$, on peut en déduire le nombre minimal de cellules sanguines à analyser 
+la numération leucocytaire sanguine comme étant de l'ordre de $5\,\text{G/L}$ et médullaire de $50\,\text{G/L}$, on peut en déduire le nombre minimal de cellules à analyser 
 pour espérer détecter la \gls{mrd} au seuil de confiance de $95\,\%$ (\autoref{tab:valeurs_n_volume}).
 
 \begin{table}[H]
     \centering
-    \caption{Nombre minimal de cellules $n$ et volume sanguin nécessaire pour différents $p$ et seuils $k$, avec $\varepsilon = 0.05$}
+    \caption{
+        Nombre minimal de cellules $n$ et volume sanguin nécessaire pour différents $p$ et seuils $k$, avec $\varepsilon = 0.05$.
+        Les volumes en \textcolor{green}{vert} et \textcolor{yellow}{jaune} sont analysable en pratique clinique, tandis que les 
+        volumes en \textcolor{orange}{orange} et nuances de \textcolor{mydarkred}{rouge} sont considérés comme trop élevés.
+    }
     \label{tab:valeurs_n_volume}
     \begin{tabular}{c|cc|cc}
         \toprule
@@ -392,19 +405,19 @@ pour espérer détecter la \gls{mrd} au seuil de confiance de $95\,\%$ (\autoref
         \midrule
         \multicolumn{5}{c}{Numération = $5\,\text{G/L}$} \\
         \midrule
-        $1 \times 10^{-4}$ & $1.57 \times 10^{5}$ & 0.031 & $1.17 \times 10^{6}$ & 0.234 \\
-        $1 \times 10^{-5}$ & $1.57 \times 10^{6}$ & 0.314 & $1.17 \times 10^{7}$ & 2.340 \\
-        $1 \times 10^{-6}$ & $1.57 \times 10^{7}$ & 3.14 & $1.17 \times 10^{8}$ & 23.40 \\
-        $1 \times 10^{-7}$ & $1.57 \times 10^{8}$ & 31.43 & $1.17 \times 10^{9}$ & 234.00 \\
-        $1 \times 10^{-8}$ & $1.57 \times 10^{9}$ & 314.29 & $1.17 \times 10^{10}$ & 2340.00 \\
+        $10^{-4}$ & $1.57 \times 10^{5}$ & \cellcolor{mygreen}0.031 & $1.17 \times 10^{6}$ & \cellcolor{mygreen}0.234 \\
+        $10^{-5}$ & $1.57 \times 10^{6}$ & \cellcolor{mygreen}0.314 & $1.17 \times 10^{7}$ & \cellcolor{myyellow}2.340 \\
+        $10^{-6}$ & $1.57 \times 10^{7}$ & \cellcolor{myyellow}3.14 & $1.17 \times 10^{8}$ & \cellcolor{myorange}23.40 \\
+        $10^{-7}$ & $1.57 \times 10^{8}$ & \cellcolor{myred}31.43 & $1.17 \times 10^{9}$ & \cellcolor{mydarkred}234.00 \\
+        $10^{-8}$ & $1.57 \times 10^{9}$ & \cellcolor{mydarkred}314.29 & $1.17 \times 10^{10}$ & \cellcolor{mydeepred}2340.00 \\
         \midrule
         \multicolumn{5}{c}{Numération = $50\,\text{G/L}$} \\
         \midrule
-        $1 \times 10^{-4}$ & $1.57 \times 10^{5}$ & 0.0031 & $1.17 \times 10^{6}$ & 0.023 \\
-        $1 \times 10^{-5}$ & $1.57 \times 10^{6}$ & 0.031 & $1.17 \times 10^{7}$ & 0.234 \\
-        $1 \times 10^{-6}$ & $1.57 \times 10^{7}$ & 0.31 & $1.17 \times 10^{8}$ & 2.34 \\
-        $1 \times 10^{-7}$ & $1.57 \times 10^{8}$ & 3.14 & $1.17 \times 10^{9}$ & 23.40 \\
-        $1 \times 10^{-8}$ & $1.57 \times 10^{9}$ & 31.43 & $1.17 \times 10^{10}$ & 234.00 \\
+        $10^{-4}$ & $1.57 \times 10^{5}$ & \cellcolor{mygreen}0.0031 & $1.17 \times 10^{6}$ & \cellcolor{mygreen}0.023 \\
+        $10^{-5}$ & $1.57 \times 10^{6}$ & \cellcolor{mygreen}0.031 & $1.17 \times 10^{7}$ & \cellcolor{mygreen}0.234 \\
+        $10^{-6}$ & $1.57 \times 10^{7}$ & \cellcolor{mygreen}0.31 & $1.17 \times 10^{8}$ & \cellcolor{myyellow}2.34 \\
+        $10^{-7}$ & $1.57 \times 10^{8}$ & \cellcolor{myyellow}3.14 & $1.17 \times 10^{9}$ & \cellcolor{myorange}23.40 \\
+        $10^{-8}$ & $1.57 \times 10^{9}$ & \cellcolor{myred}31.43 & $1.17 \times 10^{10}$ & \cellcolor{mydarkred}234.00 \\
         \bottomrule
     \end{tabular}
 \end{table}
