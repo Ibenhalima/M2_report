@@ -17,6 +17,9 @@
 *.alg
 *.acr
 *.acn
+*.nav
+*.snm
+*.vrb
 
 # Backup and swap files
 *~
@@ -29,6 +32,7 @@
 
 # PDF output
 rapport.pdf
+presentation.pdf
 
 # latexmk config 
 latexmkrc
@@ -36,3 +40,4 @@ latexmkrc
 # Misc
 Courrier CSTMT  MRD MM CSTMT350.doc
 courrier_cstmt_mrd_mm.pdf
+TP53.pptx

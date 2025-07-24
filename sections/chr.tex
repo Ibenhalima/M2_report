@@ -1,15 +1,125 @@
-\chapter{Projets au CHU de Lille}
+\chapter{Travaux effectués au CHU de Lille}
 
-Cette section se situe quelque peu en marge du reste de ce qui a été exposé dans ce rapport, mais a pour 
-but de présenter brièvement un panorama de quelques projets réalisés durant l'autre moitié de ce stage, 
-dans l'équipe bioinformatique de \gls{chu} de Lille et ceci toujours dans le cadre du \gls{mm}.
+Cette section, bien que légèrement en marge du reste du rapport, a pour objectif de présenter brièvement un aperçu 
+de plusieurs projets réalisés durant la seconde moitié de ce stage, au sein de l'équipe bioinformatique du \gls{chu}, 
+principalement en lien avec le \gls{mm}. Ces projets portent essentiellement sur la gestion des pipelines d'analyse 
+des données de séquençage, comprenant la création d'un nouveau pipeline, l'ajout d'une fonctionnalité spécifique à 
+un pipeline existant, ainsi que la mise à jour et la rédaction de tests pour trois autres pipelines. Parallèlement, 
+la gestion des cycles de qualification et de production a été assurée.
 
-TO BE CONTINUED
+\section{Architecture logicielle et environnement utilisateur}
 
-\section{Environnement de développement et utilisateur}
+L'environnement de développement du \gls{chu} s'appuie sur plusieurs composantes clés, côté développeur comme côté utilisateur.
+Des machines virtuelles sous Rocky Linux 9.2 sont mises à disposition pour les développements et la routine d'analyse.
+Elles sont hébergées sur un \gls{hpc} comprenant X Go de mémoire vive, X nœuds de calcul, deux serveurs GPU, ainsi qu'un serveur de stockage de X To.
+Le gestionnaire de \textit{workflow} \href{https://www.nextflow.io/}{Nextflow} est utilisé pour l'écriture des différents pipelines d'analyse, 
+déployés via une conteneurisation des dépendances dans des images \textit{Singularity} et de l'environnement dans des conteneurs \textit{Docker}.
+De nombreuses surcouches logicielles sont développées par l'équipe afin de faciliter, automatiser et sécuriser les phases de développement et d'utilisation.
+On peut citer notamment les \textit{nf-tools}, qui permettent d'automatiser un certain nombre de tâches, allant de la création des projets au lancement des pipelines.
+Enfin, des interfaces web permettent d'accéder de façon simple à l'ensemble des applications développées par l'équipe (\autoref{fig:bioinfo-dashboard}).
+L'ensemble du code est versionné et hébergé sur un dépôt GitLab interne au \gls{chu}.
+
+schéma Augustin architecture ? 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/dashboard_bioinfo.png}
+    \caption{
+        Page d'acceuil de lancement des pipelines et autres outils bioinformatiques du \gls{chu}.
+    }
+    \label{fig:bioinfo-dashboard}
+\end{figure}
 
 \section{Quantification des délétions du gène \textit{TP53}}
 
+Ce rapport a principalement traité du suivi de la \gls{mrd} dans le \gls{mm}, une analyse à visée pronostique réalisée au cours du suivi des patients.
+Plaçons-nous à présent dans une optique toujours pronostique (voire diagnostique) mais cette fois au moment du diagnostic de la pathologie. 
+Trois analyses moléculaires sont alors réalisées :
+
+\begin{itemize}
+    \item \textbf{La recherche de variants somatiques} dans des gènes d'intérêt, notamment des oncogènes et des gènes suppresseurs de tumeurs.
+    \item \textbf{La recherche de translocations} impliquant les \glspl{ig} et d'autres partenaires chromosomiques.
+    \item \textbf{L'analyse du nombre de copies}, permettant d'identifier des anomalies comme des duplications ou des délétions.
+\end{itemize}
+
+\vspace{1em}
+
+C'est dans le cadre de cette dernière analyse qu'il a été nécessaire de développer une approche spécifique pour quantifier les délétions du gène \textit{TP53}, 
+gène suppresseur de tumeur dont l'altération est associée à un mauvais pronostic dans le \gls{mm}, avec un seuil placé à 20 \% de cellules selon des recommandations 
+récentes non publiées \cite{flyntPrognosisBiologyTargeting2020}.
+Les plasmocytes étant des cellules particulièrement difficiles à cultiver, l'analyse du nombre de copies, associée aux techniques de \gls{fish}, constitue l'unique 
+moyen d'accéder aux remaniements génomiques de grande taille (duplications, délétions, translocations, etc.).
+Ces informations permettent de dresser ce que l'on peut considérer comme un « carytoype moléculaire » de la cellule tumorale. 
+
+\vspace{1em}
+
+Il est aisé, grâce à la technique de \gls{fish}, de quantifier ce type d'événement en comptant directement le nombre de cellules portant l'anomalie parmi l'ensemble des cellules analysées 
+(\autoref{fig:fish}).  
+En revanche, il est beaucoup plus difficile d'estimer avec précision la fréquence de ces anomalies dans le cadre d'analyses en \textit{bulk}, comme celles réalisées par \gls{ngs}.
+
+\begin{figure}[H]
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/fish_image.png}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.45\textwidth}
+        \centering
+        \includegraphics[width=01\textwidth]{images/fish.png}
+    \end{minipage}
+    \caption{
+        \gls{fish} \textit{TP53} sur noyaux interphasiques à gauche et \textit{design} de la sonde à droite. 
+    }
+    \label{fig:fish}
+\end{figure}
+
+Pour des raisons internes au laboratoire, l'analyse par \gls{fish} n'est pas réalisable dans ce contexte.  
+L'objectif a donc été de développer et d'évaluer une solution d'estimation de la fréquence des délétions de \textit{TP53} à partir des données issues du \gls{ngs}. 
+L'analyse du nombre de copie repose classiquement sur le rapport des pronfondeur sur certaines régions, et est exprimé en ratio : 1 sans anoamlie, inférieur si délétion 
+et supérieur si gain de la région (\autoref{fig:cnv}). Ainsi à partir de cette valeur et en posant quelques hypothèse :
+
+\begin{itemize}
+    \item Les délétions de \textit{TP53} sont toujours monoalléliques.
+    \item L'anomalie est clonale (hypothèse non vérifiée en pratique).
+    \item La pureté tumorale de l'échantillon est connue.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/cnv.png}
+    \caption{Résultat de l'analyse du nombre de copies sur un échantillon de \gls{mm}.}
+    \label{fig:cnv}
+\end{figure}
+
+Il est alors possible de moyenner la valeur du $\log_2$ du ratio de profondeur pour les 10 sondes couvrant la région du gène \textit{TP53},  
+et de l'exprimer comme une fréquence estimée de cellules délétées selon la relation suivante :
+
+\begin{equation}
+    \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 -2^{\overline{\log_2\text{Ratio}}}}{0{,}5} \right) 
+    \times \frac{1}{\text{pureté}} \times 100
+\end{equation}
+    
+Un intervalle de confiance et des statistiques de dispertions peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
+approche a été appliquée via un script python permettant de générer au travers d'un fichier excel, une fréquence de délétion estimée par échantillon,
+pouvant être corrigé selon la pureté tumorale (\autoref{fig:excel-tp53}). Par la suite l'analyse de témoins négatifs et positifs 
+(échantillon avec ou sans délétion du gène \textit{TP53}) ont permis d'estimer la limite de linéarité à 20 \% et de détection à 15 \%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/excel_tp53.png}
+    \caption{Résultat de l'analyse des délétions \textit{TP53} sur des échantillons de \gls{mm}.}
+    \label{fig:excel-tp53}
+\end{figure}
+
 \section{Seuil optimal de détection des translocations \textit{IgH}}
 
+En lien avec la section précédente, une autre optimisation a pu être proposée concernant la recherche des translocations impliquants les \glspl{ig}.
+Ces anomalies sont particulièrement importantes, considérées comme fondatrices dans l'oncogènese du \gls{mm} et leur détection se fait au \gls{chu} 
+par appel de variants structuraux sur \textit{paired-end short-reads} via les \textit{caller} \textit{Manta} \cite{chenMantaRapidDetection2016a} et 
+\textit{Gridss} \cite{cameronGRIDSSSensitiveSpecific2017a}. Ces deux \textit{variant-caller} fonctiennent de manière similaire en assamblant des \textit{reads} 
+candidats porteurs d'information
+
+
 \section{Statistiques sur les données du \textit{Vidjil} issues du CHU de Lille}
+
+TO BE CONTINUED

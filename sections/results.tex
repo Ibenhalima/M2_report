@@ -277,8 +277,8 @@ L'idée est donc la suivante : un nouvel attribut booléen \texttt{removed} (ini
 tag utilisateur \texttt{removed\ clonotype}. Deux attributs \texttt{removed\_clones\_reads\_of\_active\_locus} et \texttt{removed\_clones\_reads\_total} sont 
 ajoutés à l'objet \texttt{model} pour stocker le nombre de \textit{reads} des clonotypes supprimés indéxé par le temps sous forme d'\textit{array} (tableau), 
 respectivement pour le locus actif et pour l'ensemble des loci (\autoref{algo:removed-reads}). 
-Enfin la méthode \texttt{getSize} de l'objet \texttt{clone} est modifiée pour soustraire du total des \textit{reads} le nombre de \textit{reads} des clonotypes 
-supprimés, ainsi que d'autres indicateurs de nombre de \textit{reads} analysés.
+Enfin la méthode \texttt{getSize} de l'objet \texttt{clone}, ainsi que d'autres indicateurs de nombre de \textit{reads} analysés sont modifiés pour soustraire du 
+total des \textit{reads} le nombre de \textit{reads} des clonotypes supprimés.
 
 \vspace{1em}
 
@@ -384,7 +384,7 @@ un seuil de détection minimal $k$ de l'ordre de 10 à 100 cellules positives :
     \mathbb{P}(N \geq k) = 1 - \sum_{i = 0}^{k-1} \frac{e^{-\lambda} \, \lambda^{i}}{i!} = 1 - \varepsilon
 \end{equation}
 
-On cherche donc a résoudre l'équation précédente en $n$, en sachant que $p$ est inconnu en pratique, mais estimé comme étant de l'ordre de $10^{-4}$ à $10^{-8}$, 
+On cherche donc a résoudre l'équation précédente en $n$, en sachant que $p$ est inconnu dans les faits, mais estimé comme étant de l'ordre de $10^{-4}$ à $10^{-8}$, 
 valeur qui correspondrait à la proportion des cellules dites « initiatrices de leucémie ». En faisant donc varier $p$ sur cet intervalle, avec $\epsilon = 0.05$ et 
 $k = 10$ puis $100$, on peut résoudre l'équation précendente (de façon numérique et non algébrique, s'agissant d'une équation transcendante). En considérant également 
 la numération leucocytaire sanguine comme étant de l'ordre de $5\,\text{G/L}$ et médullaire de $50\,\text{G/L}$, on peut en déduire le nombre minimal de cellules à analyser 
@@ -424,11 +424,15 @@ pour espérer détecter la \gls{mrd} au seuil de confiance de $95\,\%$ (\autoref
 
 Ainsi, pour un seuil de détection à $10^{-5}$ avec 100 cellules minimum, il est nécessaire de prélever au moins 3 mL de sang 
 et 10 fois moins de moelle, ce qui correspond à une quantité d'environ 500 ng d'ADN (A vérfier avec Aurélie). On remarque également 
-que des seuils de détection inférieurs à $10^{-7}$ sont jusqu'à présent inatteignable, nécessaitant des volumes de prélèvement pouvant 
-attiendre plusieurs litres.
+que des seuils de détection inférieurs à $10^{-6}$ sont jusqu'à présent inatteignable, nécessaitant des volumes de prélèvement pouvant 
+atteindre plusieurs litres.
 
 TO BE CONTINUED
 
 \subsection{Quantification de la MRD}
 
+Résultats leader et fr3 sur les 5 couples après modifications température, + spike in, quantification, normalisation cellules 
+
 \subsection{Détection de la MRD sur les échantillons cliniques}
+
+Comparaison résultats CMF, etc .
