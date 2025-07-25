@@ -1,0 +1,35 @@
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            width=15cm,
+            height=8cm,
+            xlabel={Seuil $t$},
+            xmode=log,
+            extra x ticks={6},
+            extra x tick labels={$6$},
+            ylabel={Nombre de patients},
+            legend pos=north west,
+            grid=major,
+        ]
+        \addplot[
+            color=blue,
+            mark=*,
+        ] table [x=t, y=T, col sep=comma] {data/threshold_analysis.csv};
+        \addlegendentry{$T(t)$}
+
+        \addplot[
+            color=red,
+            mark=square*,
+        ] table [x=t, y=T+, col sep=comma] {data/threshold_analysis.csv};
+
+        \draw[dashed, thick] (axis cs:6,-100) -- (axis cs:6,1000);
+        \node at (axis cs:6.5,450) [anchor=west, font=\small, text=black] {seuil $t^*$ optimal};
+
+        \addlegendentry{$T_+(t)$}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{Courbes de $T(t)$ et $T_+(t)$ à partir des 1178 échantillons du \gls{chu}}
+    \label{fig:translocation-threshold}
+\end{figure}

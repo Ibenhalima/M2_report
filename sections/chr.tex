@@ -5,7 +5,8 @@ de plusieurs projets réalisés durant la seconde moitié de ce stage, au sein d
 principalement en lien avec le \gls{mm}. Ces projets portent essentiellement sur la gestion des pipelines d'analyse 
 des données de séquençage, comprenant la création d'un nouveau pipeline, l'ajout d'une fonctionnalité spécifique à 
 un pipeline existant, ainsi que la mise à jour et la rédaction de tests pour trois autres pipelines. Parallèlement, 
-la gestion des cycles de qualification et de production a été assurée.
+la gestion des cycles de qualification et de production a été assurée. L'encadrement de cette section a été assurée par 
+Augustin Bourdry du \gls{chu}.
 
 \section{Architecture logicielle et environnement utilisateur}
 
@@ -75,8 +76,8 @@ En revanche, il est beaucoup plus difficile d'estimer avec précision la fréque
 
 Pour des raisons internes au laboratoire, l'analyse par \gls{fish} n'est pas réalisable dans ce contexte.  
 L'objectif a donc été de développer et d'évaluer une solution d'estimation de la fréquence des délétions de \textit{TP53} à partir des données issues du \gls{ngs}. 
-L'analyse du nombre de copie repose classiquement sur le rapport des pronfondeur sur certaines régions, et est exprimé en ratio : 1 sans anoamlie, inférieur si délétion 
-et supérieur si gain de la région (\autoref{fig:cnv}). Ainsi à partir de cette valeur et en posant quelques hypothèse :
+L'analyse du nombre de copie repose classiquement sur le rapport des pronfondeur sur certaines régions, et est exprimé en ratio : 1 sans anomalie, inférieur si délétion 
+et supérieur si gain de la région (\autoref{fig:cnv}). Ainsi à partir de cette valeur et en posant les hypothèses suivantes :
 
 \begin{itemize}
     \item Les délétions de \textit{TP53} sont toujours monoalléliques.
@@ -87,7 +88,7 @@ et supérieur si gain de la région (\autoref{fig:cnv}). Ainsi à partir de cett
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/cnv.png}
-    \caption{Résultat de l'analyse du nombre de copies sur un échantillon de \gls{mm}.}
+    \caption{Résultat de l'analyse du nombre de copies sur un échantillon de myélome multiple.}
     \label{fig:cnv}
 \end{figure}
 
@@ -100,14 +101,14 @@ et de l'exprimer comme une fréquence estimée de cellules délétées selon la 
 \end{equation}
     
 Un intervalle de confiance et des statistiques de dispertions peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
-approche a été appliquée via un script python permettant de générer au travers d'un fichier excel, une fréquence de délétion estimée par échantillon,
-pouvant être corrigé selon la pureté tumorale (\autoref{fig:excel-tp53}). Par la suite l'analyse de témoins négatifs et positifs 
+approche a été implémentée via un script python permettant de générer au travers d'un fichier excel, une fréquence de délétion estimée par échantillon,
+pouvant être corrigée selon la pureté tumorale (\autoref{fig:excel-tp53}). Par la suite l'analyse de témoins négatifs et positifs 
 (échantillon avec ou sans délétion du gène \textit{TP53}) ont permis d'estimer la limite de linéarité à 20 \% et de détection à 15 \%.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/excel_tp53.png}
-    \caption{Résultat de l'analyse des délétions \textit{TP53} sur des échantillons de \gls{mm}.}
+    \caption{Résultat de l'analyse des délétions \textit{TP53} sur des échantillons de myélome multiple.}
     \label{fig:excel-tp53}
 \end{figure}
 
@@ -117,9 +118,55 @@ En lien avec la section précédente, une autre optimisation a pu être proposé
 Ces anomalies sont particulièrement importantes, considérées comme fondatrices dans l'oncogènese du \gls{mm} et leur détection se fait au \gls{chu} 
 par appel de variants structuraux sur \textit{paired-end short-reads} via les \textit{caller} \textit{Manta} \cite{chenMantaRapidDetection2016a} et 
 \textit{Gridss} \cite{cameronGRIDSSSensitiveSpecific2017a}. Ces deux \textit{variant-caller} fonctiennent de manière similaire en assamblant des \textit{reads} 
-candidats porteurs d'information
+candidats porteurs d'information structurale (\textit{split-reads} et \textit{discordantly aligned reads}). 
 
+\vspace{1em}
+
+Les résultats sont ainsi rendus sous forme de page web statique, après filtrage des variants en dehors des régions d'intérêt, et en dessous d'un seuil 
+de détection fixé à 10 événements supports (\autoref{fig:translocation-web}). Des observations réalisées sur des anaylyses au laboratoire 
+laissent à penser que certaines translocations veritables sont présentes en dessous de ce seuil fixé à 10, nottament sur des \gls{adnc}.
+C'est donc concernant ce dernier, placé initialement de façon semi-arbitraire, qu'un travail d'optimisation a été entrepris afin de déterminer 
+s'il permettait effectivement de discriminer de manière fiable les réarrangements pertinents des artéfacts, tout en conservant une sensibilité adéquate 
+pour la détection d'événements rares. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/translocation_web.png}
+    \caption{
+        Résultat de l'analyse des translocations \gls{igh} sur un échantillon de myélome multiple, 
+        retrouvant ici une tranlocation t(4;14)(p16.3;q32.33) \textit{NSD2::IGH}.
+        }
+    \label{fig:translocation-web}
+\end{figure}
+
+Une manière d'aborder ce problème consiste à envisager une optimisation \textit{a posteriori}, en s'appuyant sur les nombreuses données déjà acquises, 
+en formulant quelques hypothèses et en s'appuyant sur quelques vérités biologiques.
+
+\begin{itemize}
+    \item Les événements rapportés par \textit{Manta} et \textit{GRIDSS} reposent sur des signaux difficilement attribuables à des artéfacts, et peuvent donc être considérés comme fiables.
+    \item Les translocations impliquant les \textit{\gls{igh}} sont des événements fondateurs, uniques et exclusifs : un patient ne présente au maximum qu'une seule translocation de ce type.
+    \item À l'inverse, les translocations de type t(8;14) sont souvent secondaires, et peuvent coexister avec d'autres anomalies.
+\end{itemize}
+
+\vspace{1em}
+
+Dans cette optique, on peut chercher à définir un seuil de détection optimisé, qui maximise le nombre de patients identifiés comme porteurs d'une translocation, 
+tout en minimisant le nombre de patients présentant plusieurs anomalies, phénomène assez rare biologiquement. Ainsi on note $T$ le nombre de patient 
+présentant au moins une translocation et $T_{+}$ le nombre présetnant plusieurs translocations ,en excluant les t(8;14). $T$ et $T_{+}$ sont alors des fonctions 
+de $t$ de à valeurs dans $\mathbb{N}$, $t$ désignant le seuil en dessous duquel l'anomalie n'est pas retenue. On peut donc formuler la question sous la forme d'une optimisation sous contrainte, 
+où $\epsilon$ représente un nombre accetable de patients présentant plusieurs translocations, et $t^*$ le seuil optimal retenu :
+
+
+\begin{equation}
+    t^* = \arg\max_{t} \; T(t) \quad \text{sous la contrainte} \quad T_{+}(t) \leq \epsilon
+ \end{equation}
+    
+ Il est assez facile de résoudre le problème par recherche exhaustive, ou graphiquement sur les données du \gls{chu} à partir de 1178 échantillons, en faisant varier 
+ $t$ de $1$ à $100$ avec $\epsilon < 1 \%$ ce qui nous permet d'abaisser le seuil à 6 (\autoref{fig:translocation-threshold}).
+
+\input{figures/translocation-threshold.tex}
 
 \section{Statistiques sur les données du \textit{Vidjil} issues du CHU de Lille}
 
+A mettre où ?
 TO BE CONTINUED

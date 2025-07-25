@@ -128,6 +128,8 @@ Lorsqu'on aligne ces séquences sur le génome humain, on observe qu'elles corre
 parfait, à l'exception de quelques bases aux extrémités des séquences. Ces bases sont toutes identiques et correspondent à la séquence 
 \C\G\T\C\T\C\C\T\C\A\G\G\T\A\A\G, ou à sa séquence complémentaire (inversée) \C\T\T\A\C\C\T\G\A\G\G\A\G\A\C\G.
 
+\vspace{1em}
+
 Dans l'hypothèse d'une amplification non spécifique, il est possible que ces séquences correspondent à des fragments d'amorces,
 hypothèse qu'il est facile de vérifier en recherchant ces séquences dans les amorces utilisées pour l'amplification (\texttt{primers.fa} 
 compremant les différentes combinaisons de bases dégénerées)
@@ -189,6 +191,8 @@ R1, tandis que la séquence anti-sens \C\T\T\A\C\C\T\G\A\G\G\A\G\A\C\G\ uniqueme
 R2 (\autoref{lst:bash-primer-r1-r2}). On peut donc en déduire que seule la séquence sens de l'amorce JH se fixe sur 
 le brin d'ADN et n'est jamais recopiée, confortant l'hypothèse formulée.
 
+
+\begin{figure}[H]
 \begin{lstlisting}[language=custombash, 
     caption={Commande Bash et résultat de la recherche des séquences des amorces dans les fichiers FASTQ R1 et R2.},
     label={lst:bash-primer-r1-r2},
@@ -205,8 +209,7 @@ $ zgrep -c "CTTACCTGAGGAGACG" FR3_P01-TEMOIN_PBL_IVS_S7_R2_001.fastq.gz
 $ zgrep -c "CTTACCTGAGGAGACG" FR3_P01-TEMOIN_PBL_IVS_S7_R1_001.fastq.gz
 0
 \end{lstlisting}
-
-\vspace{1em}
+\end{figure}
     
 Par ailleurs ces clonotypes ne resprésentent que la fasse visible du problème, car en réalité, un certain nombre de \textit{reads} 
 hors-cibles ne sont pas identifiés comme des réarrangements \gls{vdj} valides par \textit{Vidjil}, mais sont pour autant présents 

@@ -15,12 +15,16 @@
   a4paper,
   left=25mm,
   right=25mm,
-  top=25mm,
-  bottom=25mm,
+  top=20mm,
+  bottom=20mm,
 }
 \usepackage{titlesec}
 \titleformat{\chapter}{}{}{0em}{\bfseries\LARGE}
 \usepackage{setspace}
+\interlinepenalty=1000
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
 
 % Colors & Graphics 
 \usepackage[table,dvipsnames]{xcolor}
@@ -43,6 +47,7 @@
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepgfplotslibrary{fillbetween}
+\usepackage{pgfplotstable}
 
 % Listings for source code 
 \usepackage{listings}
