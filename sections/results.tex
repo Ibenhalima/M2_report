@@ -55,7 +55,7 @@ En effet les plasmocytes constituent le stade le plus mature de la lignée lymph
 réarrangement \gls{vdj} comporte le moins d'homologie avec les séquence germinales. La conséquence de ceci étant que dans certains 
 cas, les amorces utilisées pour l'amplification \gls{fr}3 ne sont pas capables de se fixer sur les séquences \gls{vdj} mutées, et 
 amplifier les réarrangements. L'utilisation d'amorces dégénérées permet de limiter ce problème sans le résoudre totalement pour autant. 
-Dans le cas ou le réarragenemt \gls{vdj} n'est pas amplifiable, il est possible d'analyser en lieu les réarrangements incomplets DH-JH 
+Dans le cas où le réarragenemt \gls{vdj} n'est pas amplifiable, il est possible d'analyser en lieu les réarrangements incomplets DH-JH 
 (cf \autoref{fig:vdj}). Ainsi en guise d'illustration, parmi les 5 patients analysés, le patient 1 présente un réarrangement amplifié 
 en \gls{fr}3, tandis que chez le patient 2, le réarrangement n'est pas amplifié (\autoref{fig:primer-alignement}).
 
@@ -91,7 +91,7 @@ ainsi que la présence de nombreux artéfacts dans les données de séquençage.
 De plus, certaines amorces, notamment celle ciblant la région JH commune, amplfient des régions non ciblées dans 
 les conditions actuelles de \gls{pcr}. Pour illustrer, chez le patient 1 sur le même prélèvement au diagnostic, on identifie 
 un clone majoritaire qui represente près de 82 \% des clones identifiés en \textit{leader}, contre 32 \% en \gls{fr}3 au milieu 
-de nombreuses séquences artéfactuelles et hors-cibles (\autoref{fig:fr3-vs-leader}).
+de nombreuses séquences artéfactuelles et hors-cibles \footnote{Traduction un peu libre de l'anglais \textit{off-target}} (\autoref{fig:fr3-vs-leader}).
 
 \begin{figure}[H]
     \centering
@@ -119,7 +119,7 @@ notamment concernant les clones artéfactuels issus des dimères d'amorces et s�
 
 En ce qui concerne les artéfacts issues des dimières d'amorces, il est assez naturel que \textit{Vidjil} les identifie comme 
 des réarrangements \gls{vdj} valides, comprenat une section V et J. Il est par contre plus surprenant que des séquences ne comprenant 
-ni gènes V ni J soient également identifiées comme des réarrangements \gls{vdj} valides. Ces séquences étant par ailleurs souvent majoritaires 
+ni gène V ni J soient également identifiées comme des réarrangements \gls{vdj} valides. Ces séquences étant par ailleurs souvent majoritaires 
 dans les premières données obtenues, pouvant représenter jusqu'à 50 \% \textit{reads} indentifiés par \textit{Vidjil}.
 
 \vspace{1em}
@@ -247,7 +247,7 @@ en \textcolor{red}{-e 1e-15} (\autoref{fig:fr3-evalue}).
 Ainsi, une simple adaptation de la configuration de \textit{vidjil-algo} a permis de réduire significativement la détection des clonotypes 
 artéfactuels liés aux séquences hors-cibles. Pour autant, certains de ces clonotypes persistent dans les résultats, tandis que les dimères 
 d'amorces demeurent en grande partie non filtrés. Ces artéfacts fausseraient dès lors toute quantification de la \gls{mrd} en sous-estimant 
-le poids réels des véritables clones.
+le poids réel des véritables clones.
 Il est possible via l'interface web de \textit{Vidjil} de masquer temporairement certains 
 clonotypes qui restent alors comptabilisés dans les clones analysés, mais redeviennent visible à chaque rafraichissement de la page sans 
 possibilité de sauvegarde. Il a donc été nécessaire de développer une fonctionnalité permettant la suppression contrôlée des clonotypes, 

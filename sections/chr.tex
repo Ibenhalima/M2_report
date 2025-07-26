@@ -48,7 +48,7 @@ Trois analyses moléculaires sont alors réalisées :
 C'est dans le cadre de cette dernière analyse qu'il a été nécessaire de développer une approche spécifique pour quantifier les délétions du gène \textit{TP53}, 
 gène suppresseur de tumeur dont l'altération est associée à un mauvais pronostic dans le \gls{mm}, avec un seuil placé à 20 \% de cellules selon des recommandations 
 récentes non publiées \cite{flyntPrognosisBiologyTargeting2020}.
-Les plasmocytes étant des cellules particulièrement difficiles à cultiver, l'analyse du nombre de copies, associée aux techniques de \gls{fish}, constitue l'unique 
+Les plasmocytes étant des cellules particulièrement difficiles à cultiver, l'analyse du nombre de copies, associée aux techniques d'\gls{fish}, constitue l'unique 
 moyen d'accéder aux remaniements génomiques de grande taille (duplications, délétions, translocations, etc.).
 Ces informations permettent de dresser ce que l'on peut considérer comme un « carytoype moléculaire » de la cellule tumorale. 
 
@@ -99,8 +99,12 @@ et de l'exprimer comme une fréquence estimée de cellules délétées selon la 
     \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 -2^{\overline{\log_2\text{Ratio}}}}{0{,}5} \right) 
     \times \frac{1}{\text{pureté}} \times 100
 \end{equation}
+
+\begin{equation}
+    \text{où} \quad \overline{\log_2\text{Ratio}} = \frac{1}{n} \sum_{i=1}^{n} \log_2\text{Ratio}_i
+\end{equation}
     
-Un intervalle de confiance et des statistiques de dispertions peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
+Un intervalle de confiance et des statistiques de dispertion peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
 approche a été implémentée via un script python permettant de générer au travers d'un fichier excel, une fréquence de délétion estimée par échantillon,
 pouvant être corrigée selon la pureté tumorale (\autoref{fig:excel-tp53}). Par la suite l'analyse de témoins négatifs et positifs 
 (échantillon avec ou sans délétion du gène \textit{TP53}) ont permis d'estimer la limite de linéarité à 20 \% et de détection à 15 \%.
@@ -118,14 +122,18 @@ En lien avec la section précédente, une autre optimisation a pu être proposé
 Ces anomalies sont particulièrement importantes, considérées comme fondatrices dans l'oncogènese du \gls{mm} et leur détection se fait au \gls{chu} 
 par appel de variants structuraux sur \textit{paired-end short-reads} via les \textit{caller} \textit{Manta} \cite{chenMantaRapidDetection2016a} et 
 \textit{Gridss} \cite{cameronGRIDSSSensitiveSpecific2017a}. Ces deux \textit{variant-caller} fonctiennent de manière similaire en assamblant des \textit{reads} 
-candidats porteurs d'information structurale (\textit{split-reads} et \textit{discordantly aligned reads}). 
+candidats porteurs d'information structurale Ces deux \textit{variant-callers} fonctionnent de manière similaire en assemblant des \textit{reads} candidats
+porteurs d'information structurale (\textit{split-reads}\footnote{Les \textit{split-reads} sont des lectures dont une portion s'aligne sur une région du génome 
+et une autre portion sur une région distante, indiquant une possible rupture structurale.} et \textit{discordantly aligned reads}\footnote{Les \textit{discordantly aligned reads} 
+sont des paires de lectures dont l'orientation ou la distance d'alignement est anormale par rapport à ce qui est attendu, suggérant une remaniement du génome.}).
+
 
 \vspace{1em}
 
 Les résultats sont ainsi rendus sous forme de page web statique, après filtrage des variants en dehors des régions d'intérêt, et en dessous d'un seuil 
 de détection fixé à 10 événements supports (\autoref{fig:translocation-web}). Des observations réalisées sur des anaylyses au laboratoire 
 laissent à penser que certaines translocations veritables sont présentes en dessous de ce seuil fixé à 10, nottament sur des \gls{adnc}.
-C'est donc concernant ce dernier, placé initialement de façon semi-arbitraire, qu'un travail d'optimisation a été entrepris afin de déterminer 
+C'est donc concernant ce dernier, initialement fixé de manière empirique, qu'un travail d'optimisation a été entrepris afin de déterminer 
 s'il permettait effectivement de discriminer de manière fiable les réarrangements pertinents des artéfacts, tout en conservant une sensibilité adéquate 
 pour la détection d'événements rares. 
 
@@ -134,16 +142,16 @@ pour la détection d'événements rares.
     \includegraphics[width=1\textwidth]{images/translocation_web.png}
     \caption{
         Résultat de l'analyse des translocations \gls{igh} sur un échantillon de myélome multiple, 
-        retrouvant ici une tranlocation t(4;14)(p16.3;q32.33) \textit{NSD2::IGH}.
+        retrouvant ici une translocation t(4;14)(p16.3;q32.33) \textit{NSD2::IGH}.
         }
     \label{fig:translocation-web}
 \end{figure}
 
-Une manière d'aborder ce problème consiste à envisager une optimisation \textit{a posteriori}, en s'appuyant sur les nombreuses données déjà acquises, 
+Une manière d'aborder ce problème consiste à envisager une optimisation \textit{a posteriori}, reposant sur les nombreuses données déjà acquises, 
 en formulant quelques hypothèses et en s'appuyant sur quelques vérités biologiques.
 
 \begin{itemize}
-    \item Les événements rapportés par \textit{Manta} et \textit{GRIDSS} reposent sur des signaux difficilement attribuables à des artéfacts, et peuvent donc être considérés comme fiables.
+    \item Les événements rapportés par \textit{Manta} et \textit{Gridss} reposent sur des signaux difficilement attribuables à des artéfacts, et peuvent donc être considérés comme fiables.
     \item Les translocations impliquant les \textit{\gls{igh}} sont des événements fondateurs, uniques et exclusifs : un patient ne présente au maximum qu'une seule translocation de ce type.
     \item À l'inverse, les translocations de type t(8;14) sont souvent secondaires, et peuvent coexister avec d'autres anomalies.
 \end{itemize}
@@ -152,16 +160,15 @@ en formulant quelques hypothèses et en s'appuyant sur quelques vérités biolog
 
 Dans cette optique, on peut chercher à définir un seuil de détection optimisé, qui maximise le nombre de patients identifiés comme porteurs d'une translocation, 
 tout en minimisant le nombre de patients présentant plusieurs anomalies, phénomène assez rare biologiquement. Ainsi on note $T$ le nombre de patient 
-présentant au moins une translocation et $T_{+}$ le nombre présetnant plusieurs translocations ,en excluant les t(8;14). $T$ et $T_{+}$ sont alors des fonctions 
-de $t$ de à valeurs dans $\mathbb{N}$, $t$ désignant le seuil en dessous duquel l'anomalie n'est pas retenue. On peut donc formuler la question sous la forme d'une optimisation sous contrainte, 
+présentant au moins une translocation et $T_{+}$ le nombre présentant plusieurs translocations, en excluant les t(8;14). $T$ et $T_{+}$ sont alors des fonctions 
+de $t$ définies sur $\mathbb{N}$ et à valeurs dans $\mathbb{N}$, $t$ désignant le seuil en dessous duquel l'anomalie n'est pas retenue. On peut donc formuler la question sous la forme d'une optimisation sous contrainte, 
 où $\epsilon$ représente un nombre accetable de patients présentant plusieurs translocations, et $t^*$ le seuil optimal retenu :
 
-
 \begin{equation}
-    t^* = \arg\max_{t} \; T(t) \quad \text{sous la contrainte} \quad T_{+}(t) \leq \epsilon
+    t^* = \arg\max_{t} \; T(t) \quad \text{tel que} \quad T_{+}(t) \leq \epsilon
  \end{equation}
     
- Il est assez facile de résoudre le problème par recherche exhaustive, ou graphiquement sur les données du \gls{chu} à partir de 1178 échantillons, en faisant varier 
+ Il est assez aisé de résoudre le problème par recherche exhaustive, ou graphiquement sur les données du \gls{chu} à partir de 1178 échantillons, en faisant varier 
  $t$ de $1$ à $100$ avec $\epsilon < 1 \%$ ce qui nous permet d'abaisser le seuil à 6 (\autoref{fig:translocation-threshold}).
 
 \input{figures/translocation-threshold.tex}
