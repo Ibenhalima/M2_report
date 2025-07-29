@@ -12,7 +12,8 @@ Augustin Bourdry du \gls{chu}.
 
 L'environnement de développement du \gls{chu} s'appuie sur plusieurs composantes clés, côté développeur comme côté utilisateur.
 Des machines virtuelles sous Rocky Linux 9.2 sont mises à disposition pour les développements et la routine d'analyse.
-Elles sont hébergées sur un \gls{hpc} comprenant X Go de mémoire vive, X nœuds de calcul, deux serveurs GPU, ainsi qu'un serveur de stockage de X To.
+Elles sont hébergées sur un \gls{hpc} orchestré via \href{https://oar.imag.fr/}{OAR} et très récemment \href{https://slurm.schedmd.com/documentation.html}{Slurm},  
+comprenant X Go de mémoire vive, X nœuds de calcul, deux serveurs GPU, ainsi qu'un serveur de stockage de X To.
 Le gestionnaire de \textit{workflow} \href{https://www.nextflow.io/}{Nextflow} est utilisé pour l'écriture des différents pipelines d'analyse, 
 déployés via une conteneurisation des dépendances dans des images \textit{Singularity} et de l'environnement dans des conteneurs \textit{Docker}.
 De nombreuses surcouches logicielles sont développées par l'équipe afin de faciliter, automatiser et sécuriser les phases de développement et d'utilisation.
@@ -105,9 +106,10 @@ et de l'exprimer comme une fréquence estimée de cellules délétées selon la 
 \end{equation}
     
 Un intervalle de confiance et des statistiques de dispertion peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
-approche a été implémentée via un script python permettant de générer au travers d'un fichier excel, une fréquence de délétion estimée par échantillon,
-pouvant être corrigée selon la pureté tumorale (\autoref{fig:excel-tp53}). Par la suite l'analyse de témoins négatifs et positifs 
-(échantillon avec ou sans délétion du gène \textit{TP53}) ont permis d'estimer la limite de linéarité à 20 \% et de détection à 15 \%.
+approche a été implémentée dans un process \textit{Nextflow} final appelant un script Python permettant de générer au travers d'un fichier excel, 
+une fréquence de délétion estimée par échantillon, pouvant être corrigée selon la pureté tumorale (\autoref{fig:excel-tp53}). 
+Par la suite l'analyse de témoins négatifs et positifs (échantillon avec ou sans délétion du gène \textit{TP53}) ont permis d'estimer 
+la limite de linéarité à 20 \% et de détection à 15 \%.
 
 \begin{figure}[H]
     \centering
@@ -126,7 +128,6 @@ candidats porteurs d'information structurale Ces deux \textit{variant-callers} f
 porteurs d'information structurale (\textit{split-reads}\footnote{Les \textit{split-reads} sont des lectures dont une portion s'aligne sur une région du génome 
 et une autre portion sur une région distante, indiquant une possible rupture structurale.} et \textit{discordantly aligned reads}\footnote{Les \textit{discordantly aligned reads} 
 sont des paires de lectures dont l'orientation ou la distance d'alignement est anormale par rapport à ce qui est attendu, suggérant une remaniement du génome.}).
-
 
 \vspace{1em}
 
@@ -168,12 +169,45 @@ où $\epsilon$ représente un nombre accetable de patients présentant plusieurs
     t^* = \arg\max_{t} \; T(t) \quad \text{tel que} \quad T_{+}(t) \leq \epsilon
  \end{equation}
     
- Il est assez aisé de résoudre le problème par recherche exhaustive, ou graphiquement sur les données du \gls{chu} à partir de 1178 échantillons, en faisant varier 
- $t$ de $1$ à $100$ avec $\epsilon < 1 \%$ ce qui nous permet d'abaisser le seuil à 6 (\autoref{fig:translocation-threshold}).
+ Il est assez aisé de résoudre le problème par recherche exhaustive sur un intervalle restreint, ou graphiquement à partir de 1178 échantillons du \gls{chu} et en faisant varier 
+ $t$ de $1$ à $100$ avec $\epsilon < 1 \%$. Ceci nous permet d'abaisser le seuil initialement à 10, à une valeur de 6 (\autoref{fig:translocation-threshold}).
 
 \input{figures/translocation-threshold.tex}
 
 \section{Statistiques sur les données du \textit{Vidjil} issues du CHU de Lille}
 
-A mettre où ?
-TO BE CONTINUED
+Le dernier travail présenté dans ce rapport se situe à l'interface des deux sections précédentes. Il a consisté à réutiliser les données issues de \textit{Vidjil}, obtenues au \gls{chu}, 
+afin d'établir des statistiques à grande échelle sur les résultats analysés. Deux types d'échantillons sont traités en routine : d'une part, des \glspl{lal}, pour identifier les 
+réarrangements des clones tumoraux et concevoir des systèmes personnalisés de suivi de la \gls{mrd} par \gls{pcr} quantitative ; d'autre part, des \glspl{llc}, pour l'étude du taux 
+d'hypermutation des gènes \textit{IGHV}. L'objectif est d'extraire et de visualiser des tendances générales à partir du volume important de données acquises.
+
+\vspace{1em}
+
+Le traitement des données brutes issues des analyses par \textit{Vidjil} est réalisé via un script Python (\texttt{clone.py}) qui importe les fichiers d'analyse au format \gls{json}. 
+Ce script construit des objets \textit{Vidjil} représentant chaque analyse, ainsi que des objets \textit{Clone} extrayant les informations essentielles des clones détectés, 
+telles que la taille relative, les séquences CDR3, les gènes V(D)J assignés, la productivité, etc. Une étape d'enrichissement par requête du serveur IMGT/V-QUEST 
+(sans API, nécessitant donc de récupérer et traiter la page web complète) permet d'obtenir des annotations biologiques complémentaires, notamment le pourcentage d'identité des séquences V.
+Par ailleurs, les métadonnées associées aux échantillons sont intégrées afin d'assurer une contextualisation clinique et biologique des résultats.
+
+\vspace{1em}
+
+Un second script (\texttt{process\_dir.py}) traite de manière automatisée un ensemble de fichiers d'analyse et de métadonnées situés dans un répertoire donné. 
+Il agrège les informations des clones extraits selon le type d'échantillon (\gls{llc} ou \gls{lal}). Les résultats sont synthétisés dans un fichier TSV exploitable 
+pour des analyses ultérieures, avec au total plus de 4000 échantillons pour 11000 clones.
+
+\vspace{1em}
+
+Pour finir un tableau de bord interactif a été développé à l'aide de \textit{Streamlit} (\texttt{stat\_display.py}) pour permettre l'exploration dynamique des données. 
+Ce tableau de bord propose des filtres par type d'échantillon (\gls{lal}, \gls{llc} ou inconnu), par nom d'échantillon, etc. Les résultats, bien qu'intéressants, sortent du cadre 
+de ce rapport ne traitant pas de la même pathologie et ne seront pas présentés ici, mais en voici une illustration pour le plaisir des yeux (\autoref{fig:vidjil-stat}) :
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{images/vidjil_stat.png}
+    \caption{
+        Capture d'écran du tableau de bord pour la visualisation des statistiques des données de \textit{Vidjil}. 
+        Exemple de la distribution de taille des séquences \gls{cdr}3 dans les \glspl{llc} et du logo des séquences 
+        de taille 17.
+        }
+    \label{fig:vidjil-stat}
+\end{figure}
