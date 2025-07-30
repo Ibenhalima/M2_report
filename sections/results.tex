@@ -14,7 +14,7 @@ du segment V. En raison de l'utilisation d'amorces ciblant la région \gls{fr}3,
 des \gls{adnc}, seuls 20 à 30 nucléotides sont séquencés en amont du réarrangement \gls{vdj}. Cette longueur ne permet pas à 
 \textit{Vidjil} (ou tout autre outil d'analyse de réarrangements \gls{vdj}) de déterminer avec certitude le segment V utilisé 
 (\autoref{fig:v-leader-fr3}). 
-Une façon de palier à ce problème est de séquençer au diagnostic en utilisant des amorces ciblant la région \gls{fr}1 ou 
+Une façon de palier à ce problème est de d'amplifier au diagnostic en utilisant des amorces ciblant la région \gls{fr}1 ou 
 \textit{leader}, pour obtenir une séquence plus longue, et ainsi permettre à \textit{Vidjil} de déterminer le segment V utilisé. 
 L'unicité de la région \gls{cdr}3 permettra ensuite de relier les clones identifiés sur les prélèvements de suivi.
 
@@ -118,7 +118,7 @@ notamment concernant les clones artéfactuels issus des dimères d'amorces et s�
 \subsection{Filtrage des séquences hors-cibles}
 
 En ce qui concerne les artéfacts issues des dimières d'amorces, il est assez naturel que \textit{Vidjil} les identifie comme 
-des réarrangements \gls{vdj} valides, comprenat une section V et J. Il est par contre plus surprenant que des séquences ne comprenant 
+des réarrangements \gls{vdj} valides, comprenant une section V ou J. Il est par contre plus surprenant que des séquences ne comprenant 
 ni gène V ni J soient également identifiées comme des réarrangements \gls{vdj} valides. Ces séquences étant par ailleurs souvent majoritaires 
 dans les premières données obtenues, pouvant représenter jusqu'à 50 \% \textit{reads} indentifiés par \textit{Vidjil}.
 
@@ -385,11 +385,12 @@ un seuil de détection minimal $k$ de l'ordre de 10 à 100 cellules positives :
 
 \begin{equation}
     \mathbb{P}(N \geq k) = 1 - \sum_{i = 0}^{k-1} \frac{e^{-\lambda} \, \lambda^{i}}{i!} = 1 - \varepsilon
+    \quad \text{soit} \quad \varepsilon(n,k \mid p) = \sum_{i = 0}^{k-1} \frac{e^{-np} \, (np)^{i}}{i!}
 \end{equation}
 
 On cherche donc a résoudre l'équation précédente en $n$, en sachant que $p$ est inconnu dans les faits, mais estimé comme étant de l'ordre de $10^{-4}$ à $10^{-8}$, 
 valeur qui correspondrait à la proportion des cellules dites « initiatrices de leucémie ». En faisant donc varier $p$ sur cet intervalle, avec $\epsilon = 0.05$ et 
-$k = 10$ puis $100$, on peut résoudre l'équation précendente (de façon numérique et non algébrique, s'agissant d'une équation transcendante). En considérant également 
+$k = 10$ puis $100$, on peut résoudre l'équation précédente (de façon numérique et non algébrique, s'agissant d'une équation transcendante). En considérant également 
 la numération leucocytaire sanguine comme étant de l'ordre de $5\,\text{G/L}$ et médullaire de $50\,\text{G/L}$, on peut en déduire le nombre minimal de cellules à analyser 
 pour espérer détecter la \gls{mrd} au seuil de confiance de $95\,\%$ (\autoref{tab:valeurs_n_volume}).
 
@@ -427,7 +428,7 @@ pour espérer détecter la \gls{mrd} au seuil de confiance de $95\,\%$ (\autoref
 
 Ainsi, pour un seuil de détection à $10^{-5}$ avec 100 cellules minimum, il est nécessaire de prélever au moins 3 mL de sang 
 et 10 fois moins de moelle, ce qui correspond à une quantité d'environ 500 ng d'ADN (A vérfier avec Aurélie + correspondance en reads). On remarque également 
-que des seuils de détection inférieurs à $10^{-6}$ sont jusqu'à présent inatteignable, nécessaitant des volumes de prélèvement pouvant 
+que des seuils de détection inférieurs à $10^{-6}$ sont jusqu'à présent inatteignables, nécessitant des volumes de prélèvement pouvant 
 atteindre plusieurs litres.
 
 TO BE CONTINUED

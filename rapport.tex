@@ -21,11 +21,14 @@
 \usepackage{titlesec}
 \titleformat{\chapter}{}{}{0em}{\bfseries\LARGE}
 \titlespacing*{\chapter}{0pt}{-20pt}{20pt}
+
 \usepackage{setspace}
 \interlinepenalty=1000
 \clubpenalty=10000
 \widowpenalty=10000
 \displaywidowpenalty=10000
+
+\usepackage[bottom]{footmisc}
 
 % Colors & Graphics 
 \usepackage[table,dvipsnames]{xcolor}
@@ -45,9 +48,11 @@
 % Graphics and Plots
 \usepackage{tikz}
 \usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
+
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepgfplotslibrary{fillbetween}
+
 \usepackage{pgfplotstable}
 
 % Listings for source code 
