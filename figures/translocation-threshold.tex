@@ -14,13 +14,13 @@
             grid=major,
         ]
         \addplot[
-            color=blue,
+            color=Purple,
             mark=*,
         ] table [x=t, y=T, col sep=comma] {data/threshold_analysis.csv};
         \addlegendentry{$T(t)$}
 
         \addplot[
-            color=red,
+            color=Goldenrod,
             mark=square*,
         ] table [x=t, y=T+, col sep=comma] {data/threshold_analysis.csv};
 
@@ -30,6 +30,6 @@
         \addlegendentry{$T_+(t)$}
         \end{axis}
     \end{tikzpicture}
-    \caption{Courbes de $T(t)$ et $T_+(t)$ à partir des 1178 échantillons du \gls{chu}}
+    \caption{Courbes de \textcolor{Purple}{$T(t)$} et \textcolor{Goldenrod}{$T_+(t)$} à partir des 1178 échantillons du \gls{chu}}
     \label{fig:translocation-threshold}
 \end{figure}

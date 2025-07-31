@@ -1,7 +1,7 @@
 \chapter{Résultats}
 
 Préalablement aux résultats acquis durant le stage, plusieurs étapes de mises au point (notamment sur lignées cellulaires de plasmocytes et 
-échantillons de \gls{llc}) ont été réalisées durant l'année 2024-2025. Les données ne seront pas présentés dans ce rapport, mais ont permis 
+échantillons de \gls{llc}) ont été réalisées durant l'année 2024-2025. Les données ne seront pas présentées dans ce rapport, mais ont permis 
 de valider la faisabilité de l'analyse des réarrangements \gls{vdj} via le protocole précédement décrit, sous-tenant quelques modifications, 
 mais aussi de faire la lumière sur plusieurs difficultés.
 
@@ -14,7 +14,7 @@ du segment V. En raison de l'utilisation d'amorces ciblant la région \gls{fr}3,
 des \gls{adnc}, seuls 20 à 30 nucléotides sont séquencés en amont du réarrangement \gls{vdj}. Cette longueur ne permet pas à 
 \textit{Vidjil} (ou tout autre outil d'analyse de réarrangements \gls{vdj}) de déterminer avec certitude le segment V utilisé 
 (\autoref{fig:v-leader-fr3}). 
-Une façon de palier à ce problème est de d'amplifier au diagnostic en utilisant des amorces ciblant la région \gls{fr}1 ou 
+Une façon de remédier à ce problème est de d'amplifier au diagnostic en utilisant des amorces ciblant la région \gls{fr}1 ou 
 \textit{leader}, pour obtenir une séquence plus longue, et ainsi permettre à \textit{Vidjil} de déterminer le segment V utilisé. 
 L'unicité de la région \gls{cdr}3 permettra ensuite de relier les clones identifiés sur les prélèvements de suivi.
 
@@ -75,7 +75,7 @@ en \gls{fr}3, tandis que chez le patient 2, le réarrangement n'est pas amplifi�
               160       170
     \end{ColoredVerbatim}
     \caption{
-        Alignement de l'amorce dégénéree VH commune utilisé pour l'amplification \gls{fr}3 
+        Alignement de l'amorce dégénéree VH commune utilisée pour l'amplification \gls{fr}3 
         avec les séquences V majoritaires indentifiées chez les patients 1 et 2 en \textit{leader}. 
         Un alignement est représenté par | et : pour les nucléotides dégénerés. Les bases soulignées 
         correspondent aux bases mutées par rapport à la séquence germinale.
@@ -85,7 +85,7 @@ en \gls{fr}3, tandis que chez le patient 2, le réarrangement n'est pas amplifi�
     
 \subsection{Amplification non spécifique et artefacts de PCR}
 
-Un dernier problème, et non des moindre concerne l'amplification non spécifiques de régions non ciblées par les amorces, 
+Un dernier problème, et non des moindre, concerne l'amplification non spécifiques de régions non ciblées par les amorces, 
 ainsi que la présence de nombreux artéfacts dans les données de séquençage. Les amorces utilisées faisant de l'ordre de 100 bases 
 (cf \autoref{anx:primer-sequences}), elles ont tendance à se dimériser et ainsi être amplifiées et séquencées en l'état. 
 De plus, certaines amorces, notamment celle ciblant la région JH commune, amplfient des régions non ciblées dans 
@@ -120,7 +120,7 @@ notamment concernant les clones artéfactuels issus des dimères d'amorces et s�
 En ce qui concerne les artéfacts issues des dimières d'amorces, il est assez naturel que \textit{Vidjil} les identifie comme 
 des réarrangements \gls{vdj} valides, comprenant une section V ou J. Il est par contre plus surprenant que des séquences ne comprenant 
 ni gène V ni J soient également identifiées comme des réarrangements \gls{vdj} valides. Ces séquences étant par ailleurs souvent majoritaires 
-dans les premières données obtenues, pouvant représenter jusqu'à 50 \% \textit{reads} indentifiés par \textit{Vidjil}.
+dans les premières données obtenues, pouvant représenter jusqu'à 50 \% des \textit{reads} identifiés par \textit{Vidjil}.
 
 \vspace{1em}
 
@@ -213,13 +213,10 @@ $ zgrep -c "CTTACCTGAGGAGACG" FR3_P01-TEMOIN_PBL_IVS_S7_R1_001.fastq.gz
     
 Par ailleurs ces clonotypes ne resprésentent que la fasse visible du problème, car en réalité, un certain nombre de \textit{reads} 
 hors-cibles ne sont pas identifiés comme des réarrangements \gls{vdj} valides par \textit{Vidjil}, mais sont pour autant présents 
-dans les données de séquençage. Il est possible de  se mesurer l'ampleur du phénomène en alignant les fichiers FASTQ de séquençage.
+dans les données de séquençage. Il est possible de  se mesurer l'ampleur du phénomène en alignant les fichiers FASTQ de séquençage 
+(\autoref{fig:alignement-leader-fr3}).
 
-\vspace{1em}
-
-cf données figure CHR alignement.
-
-\vspace{1em}
+\input{figures/alignement-leader-fr3.tex}
 
 Pour pallier à ce problème, il est possible de filtrer les séquences en ajustant les paramètres de \textit{vidjil-algo}.
 Pour chaque clone, une \textit{e-value} (valeur E) est calculée, souvent de l'orde de $10^{-50}$ à $10^{-100}$, dans le 
@@ -381,7 +378,8 @@ La probabilité de détecter au moins une cellule tumorale est donnée par :
 
 où $\varepsilon$ est le risque de non-détection fixé à l'avance (par exemple $5\,\%$ pour un seuil de confiance de $95\,\%$).
 En pratique, la sensibilité analytique des techniques de mesure de la \gls{mrd} ne permettent pas la détection d'un événement unique, et il est plus juste de placer 
-un seuil de détection minimal $k$ de l'ordre de 10 à 100 cellules positives : 
+un seuil de détection minimal $k$ \footnote{On confond ici volontairement pour des raisons de simplicité le seuil de détection analytique $k_{\text{ana}}$, 
+et $k$ le seuil statisique, avec en pratique $k_{\text{ana}} \leq k$.} de l'ordre de 10 à 100 cellules positives : 
 
 \begin{equation}
     \mathbb{P}(N \geq k) = 1 - \sum_{i = 0}^{k-1} \frac{e^{-\lambda} \, \lambda^{i}}{i!} = 1 - \varepsilon

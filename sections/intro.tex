@@ -75,7 +75,7 @@ est la plus variable et joue un rôle central dans la reconnaissance de l'antig�
 La diversité de cette région \gls{cdr}3 est générée par plusieurs mécanismes :
 la recombinaison somatique entre les segments V, D et J, et l'ajout des domaines de N-diversité 
 mentionnés précédemment, mais aussi l'excision de nucléotides en 3' et 5' des segments V, D et J.
-À cela s'ajoute un processus nommé hypermutation somatique, qui affecte principalement le segment V 
+À cela s'ajoute un processus d'hypermutation somatique, qui affecte principalement le segment V 
 après activation des lymphocytes B naïf, introduisant des mutations ponctuelles supplémentaires,
 notamment dans les régions \glspl{cdr}, afin d'augmenter l'affinité de l'anticorps pour son antigène (\autoref{fig:igh}).
 
@@ -114,7 +114,7 @@ public suivant : \href{https://gitlab.inria.fr/vidjil/vidjil}{gitlab.inria.fr/vi
 
 La première composante, \textit{vidjil-algo} est un programme écrit en \texttt{C++}, dont la fonction est d'extraire 
 les jonctions \gls{vdj} à partir des \textit{reads} (lectures) issues du \gls{ngs} dans des fichiers de séquences 
-brutes au format FASTQ ou bien préalablement alignées au format \gls{bam}. Pour ce faire, l'algorithme 
+brutes au format FASTQ, ou bien préalablement alignées au format \gls{bam}. Pour ce faire, l'algorithme 
 repose sur une heuristique originale qui détecte des fenêtres caractéristiques chevauchant les régions CDR3, 
 sans recourir à un alignement exhaustif contre les séquences germinales. Une première étape consiste à constuire un index 
 des séquences germinales V et J à partir de \textit{k-mers} (ou mots de taille $\mathbf{k}$), où $\mathbf{k}$ est choisi de façon à 
@@ -132,11 +132,14 @@ notamment en cas de substitutions (example \ref{ex:spaced-seed}).
 La seconde étape consiste à traverser l'ensemble des \textit{reads} en recherchant des fenêtres $\mathbf{w}$ qui recouvrent 
 la région \gls{cdr}3 par comparaison de chacun des \textit{k-mer} du \textit{read} à ceux des index générés. Brièvement cette 
 approche consiste à conserver les \textit{reads} qui contiennent les \textit{k-mer} d'une séquence V et ceux d'une séquence J, 
-de façon à forme une fenêtre $\mathbf{w}$ débutant par les derniers \textit{k-mer} de la séquence V et se terminant 
+de façon à former une fenêtre $\mathbf{w}$ débutant par les derniers \textit{k-mer} de la séquence V et se terminant 
 par les premiers \textit{k-mer} de la séquence J (\autoref{fig:vidjil-algo}).
-Cette approche permet une détection rapide (qui croit linéairement avec le nombre de nucléotides), robuste et efficace 
+Cette approche permet une détection rapide (qui croit linéairement avec le nombre de nucléotides \footnote{En pratique l'étape de détection des fenêtres 
+est de compléxité $O(ln)$ et plus récemment $O(l'n)$ où $l$ est le nombre de recombinaisons des systèmes, $l'$ le nombre moyen avec $l' \ll l$, et $n$ 
+la taille de la séquence.}), robuste et efficace 
 des séquences recombinées. Une fois les fenêtres détectées, \textit{vidjil-algo} regroupe les \textit{reads} en clones, 
-puis procède à une segmentation et une annotation des séquences identifiées.
+puis procède à une segmentation et une annotation des séquences identifiées \footnote{Cette étape de désignation est elle de compléxité $O(Mn)$, et $O(M'n)$ à présent, 
+$M$ désignant la taille totale des gènes considérés, et $M'$ un sous ensemble tel que $M' \ll M$.}. 
 
 \input{figures/vidjil-algo.tex}
 
@@ -253,7 +256,7 @@ maintenance et la surveillance à long terme permettent de prolonger la réponse
 \vspace{1em}
 
 En ce qui concerne le \gls{mm}, l'intérêt de l'analyse du répertoire \gls{vdj} se rapproche de celui des \glspl{lal} ou l'identification 
-de réarrangement \gls{vdj} (en l'occurrence ici des \textit{\gls{igh}} ou des \gls{igk} et \gls{igl}) sert de marqueur unique (dit de clonalité) 
+de réarrangement \gls{vdj} (en l'occurrence ici des \textit{\gls{igh}} ou des \textit{\gls{igk}} et \textit{\gls{igl}}) sert de marqueur unique (dit de clonalité) 
 de la cellule tumorale, et permet ainsi de suivre l'évolution de la maladie.
 
 \section{Maladie résiduelle et ADN circulant tumoral}
@@ -317,7 +320,7 @@ invasif, et souvent inconfortable pour le patient.
 
 \vspace{1em}
 
-Dans ce contexte, l'analyse des acides nucléiques circulants, et en particulier de \gls{adnc}, suscite un intérêt croissant. Ces fragments d'ADN, libérés dans le sang 
+Dans ce contexte, l'analyse des acides nucléiques circulants, et en particulier de l'\gls{adnc}, suscite un intérêt croissant. Ces fragments d'ADN, libérés dans le sang 
 par les cellules tumorales et normales en apoptose ou en nécrose, peuvent refléter de manière globale la charge tumorale et permettre une évaluation non 
 invasive de la \gls{mrd} (\autoref{fig:ctdna}). Contrairement à la ponction médullaire, un simple prélèvement sanguin (ou « biopsie liquide ») permet de suivre plus facilement 
 et plus fréquemment l'évolution de la maladie.

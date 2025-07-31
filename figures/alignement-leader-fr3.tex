@@ -1,0 +1,75 @@
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+        \begin{axis}[
+            ybar,
+            ylabel={\textit{Reads} alignés (\%)},
+            ymode=log,
+            ytick pos=left,
+            symbolic x coords={chr1,chr2,chr3,chr4,chr5,chr6,chr7,chr8,chr9,chr10,
+            chr11,chr12,chr13,chr14,chr15,chr16,chr17,chr18,chr19,chr20,
+            chr21,chr22,chrX,chrY},
+            xlabel={Chromosome},
+            xtick=data,
+            x tick label style={rotate=45, anchor=east},
+            xtick pos=bottom,
+            bar width=6pt,
+            enlarge x limits=0.05,
+            legend style={at={(0.4,1)}},
+            height=0.3\textheight,
+            width=1\textwidth
+        ]
+    
+        \addplot+[
+            fill=Magenta!30,
+            bar shift=-3pt,
+            draw=none
+        ] table [
+            x=chromosome,
+            y=mapped_percent,
+            col sep=comma,
+        ] {data/alignement_leader.csv};
+        \addlegendentry{Alignement \textit{leader}}
+    
+        \addplot+[
+            fill=cyan!30,
+            bar shift=3pt,
+            draw=none
+        ] table [
+            x=chromosome,
+            y=mapped_percent,
+            col sep=comma,
+        ] {data/alignement_fr3.csv};
+
+        \addplot+[
+            fill=Magenta!60,
+            bar shift=-3pt,
+            draw=black,
+            ultra thick,
+        ] table [
+            x=chromosome,
+            y=mapped_percent,
+            col sep=comma,
+        ] {data/alignement_leader_chr14.csv};
+
+        \addplot+[
+            fill=cyan!100,
+            bar shift=3pt,
+            draw=black,
+            ultra thick,
+        ] table [
+            x=chromosome,
+            y=mapped_percent,
+            col sep=comma,
+        ] {data/alignement_fr3_chr14.csv};
+
+        \addlegendentry{Alignement \gls{fr}3}
+        \end{axis}
+    \end{tikzpicture}
+    \caption{
+        Comparaison du pourcentage de lectures alignées par chromosome en \textcolor{Magenta}{\textit{leader} (rose)} 
+        et \textcolor{cyan}{\textit{\gls{fr}3} (cyan)} sur un échantillon de myélome multiple. 
+        Le locus des \textit{\gls{igh}} se situe sur le chromosome 14.
+        }
+    \label{fig:alignement-leader-fr3}
+\end{figure}

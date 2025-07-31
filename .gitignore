@@ -20,6 +20,7 @@
 *.nav
 *.snm
 *.vrb
+*.lof
 
 # Backup and swap files
 *~
