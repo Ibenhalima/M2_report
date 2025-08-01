@@ -10,17 +10,18 @@ mais aussi et surtout en hématologie pour l'étude des caractéristiques de cer
 
 \section{Répertoire et recombinaison des gènes V(D)J}
 
-Ce processus de recombinaison est complexe, et implique plusieurs étapes successives de réarrangement des segments
-\gls{vdj} au sein des loci des \glspl{ig} et des \glspl{tcr} \cite{rothVDJRecombinationMechanism2014}.
-Il débute par la sélection aléatoire de segments D et J, suivie de la sélection d'un segment V, au sein des chaînes
-dites « lourdes », sous l'action des recombinases \gls{vdj}. Un mécanisme identique est observé pour les chaînes « légères »,
-avec une recombinaison directe des segments V et J, sans étape D. À la suite de chaque recombinaison, des régions de diversité N 
-de quelques nucléotides sont insérées aléatoirement entre les segments, contribuant à la diversité potentielle du répertoire 
-(\autoref{fig:vdj}).
+Ce processus de recombinaison est complexe, et implique plusieurs étapes successives de réarrangement des segments \gls{vdj} 
+au sein des loci des \glspl{ig} et des \glspl{tcr} \cite{rothVDJRecombinationMechanism2014}. Les \glspl{ig} sont des récepteurs membranaires 
+ou des anticorps solubles exprimés par les lymphocytes B, tandis que les \glspl{tcr} sont exprimés à la surface des lymphocytes T et permettent 
+la reconnaissance des antigènes présentés par le \gls{cmh}.
 
 \vspace{1em}
 
-Par conséquent, si l'on considère les loci des \glspl{ig}, la recombinaison \gls{vdj} permet de générer théoriquement : 
+La recombinaison débute par la sélection aléatoire de segments D et J, suivie de la sélection d'un segment V, au sein des chaînes dites « lourdes », 
+sous l'action des recombinases \gls{vdj}. Un mécanisme identique est observé pour les chaînes « légères », avec une recombinaison directe des segments V et J, 
+sans étape D. À la suite de chaque recombinaison, des régions de diversité N de quelques nucléotides sont insérées aléatoirement entre les segments, 
+contribuant à la diversité potentielle du répertoire (\autoref{fig:vdj}). Par conséquent, si l'on considère les loci des \glspl{ig}, la recombinaison \gls{vdj} 
+permet de générer théoriquement : 
 
 \begin{examplebox}[label={ex:combinaisons}]
     \begin{equation}
@@ -65,9 +66,9 @@ dans une moindre mesure \textit{IgK} et \textit{IgL} sont pertinents.}.
 Si l'on s'intéresse plus en détail à la structure des remaniements \gls{vdj} des \textit{\gls{igh}},
 on peut noter que les segments codant la région variable de la chaîne lourde (V, D et J)
 incluent plusieurs sous-régions fonctionnelles. En amont du segment V, on trouve la région \textit{leader} et 
-le segment V lui-même est divisé en \glspl{fr} 1, 2 et 3, qui assurent le repliement structural du domaine variable, 
-(et servent de matrice pour la conception d'amorces d'amplification par \gls{pcr}), 
-et les \glspl{cdr}. Parmi celles-ci, la région \gls{cdr}3, située à la jonction des segments V, D et J 
+le segment V lui-même est divisé en \glspl{fr} 1, 2 et 3, qui assurent le repliement structural du domaine variable 
+\footnote{Et servent de matrice pour la conception d'amorces d'amplification par \gls{pcr}.}, 
+et les \glspl{cdr} (\autoref{fig:igh}). Parmi celles-ci, la région \gls{cdr}3, située à la jonction des segments V, D et J 
 est la plus variable et joue un rôle central dans la reconnaissance de l'antigène, et l'unicité du réarrangement.
 
 \vspace{1em}
@@ -105,7 +106,7 @@ et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\a
 
 La plateforme \textit{Vidjil} qui permet donc l'étude de ces réarrangements \gls{vdj} est développée et maintenue 
 conjointement par l'équipe Bonsai du laboratoire \gls{cristal} et par le consortium \textit{VidjilNet}. 
-Elle regroupe d'une par l'algorithme \textit{vidjil-algo}, une heuristique de détection des réarrangement \gls{vdj} 
+Elle regroupe d'une part l'algorithme \textit{vidjil-algo}, une heuristique de détection des réarrangement \gls{vdj} 
 \cite{giraudFastMulticlonalClusterization2014b} et d'autre part une interface web permettant de visualiser les 
 résultats ainsi produits \cite{duezVidjilWebPlatform2016}. L'ensemble du code source est disponible sur le dépôt gitlab 
 public suivant : \href{https://gitlab.inria.fr/vidjil/vidjil}{gitlab.inria.fr/vidjil/vidjil}.
@@ -197,7 +198,7 @@ myéloïdes et lymphoïdes selon l'origine des cellules. Brièvement, les cellul
 lignée lymphoïde pour les lymphocytes (B, T, NK et autres non conventionnels) et précurseurs, soit de lignée myéloïde 
 pour le reste des cellules (hématies, plaquettes, polynucléaires, monocytes) et leurs précurseurs. Une seconde séparation 
 est établie selon la maturité des cellules : on parle alors de \glspl{lam} et de \glspl{lal} lorsque la cellule 
-tumorale dérive d'un précurseur, et de \glspl{smp} et de \glspl{slp}/\glspl{lnh} lorsque la cellule est mature 
+tumorale dérive d'un précurseur, et de \glspl{smp} et de \glspl{slp}/\glspl{lnh} lorsque la cellule est mature (\autoref{fig:hemopathies}) 
 \cite{alaggio5thEditionWorld2022a, khoury5thEditionWorld2022}.
 
 \input{figures/hemopathies.tex}
@@ -330,7 +331,7 @@ et plus fréquemment l'évolution de la maladie.
 Bien que cette approche soit largement démocratisée dans le domaine de l'oncologie solide, elle reste encore en cours de validation en oncohématologie et demeure,
 pour le moment, marginale, avec quelques applications dans le cadre des \gls{lnh}. Dans les autres pathologies, les défis techniques liés à la faible concentration des 
 \gls{adnc} et à la faible taille des fragments ($\approx$ 150 pb), à l'hétérogénéité génétique des hémopathies malignes et à l'absence de biomarqueurs universels 
-limitent encore son déploiement en routine clinique.
+limitent encore son déploiement en routine clinique \cite{daoUsingCfDNACtDNA2023}.
 
 \begin{figure}[H]
     \includegraphics[width=1\textwidth]{images/ctdna.png}

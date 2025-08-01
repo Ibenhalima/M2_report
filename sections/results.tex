@@ -10,7 +10,7 @@ mais aussi de faire la lumière sur plusieurs difficultés.
 \subsection{Identification incertaine du segment V}
 
 Une des premières difficultés rencontrées, inhérente à la nature du protocole utilisé, est l'incertitude sur l'identification 
-du segment V. En raison de l'utilisation d'amorces ciblant la région \gls{fr}3, toujours dans l'optique d'analyser par les suite 
+du segment V. En raison de l'utilisation d'amorces ciblant la région \gls{fr}3, toujours dans l'optique d'analyser par la suite 
 des \gls{adnc}, seuls 20 à 30 nucléotides sont séquencés en amont du réarrangement \gls{vdj}. Cette longueur ne permet pas à 
 \textit{Vidjil} (ou tout autre outil d'analyse de réarrangements \gls{vdj}) de déterminer avec certitude le segment V utilisé 
 (\autoref{fig:v-leader-fr3}). 
@@ -55,7 +55,7 @@ En effet les plasmocytes constituent le stade le plus mature de la lignée lymph
 réarrangement \gls{vdj} comporte le moins d'homologie avec les séquence germinales. La conséquence de ceci étant que dans certains 
 cas, les amorces utilisées pour l'amplification \gls{fr}3 ne sont pas capables de se fixer sur les séquences \gls{vdj} mutées, et 
 amplifier les réarrangements. L'utilisation d'amorces dégénérées permet de limiter ce problème sans le résoudre totalement pour autant. 
-Dans le cas où le réarragenemt \gls{vdj} n'est pas amplifiable, il est possible d'analyser en lieu les réarrangements incomplets DH-JH 
+Dans le cas où le réarrangement \gls{vdj} n'est pas amplifiable, il est possible d'analyser en lieu les réarrangements incomplets DH-JH 
 (cf \autoref{fig:vdj}). Ainsi en guise d'illustration, parmi les 5 patients analysés, le patient 1 présente un réarrangement amplifié 
 en \gls{fr}3, tandis que chez le patient 2, le réarrangement n'est pas amplifié (\autoref{fig:primer-alignement}).
 
@@ -76,7 +76,7 @@ en \gls{fr}3, tandis que chez le patient 2, le réarrangement n'est pas amplifi�
     \end{ColoredVerbatim}
     \caption{
         Alignement de l'amorce dégénéree VH commune utilisée pour l'amplification \gls{fr}3 
-        avec les séquences V majoritaires indentifiées chez les patients 1 et 2 en \textit{leader}. 
+        avec les séquences V majoritaires identifiées chez les patients 1 et 2 en \textit{leader}. 
         Un alignement est représenté par | et : pour les nucléotides dégénerés. Les bases soulignées 
         correspondent aux bases mutées par rapport à la séquence germinale.
     }
@@ -85,10 +85,10 @@ en \gls{fr}3, tandis que chez le patient 2, le réarrangement n'est pas amplifi�
     
 \subsection{Amplification non spécifique et artefacts de PCR}
 
-Un dernier problème, et non des moindre, concerne l'amplification non spécifiques de régions non ciblées par les amorces, 
+Un dernier problème, et non des moindres, concerne l'amplification non spécifique de régions non ciblées par les amorces, 
 ainsi que la présence de nombreux artéfacts dans les données de séquençage. Les amorces utilisées faisant de l'ordre de 100 bases 
 (cf \autoref{anx:primer-sequences}), elles ont tendance à se dimériser et ainsi être amplifiées et séquencées en l'état. 
-De plus, certaines amorces, notamment celle ciblant la région JH commune, amplfient des régions non ciblées dans 
+De plus, certaines amorces, notamment celle ciblant la région JH commune, amplifient des régions non ciblées dans 
 les conditions actuelles de \gls{pcr}. Pour illustrer, chez le patient 1 sur le même prélèvement au diagnostic, on identifie 
 un clone majoritaire qui represente près de 82 \% des clones identifiés en \textit{leader}, contre 32 \% en \gls{fr}3 au milieu 
 de nombreuses séquences artéfactuelles et hors-cibles \footnote{Traduction un peu libre de l'anglais \textit{off-target}} (\autoref{fig:fr3-vs-leader}).
@@ -109,30 +109,30 @@ de nombreuses séquences artéfactuelles et hors-cibles \footnote{Traduction un 
 
 \section{Optimisations techniques et bioinformatiques}
 
-Un certain nombre des défis posés par le protocole de séquençage \gls{fr}3 ont ont pu être surmontés conjointement par 
-des adapations techniques et bioinformatiques. Au niveau du protocole d'amplfication, une refonte complète des concentrations 
-relative des différentes amorces, du protocole d'extration et des températures de \gls{pcr} ont permis d'améliorer nettement 
+Un certain nombre des défis posés par le protocole de séquençage \gls{fr}3 ont pu être surmontés conjointement par 
+des adaptations techniques et bioinformatiques. Au niveau du protocole d'amplification, une refonte complète des concentrations 
+relatives des différentes amorces, du protocole d'extration et des températures de \gls{pcr} ont permis d'améliorer nettement 
 la qualité des données obtenues. Le cœur de cette section sera consacré au détail des approches bioinformatiques mises en place, 
 notamment concernant les clones artéfactuels issus des dimères d'amorces et séquences hors-cibles.
 
 \subsection{Filtrage des séquences hors-cibles}
 
-En ce qui concerne les artéfacts issues des dimières d'amorces, il est assez naturel que \textit{Vidjil} les identifie comme 
+En ce qui concerne les artéfacts issus des dimères d'amorces, il est assez naturel que \textit{Vidjil} les identifie comme 
 des réarrangements \gls{vdj} valides, comprenant une section V ou J. Il est par contre plus surprenant que des séquences ne comprenant 
 ni gène V ni J soient également identifiées comme des réarrangements \gls{vdj} valides. Ces séquences étant par ailleurs souvent majoritaires 
 dans les premières données obtenues, pouvant représenter jusqu'à 50 \% des \textit{reads} identifiés par \textit{Vidjil}.
 
 \vspace{1em}
 
-Lorsqu'on aligne ces séquences sur le génome humain, on observe qu'elles correspondent à diverses régions du génome, avec un aligment quasi 
-parfait, à l'exception de quelques bases aux extrémités des séquences. Ces bases sont toutes identiques et correspondent à la séquence 
+En y regardant de plus près, ces séquences s'alignent sur diverses régions du génome,de façon quasi parfaite, 
+à l'exception de quelques bases aux extrémités des séquences. Ces bases sont toutes identiques et correspondent à la séquence 
 \C\G\T\C\T\C\C\T\C\A\G\G\T\A\A\G, ou à sa séquence complémentaire (inversée) \C\T\T\A\C\C\T\G\A\G\G\A\G\A\C\G.
 
 \vspace{1em}
 
 Dans l'hypothèse d'une amplification non spécifique, il est possible que ces séquences correspondent à des fragments d'amorces,
 hypothèse qu'il est facile de vérifier en recherchant ces séquences dans les amorces utilisées pour l'amplification (\texttt{primers.fa} 
-compremant les différentes combinaisons de bases dégénerées)
+comprenant les différentes combinaisons de bases dégénerées)
 (\autoref{lst:bash-search-primer}).
 
 \begin{lstlisting}[language=custombash, 
@@ -152,9 +152,9 @@ caagcagaagacggcatacagatxxxxxxxxgtgactggagttcagacgtgtgctcttccgatctCTTACCTGAGGAGAC
 \vspace{1em}
 
 Ces séquences sont donc issues de l'amorce JH commune, et on peut en déduire le phénomène suivant :
-dans les conditions de \gls{pcr} utilisées (nottement de température), l'amorce JH se fixe à des régions 
-du génome autres que les régions JH par complémentarité faible, et amplfie ces régions recopiant au passage 
-la séquence de l'amorce spécfique de la région JH (\autoref{fig:off-target-amplification}). Ces séquences sont ensuite 
+dans les conditions de \gls{pcr} utilisées (notamment de température), l'amorce JH se fixe à des régions 
+du génome autres que les régions JH par complémentarité faible, et amplifie ces régions recopiant au passage 
+la séquence de l'amorce spécifique de la région JH (\autoref{fig:off-target-amplification}). Ces séquences sont ensuite 
 identifiées par \textit{Vidjil} comme des réarrangements \gls{vdj} valides incomplets. 
 
 \begin{figure}[H]
@@ -191,7 +191,6 @@ R1, tandis que la séquence anti-sens \C\T\T\A\C\C\T\G\A\G\G\A\G\A\C\G\ uniqueme
 R2 (\autoref{lst:bash-primer-r1-r2}). On peut donc en déduire que seule la séquence sens de l'amorce JH se fixe sur 
 le brin d'ADN et n'est jamais recopiée, confortant l'hypothèse formulée.
 
-
 \begin{figure}[H]
 \begin{lstlisting}[language=custombash, 
     caption={Commande Bash et résultat de la recherche des séquences des amorces dans les fichiers FASTQ R1 et R2.},
@@ -211,15 +210,15 @@ $ zgrep -c "CTTACCTGAGGAGACG" FR3_P01-TEMOIN_PBL_IVS_S7_R1_001.fastq.gz
 \end{lstlisting}
 \end{figure}
     
-Par ailleurs ces clonotypes ne resprésentent que la fasse visible du problème, car en réalité, un certain nombre de \textit{reads} 
+Par ailleurs ces clonotypes ne représentent que la face visible du problème, car en réalité, un certain nombre de \textit{reads} 
 hors-cibles ne sont pas identifiés comme des réarrangements \gls{vdj} valides par \textit{Vidjil}, mais sont pour autant présents 
-dans les données de séquençage. Il est possible de  se mesurer l'ampleur du phénomène en alignant les fichiers FASTQ de séquençage 
+dans les données de séquençage. Il est possible de mesurer l'ampleur du phénomène en alignant les fichiers FASTQ de séquençage 
 (\autoref{fig:alignement-leader-fr3}).
 
 \input{figures/alignement-leader-fr3.tex}
 
 Pour pallier à ce problème, il est possible de filtrer les séquences en ajustant les paramètres de \textit{vidjil-algo}.
-Pour chaque clone, une \textit{e-value} (valeur E) est calculée, souvent de l'orde de $10^{-50}$ à $10^{-100}$, dans le 
+Pour chaque clone, une \textit{e-value} (valeur E) est calculée, souvent de l'ordre de $10^{-50}$ à $10^{-100}$, dans le 
 cadre de vrais réarrangements \gls{vdj}. En revanche, pour les séquences hors-cibles, cette valeur est de l'ordre de $10^{-5}$ à $10^{-10}$. 
 Ainsi, en filtrant les séquences avec une \textit{e-value} supérieure à $10^{-15}$, on peut éliminer la plupart des séquences hors-cibles, et 
 il suffit pour cela de modifier le paramètre \texttt{-e} contrôlant la \textit{e-value} maximale autorisée de la configuration \textit{multi+inc+xxx} 
@@ -246,7 +245,7 @@ artéfactuels liés aux séquences hors-cibles. Pour autant, certains de ces clo
 d'amorces demeurent en grande partie non filtrés. Ces artéfacts fausseraient dès lors toute quantification de la \gls{mrd} en sous-estimant 
 le poids réel des véritables clones.
 Il est possible via l'interface web de \textit{Vidjil} de masquer temporairement certains 
-clonotypes qui restent alors comptabilisés dans les clones analysés, mais redeviennent visible à chaque rafraichissement de la page sans 
+clonotypes qui restent alors comptabilisés dans les clones analysés, mais redeviennent visible à chaque rafraîchissement de la page sans 
 possibilité de sauvegarde. Il a donc été nécessaire de développer une fonctionnalité permettant la suppression contrôlée des clonotypes, 
 répondant également aux attentes exprimées par d'autres utilisateurs.
 
@@ -350,14 +349,14 @@ Enfin, des tests unitaires ont été ajoutés pour garantir le bon fonctionnemen
 
 Il nous est maintenant possible de supprimer les clonotypes artéfactuels et hors-cibles pour ne conserver que les réarrangements véritables lors de 
 l'étude de la \gls{mrd}, en parallèle des optimisations techniques réalisées. L'évaluation de la \gls{mrd} est alors possible en comparant le réarrangement
-clonal identifié au diagnostic à ceux présents au suivi, et nécessite de pouvoir détecter avec précision des quantité très faibles de réarrangements clonaux.
+clonal identifié au diagnostic à ceux présents au suivi, et nécessite de pouvoir détecter avec précision des quantités très faibles de réarrangements clonaux.
 
 \subsection{Quantité de matériel nécessaire selon le seuil de détection analytique}
 
 En premier lieu, il est nécessaire de s'assurer que le matériel de départ est suffisant pour espérer détecter des quantités infimes de réarrangements 
-clonaux. Dans cette optique, il est possible de modéliser de façon assez simple la question par un problème d'échantillionnage statistique. Si l'on considère 
+clonaux. Dans cette optique, il est possible de modéliser de façon assez simple la question par un problème d'échantillonnage statistique. Si l'on considère 
 l'organisme comme la population ou chaque cellule représente un individu, positif ou négatif (soit une cellule tumorale ou saine), avec une probabilité $p$ 
-qu'une cellule soit positive, en considérant chaque cellule comme un échantillon indépendant, le nombre $N$ de cellules positives parmis $n$ cellules analysées 
+qu'une cellule soit positive, en considérant chaque cellule comme un échantillon indépendant, le nombre $N$ de cellules positives parmi $n$ cellules analysées 
 suivra une loi binomiale de paramètres $n$ et $p$. Dans les faits, sachant que $p$ est très faible, on peut approximer la loi binomiale par une loi de Poisson de 
 paramètre $\lambda = n \cdot p$. 
 
@@ -396,8 +395,8 @@ pour espérer détecter la \gls{mrd} au seuil de confiance de $95\,\%$ (\autoref
     \centering
     \caption{
         Nombre minimal de cellules $n$ et volume sanguin nécessaire pour différents $p$ et seuils $k$, avec $\varepsilon = 0.05$.
-        Les volumes en \textcolor{green}{vert} et \textcolor{yellow}{jaune} sont analysable en pratique clinique, tandis que les 
-        volumes en \textcolor{orange}{orange} et nuances de \textcolor{mydarkred}{rouge} sont considérés comme trop élevés.
+        Les volumes en \colorbox{mygreen}{vert} et \colorbox{myyellow}{jaune} sont analysables en pratique clinique, tandis que les 
+        volumes en \colorbox{myorange}{orange} et nuances de \colorbox{myred}{rouge} sont considérés comme trop élevés.
     }
     \label{tab:valeurs_n_volume}
     \begin{tabular}{c|cc|cc}

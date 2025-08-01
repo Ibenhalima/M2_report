@@ -5,7 +5,7 @@ de plusieurs projets réalisés durant la seconde moitié de ce stage, au sein d
 principalement en lien avec le \gls{mm}. Ces projets portent essentiellement sur la gestion des pipelines d'analyse 
 des données de séquençage, comprenant la création d'un nouveau pipeline, l'ajout d'une fonctionnalité spécifique à 
 un pipeline existant, ainsi que la mise à jour et la rédaction de tests pour trois autres pipelines. Parallèlement, 
-la gestion des cycles de qualification et de production a été assurée. Cette section a été encadrée par Augustin Bourdry du \gls{chu}.
+la gestion des cycles de qualification et de production a été assurée. Cette section a été encadrée par Augustin Boudry du \gls{chu}.
 
 \section{Architecture logicielle et environnement utilisateur}
 
@@ -48,7 +48,9 @@ Trois analyses moléculaires sont alors réalisées :
 C'est dans le cadre de cette dernière analyse qu'il a été nécessaire de développer une approche spécifique pour quantifier les délétions du gène \textit{TP53}, 
 gène suppresseur de tumeur dont l'altération est associée à un mauvais pronostic dans le \gls{mm}, avec un seuil placé à 20 \% des cellules selon des recommandations 
 récentes non publiées \cite{flyntPrognosisBiologyTargeting2020}.
-Les plasmocytes étant des cellules particulièrement difficiles à cultiver, l'analyse du nombre de copies, associée aux techniques d'\gls{fish}, constitue l'unique 
+Les plasmocytes étant des cellules particulièrement difficiles à cultiver, l'analyse du nombre de copies, associée aux techniques de \gls{fish} 
+\footnote{La \gls{fish} est une technique de cytogénétique moléculaire permettant de détecter et localiser des séquences d'ADN spécifiques sur des chromosomes, à l'aide de sondes fluorescentes complémentaires. 
+Elle est couramment utilisée pour identifier des anomalies chromosomiques, telles que des translocations, délétions ou amplifications.}, constitue l'unique 
 moyen d'accéder aux remaniements génomiques de grande taille (duplications, délétions, translocations, etc.).
 Ces informations permettent de dresser ce que l'on peut considérer comme un « carytoype moléculaire » de la cellule tumorale. 
 
@@ -76,7 +78,7 @@ En revanche, il est beaucoup plus difficile d'estimer avec précision la fréque
 
 Pour des raisons internes au laboratoire, l'analyse par \gls{fish} n'est pas réalisable dans ce contexte.  
 L'objectif a donc été de développer et d'évaluer une solution d'estimation de la fréquence des délétions de \textit{TP53} à partir des données issues du \gls{ngs}. 
-L'analyse du nombre de copie repose classiquement sur le rapport des pronfondeur sur certaines régions, et est exprimé en ratio : 1 sans anomalie, inférieur à 1 si délétion 
+L'analyse du nombre de copies repose classiquement sur le rapport des pronfondeurs sur certaines régions, et est exprimé en ratio : 1 sans anomalie, inférieur à 1 si délétion 
 et supérieur à 1 si gain de la région (\autoref{fig:cnv}). Ainsi à partir de cette valeur et en posant les hypothèses suivantes :
 
 \begin{itemize}
@@ -96,19 +98,22 @@ Il est alors possible de moyenner la valeur du $\log_2$ du ratio de profondeur p
 et de l'exprimer comme une fréquence estimée de cellules délétées selon la relation suivante :
 
 \begin{equation}
-    \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 -2^{\overline{\log_2\text{Ratio}}}}{0{,}5} \right) 
+    \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 - \overline{2^{\log_2\text{Ratio}}}}{0{,}5} \right) 
     \times \frac{1}{\text{pureté}} \times 100
+    \footnote{Pour exprimer le ratio de profondeur en fréquence de cellules delétées, on soustrait à 1 la valeur du ratio pour exprimer la perte relative, 
+    que l'on divise par 0{,}5 qui représente la délétion monoallélique de la totatilité des cellules (une normalisation en quelque sorte). Le reste de l'expression 
+    permet de corrigier par la pureté tumorale de l'échantillon, qui est le pourcentage de cellules tumorales dans l'échantillon analysé, et exprime le résultat en pourcentage.}
 \end{equation}
 
 \begin{equation}
-    \text{où} \quad \overline{\log_2\text{Ratio}} = \frac{1}{n} \sum_{i=1}^{n} \log_2\text{Ratio}_i
+    \text{où} \quad \overline{2^{\log_2\text{Ratio}}} = \frac{1}{n} \sum_{i=1}^{n} 2^{\log_2\text{Ratio}_i}
 \end{equation}
     
-Un intervalle de confiance et des statistiques de dispertion peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
+Un intervalle de confiance et des statistiques de dispersion peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
 approche a été implémentée dans un process \textit{Nextflow} final appelant un script Python permettant de générer au travers d'un fichier excel, 
 une fréquence de délétion estimée par échantillon, et pouvant être corrigée selon la pureté tumorale (\autoref{fig:excel-tp53}). 
 Par la suite l'analyse de témoins négatifs et positifs (échantillon avec ou sans délétion du gène \textit{TP53}) ont permis d'estimer 
-la limite de linéarité à 20 \% et de détection à 15 \%.
+la limite de quantification à 20 \% et de détection à 15 \% de cellules délétées.
 
 \begin{figure}[H]
     \centering
@@ -129,9 +134,9 @@ sont des paires de lectures dont l'orientation ou la distance d'alignement est a
 
 \vspace{1em}
 
-Les résultats sont ainsi rendus sous forme de page web statique, après filtrage des variants en dehors des régions d'intérêt, et en dessous d'un seuil 
-de détection fixé à 10 événements supports (\autoref{fig:translocation-web}). Des observations réalisées sur des anaylyses au laboratoire 
-laissent à penser que certaines translocations veritables sont présentes en dessous de ce seuil fixé à 10, nottament sur des \gls{adnc}.
+Les résultats sont ainsi rendus sous forme de page web statique (\autoref{fig:translocation-web}), après filtrage des variants en dehors des régions d'intérêt, et en dessous d'un seuil 
+de détection fixé à 10 événements supports (\textit{reads} ou paires de \textit{reads}). Des observations réalisées sur des anaylyses au laboratoire 
+laissent à penser que certaines translocations veritables sont présentes en dessous de ce seuil fixé à 10, notamment sur des \gls{adnc}.
 C'est donc concernant ce dernier, initialement fixé de manière empirique, qu'un travail d'optimisation a été entrepris afin de déterminer 
 s'il permettait effectivement de discriminer de manière fiable les réarrangements pertinents des artéfacts, tout en conservant une sensibilité adéquate 
 pour la détection d'événements rares. 
@@ -158,10 +163,10 @@ en formulant quelques hypothèses et en s'appuyant sur quelques vérités biolog
 \vspace{1em}
 
 Dans cette optique, on peut chercher à définir un seuil de détection optimisé, qui maximise le nombre de patients identifiés comme porteurs d'une translocation, 
-tout en minimisant le nombre de patients présentant plusieurs anomalies, phénomène assez rare biologiquement. Ainsi on note $T$ le nombre de patient 
+tout en minimisant le nombre de patients présentant plusieurs anomalies, phénomène assez rare biologiquement. Ainsi on note $T$ le nombre de patients 
 présentant au moins une translocation et $T_{+}$ le nombre présentant plusieurs translocations, en excluant les t(8;14). $T$ et $T_{+}$ sont alors des fonctions 
 de $t$ définies sur $\mathbb{N}$ et à valeurs dans $\mathbb{N}$, $t$ désignant le seuil en dessous duquel l'anomalie n'est pas retenue. On peut donc formuler la question sous la forme d'une optimisation sous contrainte, 
-où $\delta$ représente un nombre accetable de patients présentant plusieurs translocations, et $t^*$ le seuil optimal retenu :
+où $\delta$ représente un nombre acceptable de patients présentant plusieurs translocations, et $t^*$ le seuil optimal retenu :
 
 \begin{equation}
     t^* = \arg\max_{t} \; T(t) \quad \text{tel que} \quad T_{+}(t) \leq \delta
@@ -182,7 +187,7 @@ d'hypermutation des gènes \textit{IGHV}. L'objectif est d'extraire et de visual
 \vspace{1em}
 
 Le traitement des données brutes issues des analyses par \textit{Vidjil} est réalisé via un script Python (\texttt{clone.py}) qui importe les fichiers d'analyse au format \gls{json}. 
-Ce script construit des objets \textit{Vidjil} représentant chaque analyse, ainsi que des objets \textit{Clone} extrayant les informations essentielles des clones détectés, 
+Ce script construit des objets \texttt{Vidjil} représentant chaque analyse, ainsi que des objets \texttt{Clone} extrayant les informations essentielles des clones détectés, 
 telles que la taille relative, les séquences CDR3, les gènes V(D)J assignés, la productivité, etc. Une étape d'enrichissement par requête du serveur IMGT/V-QUEST 
 (sans API, nécessitant donc de récupérer et traiter la page web complète) permet d'obtenir des annotations biologiques complémentaires, notamment le pourcentage d'identité des séquences V.
 Par ailleurs, les métadonnées associées aux échantillons sont intégrées afin d'assurer une contextualisation clinique et biologique des résultats.
