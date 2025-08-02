@@ -98,7 +98,7 @@ Il est alors possible de moyenner la valeur du $\log_2$ du ratio de profondeur p
 et de l'exprimer comme une fréquence estimée de cellules délétées selon la relation suivante :
 
 \begin{equation}
-    \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 - \overline{2^{\log_2\text{Ratio}}}}{0{,}5} \right) 
+    \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 - 2^{\overline{\log_2\text{Ratio}}}}{0{,}5} \right) 
     \times \frac{1}{\text{pureté}} \times 100
     \footnote{Pour exprimer le ratio de profondeur en fréquence de cellules delétées, on soustrait à 1 la valeur du ratio pour exprimer la perte relative, 
     que l'on divise par 0{,}5 qui représente la délétion monoallélique de la totatilité des cellules (une normalisation en quelque sorte). Le reste de l'expression 
@@ -106,8 +106,11 @@ et de l'exprimer comme une fréquence estimée de cellules délétées selon la 
 \end{equation}
 
 \begin{equation}
-    \text{où} \quad \overline{2^{\log_2\text{Ratio}}} = \frac{1}{n} \sum_{i=1}^{n} 2^{\log_2\text{Ratio}_i}
+    \text{où} \quad \overline{\log_2\text{Ratio}} = \frac{1}{n} \sum_{i=1}^{n} \log_2\text{Ratio}_i
+    \footnote{Par les propriétés des logarithmes, $\overline{\log_2\text{Ratio}} = \frac{1}{n} \sum \log_2 \text{Ratio}_i = \log_2\left( \prod_{i=1}^{n} \text{Ratio}_i^{1/n} \right) = 
+    \log_2\left( \sqrt[n]{\prod_{i=1}^{n} \text{Ratio}_i} \right)$, ce qui revient donc à calculer le logarithme de la moyenne géométrique.}
 \end{equation}
+
     
 Un intervalle de confiance et des statistiques de dispersion peuvent également être calculés pour évaluer la qualité de l'estimation. Cette 
 approche a été implémentée dans un process \textit{Nextflow} final appelant un script Python permettant de générer au travers d'un fichier excel, 
@@ -135,7 +138,7 @@ sont des paires de lectures dont l'orientation ou la distance d'alignement est a
 \vspace{1em}
 
 Les résultats sont ainsi rendus sous forme de page web statique (\autoref{fig:translocation-web}), après filtrage des variants en dehors des régions d'intérêt, et en dessous d'un seuil 
-de détection fixé à 10 événements supports (\textit{reads} ou paires de \textit{reads}). Des observations réalisées sur des anaylyses au laboratoire 
+de détection fixé à 10 événements supports (\textit{reads} ou paires de \textit{reads}). Des observations réalisées sur des analyses au laboratoire 
 laissent à penser que certaines translocations veritables sont présentes en dessous de ce seuil fixé à 10, notamment sur des \gls{adnc}.
 C'est donc concernant ce dernier, initialement fixé de manière empirique, qu'un travail d'optimisation a été entrepris afin de déterminer 
 s'il permettait effectivement de discriminer de manière fiable les réarrangements pertinents des artéfacts, tout en conservant une sensibilité adéquate 
@@ -152,7 +155,7 @@ pour la détection d'événements rares.
 \end{figure}
 
 Une manière d'aborder ce problème consiste à envisager une optimisation \textit{a posteriori}, reposant sur les nombreuses données déjà acquises, 
-en formulant quelques hypothèses et en s'appuyant sur quelques vérités biologiques.
+en formulant des hypothèses et en s'appuyant sur quelques vérités biologiques :
 
 \begin{itemize}
     \item Les événements rapportés par \textit{Manta} et \textit{Gridss} reposent sur des signaux difficilement attribuables à des artéfacts, et peuvent donc être considérés comme fiables.

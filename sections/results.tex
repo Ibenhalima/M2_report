@@ -124,7 +124,7 @@ dans les premières données obtenues, pouvant représenter jusqu'à 50 \% des \
 
 \vspace{1em}
 
-En y regardant de plus près, ces séquences s'alignent sur diverses régions du génome,de façon quasi parfaite, 
+En y regardant de plus près, ces séquences s'alignent sur diverses régions du génome, de façon quasi parfaite, 
 à l'exception de quelques bases aux extrémités des séquences. Ces bases sont toutes identiques et correspondent à la séquence 
 \C\G\T\C\T\C\C\T\C\A\G\G\T\A\A\G, ou à sa séquence complémentaire (inversée) \C\T\T\A\C\C\T\G\A\G\G\A\G\A\C\G.
 
@@ -180,7 +180,7 @@ identifiées par \textit{Vidjil} comme des réarrangements \gls{vdj} valides inc
     \end{ColoredVerbatim}
     \caption{
         Représentation schématique de l'amplification non spécifique des séquences hors-cibles. 
-        La séquence \C\G\T\C\T\C\C\T\C\A\G\G\T\A\A\G est issue de l'amorce JH commune, et est recopiée 
+        La séquence \C\G\T\C\T\C\C\T\C\A\G\G\T\A\A\G\ est issue de l'amorce JH commune, et est recopiée 
         lors de l'amplification des séquences hors-cibles.
     }
     \label{fig:off-target-amplification}
@@ -276,7 +276,7 @@ L'idée est donc la suivante : un nouvel attribut booléen \texttt{removed} (ini
 tag utilisateur \texttt{removed\ clonotype}. Deux attributs \texttt{removed\_clones\_reads\_of\_active\_locus} et \texttt{removed\_clones\_reads\_total} sont 
 ajoutés à l'objet \texttt{model} pour stocker le nombre de \textit{reads} des clonotypes supprimés indéxé par le temps sous forme d'\textit{array} (tableau), 
 respectivement pour le locus actif et pour l'ensemble des loci (\autoref{algo:removed-reads}). 
-Enfin la méthode \texttt{getSize} de l'objet \texttt{clone}, ainsi que d'autres indicateurs de nombre de \textit{reads} analysés sont modifiés pour soustraire du 
+Enfin la méthode \texttt{getSize} de l'objet \texttt{clone}, ainsi que d'autres indicateurs du nombre de \textit{reads} analysés sont modifiés pour soustraire du 
 total des \textit{reads} le nombre de \textit{reads} des clonotypes supprimés.
 
 \vspace{1em}
@@ -388,7 +388,7 @@ et $k$ le seuil statisique, avec en pratique $k_{\text{ana}} \leq k$.} de l'ordr
 On cherche donc a résoudre l'équation précédente en $n$, en sachant que $p$ est inconnu dans les faits, mais estimé comme étant de l'ordre de $10^{-4}$ à $10^{-8}$, 
 valeur qui correspondrait à la proportion des cellules dites « initiatrices de leucémie ». En faisant donc varier $p$ sur cet intervalle, avec $\epsilon = 0.05$ et 
 $k = 10$ puis $100$, on peut résoudre l'équation précédente (de façon numérique et non algébrique, s'agissant d'une équation transcendante). En considérant également 
-la numération leucocytaire sanguine comme étant de l'ordre de $5\,\text{G/L}$ et médullaire de $50\,\text{G/L}$, on peut en déduire le nombre minimal de cellules à analyser 
+la numération leucocytaire sanguine comme étant de l'ordre de $5\,\text{G/L}$ et médullaire de $50\,\text{G/L}$, on peut en déduire le volume minimal à prélever 
 pour espérer détecter la \gls{mrd} au seuil de confiance de $95\,\%$ (\autoref{tab:valeurs_n_volume}).
 
 \begin{table}[H]
