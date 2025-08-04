@@ -1,19 +1,38 @@
 \chapter{Introduction}
 
-\textit{Vidjil} est une plateforme open-source \cite{giraudFastMulticlonalClusterization2014b}
-permettant l'analyse de données de \gls{ngs} pour l'étude du répertoire des gènes \gls{vdj} des 
-cellules lymphoïdes. Ce processus de recombinaison somatique se produit au sein des précurseurs
-B et T lors de la lymphopoïèse, et permet de générer un vaste répertoire d'anticorps et de récepteurs,
-capables à leur tour de reconnaître une grande variété d'antigènes \cite{jonesTamingTransposonVDJ2004}. 
-\textit{Vidjil} trouve ses applications en immunologie pour l'étude de la diversité du répertoire immunitaire 
-mais aussi et surtout en hématologie pour l'étude des caractéristiques de certaines leucémies.
+\textit{Vidjil} est une plateforme open-source
+\cite{giraudFastMulticlonalClusterization2014b} permettant l'analyse de données
+de \gls{ngs} pour l'étude du répertoire des gènes \gls{vdj} des cellules
+lymphoïdes. Ce processus de recombinaison somatique se produit au sein des
+précurseurs B et T lors de la lymphopoïèse, et permet de générer un vaste
+répertoire d'anticorps et de récepteurs, capables à leur tour de reconnaître une
+grande variété d'antigènes \cite{jonesTamingTransposonVDJ2004}. \textit{Vidjil}
+trouve ses applications en immunologie pour l'étude de la diversité du
+répertoire immunitaire ainsi qu'en hématologie, où il permet une analyse fine
+des répertoires V(D)J dans les hémopathies lymphoïdes pour en affiner le
+diagnostic et le suivi.
 
 \section{Répertoire et recombinaison des gènes V(D)J}
+
+% Alors ici ta section est top ! très bien écrite et très claire. Cependant
+% Chaîne lourde etc. pop de nul part je trouve. Pas sûr que la personne qui lise
+% ton mémoire soit au courant. j'ai juste modifié l'ordre ;) ca me parait plus
+% clair. et j'ai retiré ce qui concerne les TCRs ça te permet de garder en
+% clarté je pense.
 
 Ce processus de recombinaison est complexe, et implique plusieurs étapes successives de réarrangement des segments \gls{vdj} 
 au sein des loci des \glspl{ig} et des \glspl{tcr} \cite{rothVDJRecombinationMechanism2014}. Les \glspl{ig} sont des récepteurs membranaires 
 ou des anticorps solubles exprimés par les lymphocytes B, tandis que les \glspl{tcr} sont exprimés à la surface des lymphocytes T et permettent 
 la reconnaissance des antigènes présentés par le \gls{cmh}.
+
+\vspace{1em}
+
+Dans le cadre de ce travail, seules les recombinaisons des \glspl{ig}, et plus
+précisément de la chaîne lourde \textit{\gls{igh}}, seront prises en compte,
+pour des raisons qui apparaîtront rapidement évidentes\footnote{La pathologie
+étudiée étant d'origine lymphocytaire B, seuls les réarrangements impliqués dans
+la production des anticorps, c'est-à-dire les réarrangements \textit{IgH}, et
+dans une moindre mesure \textit{IgK} et \textit{IgL} sont pertinents.}.
 
 \vspace{1em}
 
@@ -46,20 +65,7 @@ Ainsi, \textit{Vidjil} permet l'analyse des réarrangements des \glspl{ig} prés
     \item \textit{\gls{igl}} sur le chromosome 22.
 \end{itemize}
 
-\vspace{1em}
-
-Le répertoire des cellules T est également analysable, via les loci des \glspl{tcr} :
-\begin{itemize}
-    \item \textit{\gls{tra}} et \textit{\gls{trd}} sur le chromosome 14, 
-    \item \textit{\gls{trb}} et \textit{\gls{trg}} sur le chromosome 7.
-\end{itemize}
-
 \input{figures/vdj.tex}
-
-Dans le cadre de ce travail, seules les recombinaisons des \textit{\gls{igh}} seront prises en compte, 
-pour des raisons qui apparaîtront rapidement évidentes\footnote{La pathologie étudiée étant d'origine lymphocytaire B, 
-seuls les réarrangements impliqués dans la production des anticorps, c'est-à-dire les réarrangements \textit{IgH}, et
-dans une moindre mesure \textit{IgK} et \textit{IgL} sont pertinents.}.
 
 \vspace{1em}
 

@@ -193,6 +193,19 @@
 %  Document start 
 \begin{document}
 
+% Tout d'abord magnifique doc ! Pro tips : 
+% - Ne pas lié les figure a la compilation du document en général c'est bugogène
+%   en général ;) 
+% - Utilise HTS plutot que NGS c'est plus précis et plus moderne. NGS c'est pour
+%   Les vieux cus d'hémato anti changement (*rire*) (J'ai pas réussi a mettre a
+%   jour moi même j'ai honte ^^)
+% - Pour l'espacement entre les paragraphes je te déconseille d'utiliser
+%   \vspace{1em} la typographie LaTeX est déjà bien faite pas touche :p. En vrai
+%   je te comprend moi aussi je préfère l'aérer. utilise parskip
+%   \setlength{\parskip}{1em}
+
+
+
 \onehalfspacing
 
 \input{sections/titlepage}
@@ -204,12 +217,12 @@
 
 \input{sections/preambule}
 \input{sections/intro}
-\input{sections/problematique}
-\input{sections/material}
-\input{sections/results.tex}
-\input{sections/chr.tex}
-\input{sections/discussion.tex}
-\input{sections/conclusion.tex}
+% \input{sections/problematique}
+% \input{sections/material}
+% \input{sections/results}
+% \input{sections/chr}
+% \input{sections/discussion}
+% \input{sections/conclusion}
 
 \printbibliography
 \newpage
