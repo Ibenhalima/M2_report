@@ -79,6 +79,7 @@ est la plus variable et joue un rôle central dans la reconnaissance de l'antig�
 
 \vspace{1em}
 
+% Est-ce utile au message la partie pq diversité CDR3 ? 
 La diversité de cette région \gls{cdr}3 est générée par plusieurs mécanismes :
 la recombinaison somatique entre les segments V, D et J, et l'ajout des domaines de N-diversité 
 mentionnés précédemment, mais aussi l'excision de nucléotides en 3' et 5' des segments V, D et J.
@@ -109,6 +110,9 @@ et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\a
 
 
 \section{Détection et visualisation des réarrangements V(D)J via \textit{Vidjil}}
+
+% C'est d'une limpidité cette partie clapclap ! les schémas sont sublimes. Tu
+% pourrais expliquer le principe de Vidjil a un macaque ^^.
 
 La plateforme \textit{Vidjil} qui permet donc l'étude de ces réarrangements \gls{vdj} est développée et maintenue 
 conjointement par l'équipe Bonsai du laboratoire \gls{cristal} et par le consortium \textit{VidjilNet}. 
@@ -149,7 +153,7 @@ puis procède à une segmentation et une annotation des séquences identifiées 
 $M$ désignant la taille totale des gènes considérés, et $M'$ un sous ensemble tel que $M' \ll M$.}. 
 
 \input{figures/vidjil-algo.tex}
-
+% JavaScript Object Notation (JSON) :o je ne connaissais même pas l'acronyme !
 Les résultats ainsi générés par \textit{vidjil-algo} sont rassemblés dans un fichier \textit{.vidjil} au format \gls{json} où 
 l'on retrouvera des métadonnées en lien avec l'échantillon analysé et un ensemble de données relatif à chaque clone 
 identifié par \textit{vidjil-algo} (\autoref{lst:json-vidjil}).
@@ -195,7 +199,7 @@ où la quasi unicité de chaque réarrangement \gls{vdj} peut servir de marqueur
 spécifique de certaines cellules tumorales et ainsi permettre leur détection et leur suivi \cite{hultcrantzBaselineVDJClonotype2020}.
 
 \vspace{1em}
- 
+% Alors je pense qu'on ne met pas de s quand on utilise les acronyme LAM LAL
 Avant toute chose, il peut être utile de dresser un panorama rapide des hémopathies malignes afin de 
 mieux comprendre l'importance de l'analyse du répertoire des gènes \gls{vdj} dans ces situations.  
 Ces pathologies regroupent ce qu'on appelle communément les « cancers du sang » et peuvent se séparer selon
@@ -206,6 +210,14 @@ pour le reste des cellules (hématies, plaquettes, polynucléaires, monocytes) e
 est établie selon la maturité des cellules : on parle alors de \glspl{lam} et de \glspl{lal} lorsque la cellule 
 tumorale dérive d'un précurseur, et de \glspl{smp} et de \glspl{slp}/\glspl{lnh} lorsque la cellule est mature (\autoref{fig:hemopathies}) 
 \cite{alaggio5thEditionWorld2022a, khoury5thEditionWorld2022}.
+
+% C'et quoi cette horreur ???? (je parle du graphique) Je sais qu'on aime la
+% cyto mais non ; je ferme les yeux j'ai les diapos de claude écriture jaune
+% fond bleu marine-noire
+% iconographie plus simple et carré comme celle là :
+% https://gramproject.com/wp-content/uploads/2020/08/Haematology-cell-lineages-and-malignancies.png
+% On la modifie légèrement pour ajouter MDS comme ça on a un un truc complet 
+% Et en plus tu introduit le MM avec ce style de graph plus facilement 
 
 \input{figures/hemopathies.tex}
 
