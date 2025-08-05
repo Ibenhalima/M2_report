@@ -1,3 +1,4 @@
+
 \chapter{Introduction}
 
 \textit{Vidjil} est une plateforme open-source
@@ -20,48 +21,57 @@ diagnostic et le suivi.
 % clair. et j'ai retiré ce qui concerne les TCRs ça te permet de garder en
 % clarté je pense.
 
-Ce processus de recombinaison est complexe, et implique plusieurs étapes successives de réarrangement des segments \gls{vdj} 
-au sein des loci des \glspl{ig} et des \glspl{tcr} \cite{rothVDJRecombinationMechanism2014}. Les \glspl{ig} sont des récepteurs membranaires 
-ou des anticorps solubles exprimés par les lymphocytes B, tandis que les \glspl{tcr} sont exprimés à la surface des lymphocytes T et permettent 
-la reconnaissance des antigènes présentés par le \gls{cmh}.
+Ce processus de recombinaison est complexe, et implique plusieurs étapes
+successives de réarrangement des segments \gls{vdj} au sein des loci des
+\glspl{ig} et des \glspl{tcr} \cite{rothVDJRecombinationMechanism2014}. Les
+\glspl{ig} sont des récepteurs membranaires ou des anticorps solubles exprimés
+par les lymphocytes B, tandis que les \glspl{tcr} sont exprimés à la surface
+des lymphocytes T et permettent la reconnaissance des antigènes présentés par
+le \gls{cmh}.
 
 \vspace{1em}
 
 Dans le cadre de ce travail, seules les recombinaisons des \glspl{ig}, et plus
 précisément de la chaîne lourde \textit{\gls{igh}}, seront prises en compte,
 pour des raisons qui apparaîtront rapidement évidentes\footnote{La pathologie
-étudiée étant d'origine lymphocytaire B, seuls les réarrangements impliqués dans
-la production des anticorps, c'est-à-dire les réarrangements \textit{IgH}, et
-dans une moindre mesure \textit{IgK} et \textit{IgL} sont pertinents.}.
+étudiée étant d'origine lymphocytaire B, seuls les réarrangements impliqués
+dans la production des anticorps, c'est-à-dire les réarrangements \textit{IgH},
+et dans une moindre mesure \textit{IgK} et \textit{IgL} sont pertinents.}.
 
 \vspace{1em}
 
-La recombinaison débute par la sélection aléatoire de segments D et J, suivie de la sélection d'un segment V, au sein des chaînes dites « lourdes », 
-sous l'action des recombinases \gls{vdj}. Un mécanisme identique est observé pour les chaînes « légères », avec une recombinaison directe des segments V et J, 
-sans étape D. À la suite de chaque recombinaison, des régions de diversité N de quelques nucléotides sont insérées aléatoirement entre les segments, 
-contribuant à la diversité potentielle du répertoire (\autoref{fig:vdj}). Par conséquent, si l'on considère les loci des \glspl{ig}, la recombinaison \gls{vdj} 
-permet de générer théoriquement : 
+La recombinaison débute par la sélection aléatoire de segments D et J, suivie
+de la sélection d'un segment V, au sein des chaînes dites « lourdes », sous
+l'action des recombinases \gls{vdj}. Un mécanisme identique est observé pour
+les chaînes « légères », avec une recombinaison directe des segments V et J,
+sans étape D. À la suite de chaque recombinaison, des régions de diversité N de
+quelques nucléotides sont insérées aléatoirement entre les segments,
+contribuant à la diversité potentielle du répertoire (\autoref{fig:vdj}). Par
+conséquent, si l'on considère les loci des \glspl{ig}, la recombinaison
+\gls{vdj} permet de générer théoriquement :
 
 \begin{examplebox}[label={ex:combinaisons}]
     \begin{equation}
         \begin{aligned}
-        \text{Chaîne lourde : } & \underbrace{50}_{\text{\# VH}} \times \underbrace{30}_{\text{\# DH}} \times \underbrace{6}_{\text{\# JH}} = 9000 \\
-        \text{Chaîne légère } \kappa : & \underbrace{40}_{\text{\# Vk}} \times \underbrace{5}_{\text{\# Jk}} = 200 \\
-        \text{Chaîne légère } \lambda : & \underbrace{46}_{\text{\# Vl}} \times \underbrace{7}_{\text{\# Jl}} = 322 \\
-        \text{Total des combinaisons possibles : } & 9000 \times (200 + 322) = 4\,698\,000
+            \text{Chaîne lourde : }                    & \underbrace{50}_{\text{\# VH}} \times \underbrace{30}_{\text{\# DH}} \times \underbrace{6}_{\text{\# JH}} = 9000 \\
+            \text{Chaîne légère } \kappa :             & \underbrace{40}_{\text{\# Vk}} \times \underbrace{5}_{\text{\# Jk}} = 200                                        \\
+            \text{Chaîne légère } \lambda :            & \underbrace{46}_{\text{\# Vl}} \times \underbrace{7}_{\text{\# Jl}} = 322                                        \\
+            \text{Total des combinaisons possibles : } & 9000 \times (200 + 322) = 4\,698\,000
         \end{aligned}
     \end{equation}
 \end{examplebox}
 
-Soit près de 5 millions de combinaisons possibles, en sachant que l'ajout des régions de diversité N
-et des différentes régions constantes porte ce nombre à une valeur presque infinie (example \autoref{ex:combinaisons}).
+Soit près de 5 millions de combinaisons possibles, en sachant que l'ajout des
+régions de diversité N et des différentes régions constantes porte ce nombre à
+une valeur presque infinie (example \autoref{ex:combinaisons}).
 
 \vspace{1em}
 
-Ainsi, \textit{Vidjil} permet l'analyse des réarrangements des \glspl{ig} présents sur les loci suivants : 
+Ainsi, \textit{Vidjil} permet l'analyse des réarrangements des \glspl{ig}
+présents sur les loci suivants :
 \begin{itemize}
-    \item \textit{\gls{igh}} sur le chromosome 14, 
-    \item \textit{\gls{igk}} sur le chromosome 2, 
+    \item \textit{\gls{igh}} sur le chromosome 14,
+    \item \textit{\gls{igk}} sur le chromosome 2,
     \item \textit{\gls{igl}} sur le chromosome 22.
 \end{itemize}
 
@@ -69,31 +79,40 @@ Ainsi, \textit{Vidjil} permet l'analyse des réarrangements des \glspl{ig} prés
 
 \vspace{1em}
 
-Si l'on s'intéresse plus en détail à la structure des remaniements \gls{vdj} des \textit{\gls{igh}},
-on peut noter que les segments codant la région variable de la chaîne lourde (V, D et J)
-incluent plusieurs sous-régions fonctionnelles. En amont du segment V, on trouve la région \textit{leader} et 
-le segment V lui-même est divisé en \glspl{fr} 1, 2 et 3, qui assurent le repliement structural du domaine variable 
-\footnote{Et servent de matrice pour la conception d'amorces d'amplification par \gls{pcr}.}, 
-et les \glspl{cdr} (\autoref{fig:igh}). Parmi celles-ci, la région \gls{cdr}3, située à la jonction des segments V, D et J 
-est la plus variable et joue un rôle central dans la reconnaissance de l'antigène, et l'unicité du réarrangement.
+Si l'on s'intéresse plus en détail à la structure des remaniements \gls{vdj}
+des \textit{\gls{igh}}, on peut noter que les segments codant la région
+variable de la chaîne lourde (V, D et J) incluent plusieurs sous-régions
+fonctionnelles. En amont du segment V, on trouve la région \textit{leader} et
+le segment V lui-même est divisé en \glspl{fr} 1, 2 et 3, qui assurent le
+repliement structural du domaine variable \footnote{Et servent de matrice pour
+la conception d'amorces d'amplification par \gls{pcr}.}, et les \glspl{cdr}
+(\autoref{fig:igh}). Parmi celles-ci, la région \gls{cdr}3, située à la
+jonction des segments V, D et J est la plus variable et joue un rôle central
+dans la reconnaissance de l'antigène, et l'unicité du réarrangement.
 
 \vspace{1em}
 
-% Est-ce utile au message la partie pq diversité CDR3 ? 
+% Est-ce utile au message la partie pq diversité CDR3 ? LA REPONSE EST OUI je
+% viens de lire 5.1.2 
 La diversité de cette région \gls{cdr}3 est générée par plusieurs mécanismes :
-la recombinaison somatique entre les segments V, D et J, et l'ajout des domaines de N-diversité 
-mentionnés précédemment, mais aussi l'excision de nucléotides en 3' et 5' des segments V, D et J.
-À cela s'ajoute un processus d'hypermutation somatique, qui affecte principalement le segment V 
-après activation des lymphocytes B naïf, introduisant des mutations ponctuelles supplémentaires,
-notamment dans les régions \glspl{cdr}, afin d'augmenter l'affinité de l'anticorps pour son antigène (\autoref{fig:igh}).
+la recombinaison somatique entre les segments V, D et J, et l'ajout des
+domaines de N-diversité mentionnés précédemment, mais aussi l'excision de
+nucléotides en 3' et 5' des segments V, D et J. À cela s'ajoute un processus
+d'hypermutation somatique, qui affecte principalement le segment V après
+activation des lymphocytes B naïf, introduisant des mutations ponctuelles
+supplémentaires, notamment dans les régions \glspl{cdr}, afin d'augmenter
+l'affinité de l'anticorps pour son antigène (\autoref{fig:igh}).
 
 \input{figures/igh.tex}
 
-Chaque réarrangement \gls{vdj} peut être décrit à l'aide d'une nomenclature standardisée, 
-permettant une identification unique et reproductible \cite{laneIMGTONTOLOGYIMGTLIGMotif2010,lefrancIMGT30Years2019}. 
-Cette notation précise la nature du locus considéré, le segment V utilisé, les nucléotides excisés à son extrémité 3', 
-la séquence ou longueur de la première région N insérée, le segment D (le cas présent) avec ses excisions en 3' et 5' 
-et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\autoref{tab:nomenclature-vdj}).
+Chaque réarrangement \gls{vdj} peut être décrit à l'aide d'une nomenclature
+standardisée, permettant une identification unique et reproductible
+\cite{laneIMGTONTOLOGYIMGTLIGMotif2010,lefrancIMGT30Years2019}. Cette notation
+précise la nature du locus considéré, le segment V utilisé, les nucléotides
+excisés à son extrémité 3', la séquence ou longueur de la première région N
+insérée, le segment D (le cas présent) avec ses excisions en 3' et 5' et la
+seconde région N, ainsi que le segment J retenu et son excision en 5'
+(\autoref{tab:nomenclature-vdj}).
 
 \begin{table}[H]
     \centering
@@ -101,65 +120,82 @@ et la seconde région N, ainsi que le segment J retenu et son excision en 5' (\a
     \label{tab:nomenclature-vdj}
     \begin{tabular}{c c c c c c c c c c}
         \toprule
-        \textbf{Locus} & \textbf{VH} & \textbf{BE V3'} & \textbf{N1} & \textbf{BE D5'} & 
-        \textbf{D Nom} & \textbf{BE D3'} & \textbf{N2} & \textbf{BE J5'} & \textbf{J Nom} \\        
-        \midrule IGH & VH3-30 & 1 & 12 & 2 & D3-3 & 4 & TCG & 12 & J4*02 \\
+        \textbf{Locus} & \textbf{VH}     & \textbf{BE V3'} & \textbf{N1}     & \textbf{BE D5'} &
+        \textbf{D Nom} & \textbf{BE D3'} & \textbf{N2}     & \textbf{BE J5'} & \textbf{J Nom}                                \\
+        \midrule IGH   & VH3-30          & 1               & 12              & 2               & D3-3 & 4 & TCG & 12 & J4*02 \\
         \bottomrule
     \end{tabular}
 \end{table}
-
 
 \section{Détection et visualisation des réarrangements V(D)J via \textit{Vidjil}}
 
 % C'est d'une limpidité cette partie clapclap ! les schémas sont sublimes. Tu
 % pourrais expliquer le principe de Vidjil a un macaque ^^.
 
-La plateforme \textit{Vidjil} qui permet donc l'étude de ces réarrangements \gls{vdj} est développée et maintenue 
-conjointement par l'équipe Bonsai du laboratoire \gls{cristal} et par le consortium \textit{VidjilNet}. 
-Elle regroupe d'une part l'algorithme \textit{vidjil-algo}, une heuristique de détection des réarrangement \gls{vdj} 
-\cite{giraudFastMulticlonalClusterization2014b} et d'autre part une interface web permettant de visualiser les 
-résultats ainsi produits \cite{duezVidjilWebPlatform2016}. L'ensemble du code source est disponible sur le dépôt gitlab 
-public suivant : \href{https://gitlab.inria.fr/vidjil/vidjil}{gitlab.inria.fr/vidjil/vidjil}.
+La plateforme \textit{Vidjil} qui permet donc l'étude de ces réarrangements
+\gls{vdj} est développée et maintenue conjointement par l'équipe Bonsai du
+laboratoire \gls{cristal} et par le consortium \textit{VidjilNet}. Elle
+regroupe d'une part l'algorithme \textit{vidjil-algo}, une heuristique de
+détection des réarrangement \gls{vdj}
+\cite{giraudFastMulticlonalClusterization2014b} et d'autre part une interface
+web permettant de visualiser les résultats ainsi produits
+\cite{duezVidjilWebPlatform2016}. L'ensemble du code source est disponible sur
+le dépôt gitlab public suivant :
+\href{https://gitlab.inria.fr/vidjil/vidjil}{gitlab.inria.fr/vidjil/vidjil}.
 
 \vspace{1em}
 
-La première composante, \textit{vidjil-algo} est un programme écrit en \texttt{C++}, dont la fonction est d'extraire 
-les jonctions \gls{vdj} à partir des \textit{reads} (lectures) issues du \gls{ngs} dans des fichiers de séquences 
-brutes au format FASTQ, ou bien préalablement alignées au format \gls{bam}. Pour ce faire, l'algorithme 
-repose sur une heuristique originale qui détecte des fenêtres caractéristiques chevauchant les régions CDR3, 
-sans recourir à un alignement exhaustif contre les séquences germinales. Une première étape consiste à constuire un index 
-des séquences germinales V et J à partir de \textit{k-mers} (ou mots de taille $\mathbf{k}$), où $\mathbf{k}$ est choisi de façon à 
-minimiser les \textit{k-mers} communs aux deux segments (\autoref{fig:index}). L'utilisation de \textit{k-mers} espacés permet d'améliorer la sensibilité 
-notamment en cas de substitutions (example \ref{ex:spaced-seed}).
+La première composante, \textit{vidjil-algo} est un programme écrit en
+\texttt{C++}, dont la fonction est d'extraire les jonctions \gls{vdj} à partir
+des \textit{reads} (lectures) issues du \gls{ngs} dans des fichiers de
+séquences brutes au format FASTQ, ou bien préalablement alignées au format
+\gls{bam}. Pour ce faire, l'algorithme repose sur une heuristique originale qui
+détecte des fenêtres caractéristiques chevauchant les régions CDR3, sans
+recourir à un alignement exhaustif contre les séquences germinales. Une
+première étape consiste à constuire un index des séquences germinales V et J à
+partir de \textit{k-mers} (ou mots de taille $\mathbf{k}$), où $\mathbf{k}$ est
+choisi de façon à minimiser les \textit{k-mers} communs aux deux segments
+(\autoref{fig:index}). L'utilisation de \textit{k-mers} espacés permet
+d'améliorer la sensibilité notamment en cas de substitutions (example
+\ref{ex:spaced-seed}).
 
 \begin{examplebox}[label={ex:spaced-seed}]
-    Le mot \texttt{ATTCG-CAGGT} issue de la graine \texttt{\#\#\#\#\#\#-\#\#\#\#\#} 
-    est présent dans la séquence \texttt{ATTCG\textcolor{gray}{G}CAGGT} ou \texttt{ATTCG\textcolor{gray}{T}CAGGT} 
+    Le mot \texttt{ATTCG-CAGGT} issue de la graine \texttt{\#\#\#\#\#\#-\#\#\#\#\#}
+    est présent dans la séquence \texttt{ATTCG\textcolor{gray}{G}CAGGT} ou \texttt{ATTCG\textcolor{gray}{T}CAGGT}
     mais pas \texttt{A\textcolor{red}{C}TCG\textcolor{gray}{A}CAGGT}.
 \end{examplebox}
 
 \input{figures/index.tex}
-    
-La seconde étape consiste à traverser l'ensemble des \textit{reads} en recherchant des fenêtres $\mathbf{w}$ qui recouvrent 
-la région \gls{cdr}3 par comparaison de chacun des \textit{k-mer} du \textit{read} à ceux des index générés. Brièvement cette 
-approche consiste à conserver les \textit{reads} qui contiennent les \textit{k-mer} d'une séquence V et ceux d'une séquence J, 
-de façon à former une fenêtre $\mathbf{w}$ débutant par les derniers \textit{k-mer} de la séquence V et se terminant 
-par les premiers \textit{k-mer} de la séquence J (\autoref{fig:vidjil-algo}).
-Cette approche permet une détection rapide (qui croit linéairement avec le nombre de nucléotides \footnote{En pratique l'étape de détection des fenêtres 
-est de compléxité $O(ln)$ et plus récemment $O(l'n)$ où $l$ est le nombre de recombinaisons des systèmes, $l'$ le nombre moyen avec $l' \ll l$, et $n$ 
-la taille de la séquence.}), robuste et efficace 
-des séquences recombinées. Une fois les fenêtres détectées, \textit{vidjil-algo} regroupe les \textit{reads} en clones, 
-puis procède à une segmentation et une annotation des séquences identifiées \footnote{Cette étape de désignation est elle de compléxité $O(Mn)$, et $O(M'n)$ à présent, 
-$M$ désignant la taille totale des gènes considérés, et $M'$ un sous ensemble tel que $M' \ll M$.}. 
+
+La seconde étape consiste à traverser l'ensemble des \textit{reads} en
+recherchant des fenêtres $\mathbf{w}$ qui recouvrent la région \gls{cdr}3 par
+comparaison de chacun des \textit{k-mer} du \textit{read} à ceux des index
+générés. Brièvement cette approche consiste à conserver les \textit{reads} qui
+contiennent les \textit{k-mer} d'une séquence V et ceux d'une séquence J, de
+façon à former une fenêtre $\mathbf{w}$ débutant par les derniers
+\textit{k-mer} de la séquence V et se terminant par les premiers \textit{k-mer}
+de la séquence J (\autoref{fig:vidjil-algo}). Cette approche permet une
+détection rapide (qui croit linéairement avec le nombre de nucléotides
+\footnote{En pratique l'étape de détection des fenêtres est de compléxité
+$O(ln)$ et plus récemment $O(l'n)$ où $l$ est le nombre de recombinaisons des
+systèmes, $l'$ le nombre moyen avec $l' \ll l$, et $n$ la taille de la
+séquence.}), robuste et efficace des séquences recombinées. Une fois les
+fenêtres détectées, \textit{vidjil-algo} regroupe les \textit{reads} en clones,
+puis procède à une segmentation et une annotation des séquences identifiées
+\footnote{Cette étape de désignation est elle de compléxité $O(Mn)$, et
+$O(M'n)$ à présent, $M$ désignant la taille totale des gènes considérés, et
+$M'$ un sous ensemble tel que $M' \ll M$.}.
 
 \input{figures/vidjil-algo.tex}
 % JavaScript Object Notation (JSON) :o je ne connaissais même pas l'acronyme !
-Les résultats ainsi générés par \textit{vidjil-algo} sont rassemblés dans un fichier \textit{.vidjil} au format \gls{json} où 
-l'on retrouvera des métadonnées en lien avec l'échantillon analysé et un ensemble de données relatif à chaque clone 
-identifié par \textit{vidjil-algo} (\autoref{lst:json-vidjil}).
+Les résultats ainsi générés par \textit{vidjil-algo} sont rassemblés dans un
+fichier \textit{.vidjil} au format \gls{json} où l'on retrouvera des
+métadonnées en lien avec l'échantillon analysé et un ensemble de données
+relatif à chaque clone identifié par \textit{vidjil-algo}
+(\autoref{lst:json-vidjil}).
 
 \begin{figure}[H]
-\begin{lstlisting}[language=json, 
+    \begin{lstlisting}[language=json, 
 caption={Extrait d'une sortie de \textit{vidjil-algo}.},
 label={lst:json-vidjil}]
 "clones": [
@@ -176,40 +212,51 @@ label={lst:json-vidjil}]
 \end{lstlisting}
 \end{figure}
 
-En parallèle, \textit{Vidjil} désigne également l'application web \footnote{\url{https://app.vidjil.org/}} 
-permettant de visualiser et de manipuler les résultats produits par \textit{vidjil-algo}. 
-Elle prend aussi en charge la création et la gestion des comptes utilisateurs, des profils patients, etc. (\autoref{fig:vidjil-web}). 
-L'application est développée côté serveur en \texttt{Python}, à l'aide du \textit{framework} \href{https://py4web.com}{\texttt{py4web}} 
-(anciennement \texttt{web2py}), et côté client en \texttt{JavaScript}. La base de données utilisée est \texttt{MySQL}, 
-le tout étant orchestré via le déploiement de conteneurs \texttt{Docker}.
+En parallèle, \textit{Vidjil} désigne également l'application web
+\footnote{\url{https://app.vidjil.org/}} permettant de visualiser et de
+manipuler les résultats produits par \textit{vidjil-algo}. Elle prend aussi en
+charge la création et la gestion des comptes utilisateurs, des profils
+patients, etc. (\autoref{fig:vidjil-web}). L'application est développée côté
+serveur en \texttt{Python}, à l'aide du \textit{framework}
+\href{https://py4web.com}{\texttt{py4web}} (anciennement \texttt{web2py}), et
+côté client en \texttt{JavaScript}. La base de données utilisée est
+\texttt{MySQL}, le tout étant orchestré via le déploiement de conteneurs
+\texttt{Docker}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{images/vidjil-web.png}
-    \caption{Interface de la plateforme web \textit{Vidjil}. 
-    Liste des clones identifiés à gauche, visualisation de la cinétique des clones en haut à gauche, 
-    familles \gls{vdj} en bas à droite, et séquences des clones sélectionnés en bas.}
+    \caption{Interface de la plateforme web \textit{Vidjil}.
+        Liste des clones identifiés à gauche, visualisation de la cinétique des clones en haut à gauche,
+        familles \gls{vdj} en bas à droite, et séquences des clones sélectionnés en bas.}
     \label{fig:vidjil-web}
 \end{figure}
 
 \section{Applications en oncohématologie}
 
-L'analyse du répertoire des gènes \gls{vdj} est particulièrement utile en oncohématologie, 
-où la quasi unicité de chaque réarrangement \gls{vdj} peut servir de marqueur clonal hautement 
-spécifique de certaines cellules tumorales et ainsi permettre leur détection et leur suivi \cite{hultcrantzBaselineVDJClonotype2020}.
+L'analyse du répertoire des gènes \gls{vdj} est particulièrement utile en
+oncohématologie, où la quasi unicité de chaque réarrangement \gls{vdj} peut
+servir de marqueur clonal hautement spécifique de certaines cellules tumorales
+et ainsi permettre leur détection et leur suivi
+\cite{hultcrantzBaselineVDJClonotype2020}.
 
 \vspace{1em}
 % Alors je pense qu'on ne met pas de s quand on utilise les acronyme LAM LAL
-Avant toute chose, il peut être utile de dresser un panorama rapide des hémopathies malignes afin de 
-mieux comprendre l'importance de l'analyse du répertoire des gènes \gls{vdj} dans ces situations.  
-Ces pathologies regroupent ce qu'on appelle communément les « cancers du sang » et peuvent se séparer selon
-leur origine en quatre grandes catégories. Une première séparation peut être établie entre les hémopathies 
-myéloïdes et lymphoïdes selon l'origine des cellules. Brièvement, les cellules du sang et de la moelle sont soit de 
-lignée lymphoïde pour les lymphocytes (B, T, NK et autres non conventionnels) et précurseurs, soit de lignée myéloïde 
-pour le reste des cellules (hématies, plaquettes, polynucléaires, monocytes) et leurs précurseurs. Une seconde séparation 
-est établie selon la maturité des cellules : on parle alors de \glspl{lam} et de \glspl{lal} lorsque la cellule 
-tumorale dérive d'un précurseur, et de \glspl{smp} et de \glspl{slp}/\glspl{lnh} lorsque la cellule est mature (\autoref{fig:hemopathies}) 
-\cite{alaggio5thEditionWorld2022a, khoury5thEditionWorld2022}.
+Avant toute chose, il peut être utile de dresser un panorama rapide des
+hémopathies malignes afin de mieux comprendre l'importance de l'analyse du
+répertoire des gènes \gls{vdj} dans ces situations. Ces pathologies regroupent
+ce qu'on appelle communément les « cancers du sang » et peuvent se séparer
+selon leur origine en quatre grandes catégories. Une première séparation peut
+être établie entre les hémopathies myéloïdes et lymphoïdes selon l'origine des
+cellules. Brièvement, les cellules du sang et de la moelle sont soit de lignée
+lymphoïde pour les lymphocytes (B, T, NK et autres non conventionnels) et
+précurseurs, soit de lignée myéloïde pour le reste des cellules (hématies,
+plaquettes, polynucléaires, monocytes) et leurs précurseurs. Une seconde
+séparation est établie selon la maturité des cellules : on parle alors de
+\glspl{lam} et de \glspl{lal} lorsque la cellule tumorale dérive d'un
+précurseur, et de \glspl{smp} et de \glspl{slp}/\glspl{lnh} lorsque la cellule
+est mature (\autoref{fig:hemopathies}) \cite{alaggio5thEditionWorld2022a,
+khoury5thEditionWorld2022}.
 
 % C'et quoi cette horreur ???? (je parle du graphique) Je sais qu'on aime la
 % cyto mais non ; je ferme les yeux j'ai les diapos de claude écriture jaune
@@ -221,26 +268,41 @@ tumorale dérive d'un précurseur, et de \glspl{smp} et de \glspl{slp}/\glspl{ln
 
 \input{figures/hemopathies.tex}
 
-Dès lors \textit{Vidjil} trouve son utilité dans les hémopathies lymphoïdes, principalement dans les \glspl{lal} et les 
-\glspl{llc} où il permet l'identification des réarrangements \gls{vdj} des \glspl{ig} et des \glspl{tcr} à des fins diverses.
-Par exemple, dans les \glspl{llc} il permet d'identifier et d'annoter le segment V du réarrangement \textit{\gls{igh}} du clone tumoral, pour 
-ensuite étudier le taux de mutations face aux séquences germinales, servant de marqueur pronostique fort de la pathologie
+Dès lors \textit{Vidjil} trouve son utilité dans les hémopathies lymphoïdes,
+principalement dans les \glspl{lal} et les \glspl{llc} où il permet
+l'identification des réarrangements \gls{vdj} des \glspl{ig} et des \glspl{tcr}
+à des fins diverses. Par exemple, dans les \glspl{llc} il permet d'identifier
+et d'annoter le segment V du réarrangement \textit{\gls{igh}} du clone tumoral,
+pour ensuite étudier le taux de mutations face aux séquences germinales,
+servant de marqueur pronostique fort de la pathologie
 \cite{crombieIGHVMutationalStatus2017}.
 
 \vspace{1em}
 
-Dans le cadre de ce travail, nous nous sommes intéressés à une pathologie en particulier : le \gls{mm}, que l'on peut rattacher
-au groupe des hémopathies lymphoïdes matures. Cette pathologie se caractérise par une prolifération maligne de plasmocytes, cellules
-dérivées des lymphocytes B, responsables de la production et de la sécrétion des \glspl{ig} (anticorps) \cite{briglePathobiologyDiagnosisMultiple2017}. 
-Elles constituent le stade le plus mature de la lymphopoïèse B, à la suite de la différenciation des lymphocytes B naïfs 
-au contact de l'antigène, et sont les principaux acteurs de la réponse immunitaire humorale adaptative.
+Dans le cadre de ce travail, nous nous sommes intéressés à une pathologie en
+particulier : le \gls{mm}, que l'on peut rattacher au groupe des hémopathies
+lymphoïdes matures. Cette pathologie se caractérise par une prolifération
+maligne de plasmocytes, cellules dérivées des lymphocytes B, responsables de la
+production et de la sécrétion des \glspl{ig} (anticorps)
+\cite{briglePathobiologyDiagnosisMultiple2017}. Elles constituent le stade le
+plus mature de la lymphopoïèse B, à la suite de la différenciation des
+lymphocytes B naïfs au contact de l'antigène, et sont les principaux acteurs de
+la réponse immunitaire humorale adaptative.
 
 \vspace{1em}
 
-Dans le \gls{mm}, les plasmocytes malins prolifèrent de manière incontrôlée, entraînant une altération du fonctionnement normal de la moelle osseuse,
-avec des anémies, un déficit immunitaire secondaire, des atteintes osseuses, et une insuffisance rénale. Une partie de ces symptômes est causée
-par la production d'une \gls{ig} monoclonale, dont la détection par électrophorèse constitue un élément diagnostique majeur, au même titre que la
-prolifération médullaire des plasmocytes malins et les autres signes cliniques et biologiques précédemment décrits \cite{cowanDiagnosisManagementMultiple2022a} 
+% Alors je pense que ici on peut écouter une peu Je comprend ton introduction
+% pour l'EPS etc. Mais je pense qu'on peut simplifier un peu et garder
+% l'essentiel pour nous : epidemio + bio
+
+Dans le \gls{mm}, les plasmocytes malins prolifèrent de manière incontrôlée,
+entraînant une altération du fonctionnement normal de la moelle osseuse, avec
+des anémies, un déficit immunitaire secondaire, des atteintes osseuses, et une
+insuffisance rénale. Une partie de ces symptômes est causée par la production
+d'une \gls{ig} monoclonale, dont la détection par électrophorèse constitue un
+élément diagnostique majeur, au même titre que la prolifération médullaire des
+plasmocytes malins et les autres signes cliniques et biologiques précédemment
+décrits \cite{cowanDiagnosisManagementMultiple2022a}
 (\autoref{fig:mm-cells-ig}).
 
 \begin{figure}[H]
@@ -253,107 +315,154 @@ prolifération médullaire des plasmocytes malins et les autres signes cliniques
         \centering
         \includegraphics[width=01\textwidth]{images/pic.png}
     \end{minipage}
-    \caption{Gauche : Prolifération de plasmocytes malins dans la moelle osseuse. 
-    Droite : Electrophorèse des protéines sériques montrant la présence d'une \gls{ig} monoclonale (pic noir) 
-    superposée à un profil normal en bleu.}
+    \caption{Gauche : Prolifération de plasmocytes malins dans la moelle osseuse.
+        Droite : Electrophorèse des protéines sériques montrant la présence d'une \gls{ig} monoclonale (pic noir)
+        superposée à un profil normal en bleu.}
     \label{fig:mm-cells-ig}
 \end{figure}
 
-Le myélome multiple touche majoritairement les personnes âgées, avec un âge médian au diagnostic d'environ 70 ans. Il représente environ 10 \%
-des hémopathies malignes et près de 1 \% de l'ensemble des cancers. En France, on estime à environ 6 000 le nombre de nouveaux cas chaque année 
+Le myélome multiple touche majoritairement les personnes âgées, avec un âge
+médian au diagnostic d'environ 70 ans. Il représente environ 10 \% des
+hémopathies malignes et près de 1 \% de l'ensemble des cancers. En France, on
+estime à environ 6 000 le nombre de nouveaux cas chaque année
 \cite{spfSurviePersonnesAtteintes}.
+
+% Si tu fais met de l'épidémio mais le prono aussi ;) 
 
 \vspace{1em}
 
-Sur le plan thérapeutique, les stratégies ont considérablement évolué ces dernières années. Le traitement repose sur une approche personnalisée
-selon l'âge et l'état général du patient. Chez les patients éligibles, une chimiothérapie d'induction est souvent suivie d'une autogreffe de cellules
-souches hématopoïétiques. Chez les patients plus âgés ou fragiles, des protocoles associant agents immunomodulateurs (tels que la lénalidomide),
-inhibiteurs du protéasome (comme le bortézomib) et anticorps monoclonaux (notamment l'anti-CD38, daratumumab) sont privilégiés. Le traitement de
-maintenance et la surveillance à long terme permettent de prolonger la réponse et de retarder les rechutes, fréquentes dans cette pathologie chronique 
+Sur le plan thérapeutique, les stratégies ont considérablement évolué ces
+dernières années. Le traitement repose sur une approche personnalisée selon
+l'âge et l'état général du patient. Chez les patients éligibles, une
+chimiothérapie d'induction est souvent suivie d'une autogreffe de cellules
+souches hématopoïétiques. Chez les patients plus âgés ou fragiles, des
+protocoles associant agents immunomodulateurs (tels que la lénalidomide),
+inhibiteurs du protéasome (comme le bortézomib) et anticorps monoclonaux
+(notamment l'anti-CD38, daratumumab) sont privilégiés. Le traitement de
+maintenance et la surveillance à long terme permettent de prolonger la réponse
+et de retarder les rechutes, fréquentes dans cette pathologie chronique
 \cite{cowanDiagnosisManagementMultiple2022a}.
 
 \vspace{1em}
 
-En ce qui concerne le \gls{mm}, l'intérêt de l'analyse du répertoire \gls{vdj} se rapproche de celui des \glspl{lal} où l'identification 
-de réarrangement \gls{vdj} (en l'occurrence ici des \textit{\gls{igh}} ou des \textit{\gls{igk}} et \textit{\gls{igl}}) sert de marqueur unique (dit de clonalité) 
-de la cellule tumorale, et permet ainsi de suivre l'évolution de la maladie.
+En ce qui concerne le \gls{mm}, l'intérêt de l'analyse du répertoire \gls{vdj}
+se rapproche de celui des \glspl{lal} où l'identification de réarrangement
+\gls{vdj} (en l'occurrence ici des \textit{\gls{igh}} ou des \textit{\gls{igk}}
+et \textit{\gls{igl}}) sert de marqueur unique (dit de clonalité) de la cellule
+tumorale, et permet ainsi de suivre l'évolution de la maladie.
 
 \section{Maladie résiduelle et ADN circulant tumoral}
 
-Comme de nombreuses autres hémopathies, le \gls{mm} est une pathologie dont l'évolution clinique peut être très hétérogène. 
-Si certaines caractéristiques observées au diagnostic permettent de dresser un pronostic plus ou moins favorable, 
-la trajectoire de la maladie reste souvent difficile à prédire \cite{hanamuraMultipleMyelomaHighrisk2022}. 
-Dans ce contexte, un marqueur particulièrement pertinent de l'évolution de la maladie et de la réponse au traitement 
-est la présence d'une \gls{mrd} dite indétectable.
+Comme de nombreuses autres hémopathies, le \gls{mm} est une pathologie dont
+l'évolution clinique peut être très hétérogène. Si certaines caractéristiques
+observées au diagnostic permettent de dresser un pronostic plus ou moins
+favorable, la trajectoire de la maladie reste souvent difficile à prédire
+\cite{hanamuraMultipleMyelomaHighrisk2022}. Dans ce contexte, un marqueur
+particulièrement pertinent de l'évolution de la maladie et de la réponse au
+traitement est la présence d'une \gls{mrd} dite indétectable.
 
 \vspace{1em}
 
-La \gls{mrd} désigne la persistance de cellules tumorales résiduelles non détectables 
-par les méthodes conventionnelles (telles que l'analyse morphologique ou biochimique), mais que l'on peut mettre en évidence 
-grâce à des techniques de haute sensibilité, comme la \gls{cmf} multiparamétrique ou la biologie moléculaire. Elle représentent 
-en quelque sorte la « face cachée de l'iceberg » de la maladie, qui persiste même lorsque les signes cliniques et biologiques 
-ont disparu (\autoref{fig:mrd-techniques}).
-Dans le cas spécifique du \gls{mm}, l'évaluation de la \gls{mrd} repose souvent sur la détection de cellules présentant des 
-aberrations phénotypiques par \gls{cmf} ou sur la détection de réarrangements \gls{vdj} propres au clone tumoral, permettant un suivi très ciblé 
-mais plus complexe à mettre en oeuvre \cite{bertaminiMRDAssessmentMultiple2021}.
+% "telles que l'analyse morphologique ou biochimique" non défini au préalable :/
+% Pas sûr que ton examinateur connaisse biochimie = EPS
+
+La \gls{mrd} désigne la persistance de cellules tumorales résiduelles non
+détectables par les méthodes conventionnelles (telles que l'analyse
+morphologique ou biochimique), mais que l'on peut mettre en évidence grâce à
+des techniques de haute sensibilité, comme la \gls{cmf} multiparamétrique ou la
+biologie moléculaire. Elle représentent en quelque sorte la « face cachée de
+l'iceberg » de la maladie, qui persiste même lorsque les signes cliniques et
+biologiques ont disparu (\autoref{fig:mrd-techniques}). Dans le cas spécifique
+du \gls{mm}, l'évaluation de la \gls{mrd} repose souvent sur la détection de
+cellules présentant des aberrations phénotypiques par \gls{cmf} ou sur la
+détection de réarrangements \gls{vdj} propres au clone tumoral, permettant un
+suivi très ciblé mais plus complexe à mettre en oeuvre
+\cite{bertaminiMRDAssessmentMultiple2021}.
 
 \input{figures/mrd-techniques.tex}
 
-L'intérêt pronostique de la \gls{mrd} a largement été démontré dans d'autres hémopathies malignes, notamment dans les \gls{lal} et \gls{lam}, 
-où elle s'est imposée comme un outil essentiel pour guider et adapter les stratégies thérapeutiques. Dans le \gls{mm}, l'absence de \gls{mrd} 
-après traitement est également associée à une durée de rémission prolongée et à une survie globale améliorée. A l'inverse, une \gls{mrd} détectable, 
-même à très faible niveau, constitue un facteur de risque important de rechute précoce (\autoref{fig:mrd})
+L'intérêt pronostique de la \gls{mrd} a largement été démontré dans d'autres
+hémopathies malignes, notamment dans les \gls{lal} et \gls{lam}, où elle s'est
+imposée comme un marqueur pronostic puissant ainsi qu'un outil essentiel pour
+guider et adapter les stratégies thérapeutiques. Dans le \gls{mm}, l'absence de
+\gls{mrd} après traitement est également associée à une durée de rémission
+prolongée et à une survie globale améliorée. A l'inverse, une \gls{mrd}
+détectable, même à très faible niveau, constitue un facteur de risque important
+de rechute précoce (\autoref{fig:mrd})
 \cite{munshiLargeMetaanalysisEstablishes2020}.
 
 \vspace{1em}
 
-Ainsi, le suivi de la \gls{mrd} tend aujourd'hui à devenir non seulement un critère d'évaluation de l'efficacité thérapeutique, mais aussi un objectif 
-thérapeutique propre dans le \gls{mm}. De plus en plus d'essais cliniques intègrent désormais la \gls{mrd} comme critère principal d'évaluation, 
-voire comme élément décisionnel pour intensifier, adapter ou interrompre un traitement.
+Ainsi, le suivi de la \gls{mrd} tend aujourd'hui à devenir non seulement un
+critère d'évaluation de l'efficacité thérapeutique, mais aussi un objectif
+thérapeutique propre dans le \gls{mm}. De plus en plus d'essais cliniques
+intègrent désormais la \gls{mrd} comme critère principal d'évaluation, voire
+comme élément décisionnel pour intensifier, adapter ou interrompre un
+traitement.
 
 \input{figures/mrd.tex}
 
-Pour autant, l'analyse de la \gls{mrd} pose certaines difficultés, notamment en ce qui concerne la sensibilité et la spécificité des techniques utilisées.
-Il faut pouvoir être en mesure de détecter un nombre extrêmement faible de cellules tumorales parmi une population très majoritaire de cellules normales,
-ce qui exige des méthodes à très haut pouvoir résolutif et des échantillons de qualité et quantité suffisante.
+Pour autant, l'analyse de la \gls{mrd} pose certaines difficultés, notamment en
+ce qui concerne la sensibilité et la spécificité des techniques utilisées. Il
+faut pouvoir être en mesure de détecter un nombre extrêmement faible de
+cellules tumorales parmi une population très majoritaire de cellules normales,
+ce qui exige des méthodes à très haut pouvoir résolutif et des échantillons de
+qualité et quantité suffisante.
 
 \vspace{1em}
 
-La \gls{cmf}, bien qu'accessible dans de nombreux centres, dépend fortement de l'expertise technique et de la standardisation
-des panels d'anticorps utilisés. De plus, son seuil de détection, généralement de l'ordre de $10^{-3}$ à $5.10^{-5}$, peut s'avérer insuffisant dans certains contextes
-thérapeutiques.
+La \gls{cmf}, bien qu'accessible dans de nombreux centres, dépend fortement de
+l'expertise technique et de la standardisation des panels d'anticorps utilisés.
+De plus, son seuil de détection, généralement de l'ordre de $10^{-3}$ à
+$5.10^{-5}$, peut s'avérer insuffisant dans certains contextes thérapeutiques.
 
 \vspace{1em}
 
-Les approches moléculaires, comme le \gls{ngs} ciblant les réarrangements \gls{vdj}, offrent une sensibilité encore plus élevée (jusqu'à $10^{-6}$),
-mais nécessitent une connaissance préalable du profil clonotypique du patient, ainsi qu'un accès à des plateformes technologiques spécialisées et solutions 
-bioinformatiques dédiées. Par ailleurs, s'agissant du \gls{mm}, la détection des réarrangements \gls{vdj} peut être compliquée par la présence de nombreuses 
-mutations sur la région V des \glspl{ig} à la suite du phénomène d'hypermutation somatique, ce qui peut rendre difficile l'amplification des séquences.
+Les approches moléculaires, comme le \gls{ngs} ciblant les réarrangements
+\gls{vdj}, offrent une sensibilité encore plus élevée (jusqu'à $10^{-6}$), mais
+nécessitent une connaissance préalable du profil clonotypique du patient, ainsi
+qu'un accès à des plateformes technologiques spécialisées et solutions
+bioinformatiques dédiées. Par ailleurs, s'agissant du \gls{mm}, la détection
+des réarrangements \gls{vdj} peut être compliquée par la présence de nombreuses
+mutations sur la région V des \glspl{ig} à la suite du phénomène
+d'hypermutation somatique, ce qui peut rendre difficile l'amplification des
+séquences.
 
 \vspace{1em}
 
-Enfin, la représentativité de l'échantillon, souvent issu d'une ponction médullaire unique, peut aussi poser problème en raison de la distribution hétérogène
-des plasmocytes tumoraux dans la moelle osseuse. Cette variabilité peut conduire à une sous-estimation de la \gls{mrd} en cas de prélèvement non représentatif.
-Par ailleurs, la nécessité de prélèvements médullaires peut également constituer un frein à l'évaluation répétée de la \gls{mrd}, du fait de leur caractère
-invasif, et souvent inconfortable pour le patient.
+Enfin, la représentativité de l'échantillon, souvent issu d'une ponction
+médullaire unique (biopsie de moelle osseuse), peut aussi poser problème en
+raison de la distribution hétérogène des plasmocytes tumoraux dans la moelle
+osseuse. Cette variabilité peut conduire à une sous-estimation de la \gls{mrd}
+en cas de prélèvement non représentatif. Par ailleurs, la nécessité de réaliser
+des ponctions médullaires, , du fait de leur caractère invasif, et souvent
+inconfortable pour le patient, peut également constituer un frein à
+l'évaluation répétée de la \gls{mrd}.
 
 \vspace{1em}
 
-Dans ce contexte, l'analyse des acides nucléiques circulants, et en particulier de l'\gls{adnc}, suscite un intérêt croissant. Ces fragments d'ADN, libérés dans le sang 
-par les cellules tumorales et normales en apoptose ou en nécrose, peuvent refléter de manière globale la charge tumorale et permettre une évaluation non 
-invasive de la \gls{mrd} (\autoref{fig:ctdna}). Contrairement à la ponction médullaire, un simple prélèvement sanguin (ou « biopsie liquide ») permet de suivre plus facilement 
-et plus fréquemment l'évolution de la maladie.
+Dans ce contexte, l'analyse des acides nucléiques circulants, et en particulier
+de l'\gls{adnc}, suscite un intérêt croissant. Ces fragments d'ADN, libérés
+dans le sang par les cellules tumorales et normales en apoptose ou en nécrose,
+peuvent refléter de manière globale la charge tumorale et permettre une
+évaluation non invasive de la \gls{mrd} (\autoref{fig:ctdna}). Contrairement à
+la ponction médullaire, un simple prélèvement sanguin (ou « biopsie liquide »)
+permet de suivre plus facilement et plus fréquemment l'évolution de la maladie.
 
 \vspace{1em}
 
-Bien que cette approche soit largement démocratisée dans le domaine de l'oncologie solide, elle reste encore en cours de validation en oncohématologie et demeure,
-pour le moment, marginale, avec quelques applications dans le cadre des \glspl{lnh}. Dans les autres pathologies, les défis techniques liés à la faible concentration des 
-\gls{adnc} et à la faible taille des fragments ($\approx$ 150 pb), à l'hétérogénéité génétique des hémopathies malignes et à l'absence de biomarqueurs universels 
-limitent encore son déploiement en routine clinique \cite{daoUsingCfDNACtDNA2023}.
+Bien que cette approche soit largement démocratisée dans le domaine de
+l'oncologie solide, elle reste encore en cours de validation en oncohématologie
+et demeure, pour le moment, marginale, avec quelques applications dans le cadre
+des \glspl{lnh}. Dans les autres pathologies, les défis techniques liés à la
+faible concentration des \gls{adnc} et à la faible taille des fragments
+($\approx$ 150 pb), à l'hétérogénéité génétique des hémopathies malignes et à
+l'absence de biomarqueurs universels limitent encore son déploiement en routine
+clinique \cite{daoUsingCfDNACtDNA2023}.
 
 \begin{figure}[H]
     \includegraphics[width=1\textwidth]{images/ctdna.png}
     \caption{Origines des \gls{adnc}. \citeauthor{racheljunewongEnglishCirculatingTumor2017} \cite{racheljunewongEnglishCirculatingTumor2017}.}
     \label{fig:ctdna}
 \end{figure}
-    
+
