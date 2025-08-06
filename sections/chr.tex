@@ -94,7 +94,7 @@ d'événement en comptant directement le nombre de cellules portant l'anomalie
 parmi l'ensemble des cellules analysées (\autoref{fig:fish}). En revanche, il
 est beaucoup plus difficile d'estimer avec précision la fréquence de ces
 anomalies dans le cadre d'analyses en \textit{bulk}, comme celles réalisées par
-\gls{ngs}.
+\gls{hts}.
 
 \begin{figure}[H]
     \begin{minipage}{0.45\textwidth}
@@ -115,7 +115,7 @@ anomalies dans le cadre d'analyses en \textit{bulk}, comme celles réalisées pa
 Pour des raisons internes au laboratoire, l'analyse par \gls{fish} n'est pas
 réalisable dans ce contexte. L'objectif a donc été de développer et d'évaluer
 une solution d'estimation de la fréquence des délétions de \textit{TP53} à
-partir des données issues du \gls{ngs}. L'analyse du nombre de copies repose
+partir des données issues du \gls{hts}. L'analyse du nombre de copies repose
 classiquement sur le rapport des pronfondeurs sur certaines régions, et est
 exprimé en ratio : 1 sans anomalie, inférieur à 1 si délétion et supérieur à 1
 si gain de la région (\autoref{fig:cnv}). Ainsi à partir de cette valeur et en
@@ -136,18 +136,17 @@ posant les hypothèses suivantes :
 
 Il est alors possible de moyenner la valeur du $\log_2$ du ratio de profondeur
 pour les 10 sondes couvrant la région du gène \textit{TP53}, et de l'exprimer
-comme une fréquence estimée de cellules délétées selon la relation suivante :
+comme une fréquence estimée de cellules délétées selon la relation suivante, ou $\pi$ 
+désigne la pureté tumorale qui est le pourcentage de cellules tumorales dans l'échantillon analysé :
 
 % Perso dans le texte je ferai correspondre n
-% J'introduirai la notion de pureté qq chose de très court 
-% définirai la pureté dans la formule par un symbole
 
 \begin{equation}
     \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 - 2^{\overline{\log_2\text{Ratio}}}}{0{,}5} \right)
-    \times \frac{1}{\text{pureté}} \times 100
+    \times \frac{1}{\pi} \times 100
     \footnote{Pour exprimer le ratio de profondeur en fréquence de cellules delétées, on soustrait à 1 la valeur du ratio pour exprimer la perte relative,
         que l'on divise par 0{,}5 qui représente la délétion monoallélique de la totatilité des cellules (une normalisation en quelque sorte). Le reste de l'expression
-        permet de corrigier par la pureté tumorale de l'échantillon, qui est le pourcentage de cellules tumorales dans l'échantillon analysé, et exprime le résultat en pourcentage.}
+        permet de corriger par la pureté tumorale $\pi$ de l'échantillon, et exprime le résultat en pourcentage.}
 \end{equation}
 
 \begin{equation}
@@ -254,12 +253,11 @@ intervalle restreint, ou graphiquement à partir des 1178 échantillons du
 nous permet d'abaisser le seuil initialement à 10, à une valeur de 6
 (\autoref{fig:translocation-threshold}).
 
-% J'ai lu la légende mais je pense que tu devrais mettre seuil t* optimal avec
-% une couleur qui correspond au ----
-% Beau formalisme ;) mais ne metterai tu pas au total le nombre d'échantillon 
-% que tu récupères en applicant cette méthode ? 
-
 \input{figures/translocation-threshold.tex}
+
+On récupère ainsi 34 patients initialements considérés comme négatifs, mais il reste 
+à confronter cette donnée au type d'anomalie et au reste du dossier pour évaluer l'impact 
+sur le pronostic.
 
 \section{Statistiques sur les données de \textit{Vidjil} issues du CHU de Lille}
 

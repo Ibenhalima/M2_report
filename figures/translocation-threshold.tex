@@ -24,15 +24,15 @@
             mark=square*,
         ] table [x=t, y=T+, col sep=comma] {data/threshold_analysis.csv};
 
-        \draw[dashed, thick] (axis cs:6,-100) -- (axis cs:6,1000);
-        \node at (axis cs:6.5,450) [anchor=west, font=\small, text=black] {seuil $t^*$ optimal};
+        \draw[dashed, thick, color=Brown] (axis cs:6,-100) -- (axis cs:6,1000);
+        \node at (axis cs:6.5,450) [anchor=west, font=\small, text=Brown] {seuil $t^*$ optimal};
 
         \addlegendentry{$T_+(t)$}
         \end{axis}
     \end{tikzpicture}
     \caption{
         Courbes de \textcolor{Purple}{$T(t)$} et \textcolor{Goldenrod}{$T_+(t)$} à partir des 1178 échantillons du \gls{chu}.
-        Le seuil optimal $t^*$ est indiqué par la ligne pointillée, il est choisi de façon à maximiser \textcolor{Purple}{$T(t)$} 
+        Le \textcolor{Brown}{seuil optimal $t^*$ est indiqué par la ligne pointillée}, il est choisi de façon à maximiser \textcolor{Purple}{$T(t)$} 
         tout en contraignant \textcolor{Goldenrod}{$T_+(t)$} en dessous de 10.
         }
     \label{fig:translocation-threshold}

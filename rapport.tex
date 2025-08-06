@@ -28,6 +28,9 @@
 \widowpenalty=10000
 \displaywidowpenalty=10000
 
+\usepackage{parskip}
+\setlength{\parskip}{1em}
+
 \usepackage[bottom]{footmisc}
 
 % Colors & Graphics 
@@ -47,7 +50,17 @@
 
 % Graphics and Plots
 \usepackage{tikz}
-\usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
+\usetikzlibrary{
+    calc, 
+    positioning, 
+    arrows.meta, 
+    shapes.geometric, 
+    decorations.pathreplacing,
+    fit, 
+    shapes, 
+    backgrounds,
+    trees
+    }
 
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
@@ -192,17 +205,6 @@
 
 %  Document start 
 \begin{document}
-
-% Tout d'abord magnifique doc ! Pro tips : 
-% - Ne pas lié les figure a la compilation du document en général c'est bugogène
-%   en général ;) 
-% - Utilise HTS plutot que NGS c'est plus précis et plus moderne. NGS c'est pour
-%   Les vieux cus d'hémato anti changement (*rire*) (J'ai pas réussi a mettre a
-%   jour moi même j'ai honte ^^)
-% - Pour l'espacement entre les paragraphes je te déconseille d'utiliser
-%   \vspace{1em} la typographie LaTeX est déjà bien faite pas touche :p. En vrai
-%   je te comprend moi aussi je préfère l'aérer. utilise parskip
-%   \setlength{\parskip}{1em}
 
 \onehalfspacing
 
