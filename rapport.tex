@@ -28,6 +28,9 @@
 \widowpenalty=10000
 \displaywidowpenalty=10000
 
+\usepackage[parfill]{parskip}
+\setlength{\parindent}{0pt}
+
 \usepackage[bottom]{footmisc}
 
 % Colors & Graphics 
@@ -47,7 +50,17 @@
 
 % Graphics and Plots
 \usepackage{tikz}
-\usetikzlibrary{calc, positioning, arrows.meta, shapes.geometric, decorations.pathreplacing}
+\usetikzlibrary{
+    calc, 
+    positioning, 
+    arrows.meta, 
+    shapes.geometric, 
+    decorations.pathreplacing,
+    fit, 
+    shapes, 
+    backgrounds,
+    trees
+    }
 
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
@@ -73,7 +86,8 @@
 \usepackage{caption}
 \captionsetup{
     labelfont={color=gray},
-    textfont={color=gray}
+    textfont={color=gray},
+    belowskip=0pt
 }
 
 % Other useful packages 

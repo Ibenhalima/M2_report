@@ -1,29 +1,32 @@
 \chapter{Problématique et objectifs}
 
-Ainsi, l'objectif de ce travail a été de développer un protocole d'analyse via \textit{Vidjil} 
-pour l'étude de la \gls{mrd} dans le \gls{mm}. Dans un premier temps, l'objectif a été 
-de mettre en place un protocole reproductible permettant d'identifier les réarrangements clonaux 
-à partir d'ADN génomique, extrait de prélèvements médullaires. Cette phase a servi de référence 
-pour caractériser le réarrangement \gls{vdj} dominant propre à chaque patient, et constituer une 
-signature clonale utilisable pour le suivi ultérieur, sur ADN génomique et \gls{adnc}.
+Ainsi, l'objectif de ce travail a été de développer un protocole d'analyse via
+\textit{Vidjil} pour l'étude de la \gls{mrd} dans le \gls{mm}. Dans un premier
+temps, l'objectif a été de mettre en place un protocole reproductible
+permettant d'identifier les réarrangements clonaux à partir d'ADN génomique,
+extrait de prélèvements médullaires. Cette phase a servi de référence pour
+caractériser le réarrangement \gls{vdj} dominant propre à chaque patient, et
+constituer une signature clonale utilisable pour le suivi ultérieur, sur ADN
+génomique et \gls{adnc}.
 
-\vspace{1em}
+Dans un second temps, l'objectif (bien que non atteint à ce jour, mais qui aura
+guidé les décisions entreprises) était de rechercher ces réarrangements dans
+l'\gls{adnc} issu de prélèvements sanguins. L'analyse de ce type d'échantillons
+soulève plusieurs défis techniques et bioinformatiques : d'une part, la très
+faible concentration d'\gls{adnc} dans le plasma nécessite des méthodes de
+quantification sensibles et fiables ; d'autre part la fragmentation naturelle
+du \gls{adnc}, rend plus difficile l'identification des réarrangements clonaux,
+souvent de l'ordre de 500 pb contre seulement 150 pb pour l'\gls{adnc}.
 
-Dans un second temps, l'objectif (bien que non atteint à ce jour, mais qui aura guidé les décisions entreprises) 
-était de rechercher ces réarrangements dans l'\gls{adnc} issu de prélèvements sanguins. L'analyse de ce type d'échantillons 
-soulève plusieurs défis techniques et bioinformatiques : d'une part, la très faible concentration d'\gls{adnc} dans le 
-plasma nécessite des méthodes de quantification sensibles et fiables ; d'autre part la fragmentation naturelle du \gls{adnc}, 
-rend plus difficile l'identification des réarrangements clonaux, souvent de l'ordre de 500 pb contre seulement 150 pb pour l'\gls{adnc}. 
+Un autre pan de ce travail a également consisté à adapter l'analyse faite par
+\textit{Vidjil} à ces spécificités, en évaluant la pertinence des paramètres de
+détection utilisés par \textit{Vidjil} pour l'\gls{adnc} (ou l'ADN génomique
+traité comme tel) et en développant des outils de traitement personnalisés pour
+l'exploration des résultats.
 
-\vspace{1em}
-
-Un autre pan de ce travail a également consisté à adapter l'analyse faite par \textit{Vidjil} à ces spécificités, 
-en évaluant la pertinence des paramètres de détection utilisés par \textit{Vidjil} pour l'\gls{adnc} (ou l'ADN génomique 
-traité comme tel) et en développant des outils de traitement personnalisés pour l'exploration des résultats. 
-
-\vspace{1em}
-
-Enfin, une étude des performances analytiques du protocole a été menée, avec une attention particulière portée à la 
-sensibilité (détection de faibles taux de \gls{mrd}) et à la spécificité (éviction des signaux non clonaux ou artefactuels), 
-afin d'évaluer la faisabilité de cette approche dans un environnement clinique pour le suivi thérapeutique.
+Enfin, une étude des performances analytiques du protocole a été menée, avec
+une attention particulière portée à la limite de détection (détection de faibles taux
+de \gls{mrd}) et à la spécificité (éviction des signaux non clonaux ou
+artefactuels), afin d'évaluer la faisabilité de cette approche dans un
+environnement clinique pour le suivi thérapeutique.
 
