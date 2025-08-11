@@ -51,7 +51,7 @@ ensuite de relier les clones identifiés sur les prélèvements de suivi.
         complet séquencé en \textit{leader}, tandis que le second (en bas) commence au niveau de la région \gls{fr}3.
         Les séquences en \colorbox{blue!20}{bleu} correspondent au segment V, en \colorbox{green!20}{vert}
         au segment D, et les séquences en \colorbox{orange!20}{orange} correspondent au segment J.
-        Les jonctions sont alignées pour souligner la différence de longueur des régions V.}
+        }
     \label{fig:v-leader-fr3}
 \end{figure}
 
@@ -184,7 +184,7 @@ incomplets.
     \centering
     \begin{ColoredVerbatim}
         
-        NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN Séquence quelconque double brin
+        NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN Région quelconque double brin
         NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
         NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN Dénaturation (Cycle 1)
@@ -203,7 +203,7 @@ incomplets.
     \end{ColoredVerbatim}
     \caption{
         Représentation schématique de l'amplification non spécifique des séquences hors-cibles. 
-        La séquence \C\G\T\C\T\C\C\T\C\A\G\G\T\A\A\G\ est issue de l'amorce JH commune, et est recopiée 
+        La séquence \C\G\T\C\T\C\C\T\C\A\G\G\T\A\A\G\ est issue de l'amorce JH commune, et est insérée 
         lors de l'amplification des séquences hors-cibles.
     }
     \label{fig:off-target-amplification}
@@ -326,10 +326,8 @@ pour stocker le nombre de \textit{reads} des clonotypes supprimés indéxé par 
 temps sous forme d'\textit{array} (tableau), respectivement pour le locus actif
 et pour l'ensemble des loci (\autoref{algo:removed-reads}). Enfin la méthode
 \texttt{getSize} de l'objet \texttt{clone}, ainsi que d'autres indicateurs du
-nombre de \textit{reads} analysés sont modifiés pour soustraire du total des
-\textit{reads} le nombre de \textit{reads} des clonotypes supprimés.
-
-\vspace{1em}
+nombre de \textit{reads} analysés sont modifiés pour soustraire de façon dynamique
+du total des \textit{reads} le nombre de \textit{reads} des clonotypes supprimés.
 
 \begin{algorithm}[H]
     \caption{Calcul des \textit{reads} des clonotypes supprimés à chaque temps}
@@ -418,7 +416,7 @@ positif ou négatif (soit une cellule tumorale ou saine), avec une probabilité
 $p$ qu'une cellule soit positive, en considérant chaque cellule comme un
 échantillon indépendant, le nombre $N$ de cellules positives parmi $n$ cellules
 analysées suivra une loi binomiale de paramètres $n$ et $p$. Dans les faits,
-sachant que $p$ est très faible, on peut approximer la loi binomiale par une
+sachant que $p$ est très faible et $n$ assez elevé, on peut approximer la loi binomiale par une
 loi de Poisson de paramètre $\lambda = n \cdot p$.
 
 Ainsi, si l'on accepte un risque $\epsilon$ de ne pas détecter un réarrangement

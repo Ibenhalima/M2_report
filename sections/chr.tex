@@ -35,11 +35,7 @@ applications développées par l'équipe (\autoref{fig:bioinfo-dashboard}).
 L'ensemble du code est versionné et hébergé sur un dépôt GitLab interne au
 \gls{chu}.
 
-schéma Augustin architecture ?
-
-% Pour l'architecture je ne sais pas si tu parles de notre infra ou celle de
-% pipelines. Je te joins a ce mail mes schéma déguelasse ^^ 
-% Faut mettre a jour la partie IT ++ mais les bases sont là 
+schéma Augustin architecture
 
 \begin{figure}[H]
     \centering
@@ -68,8 +64,6 @@ analyses moléculaires sont alors réalisées :
           anomalies comme des duplications ou des délétions.
 \end{itemize}
 
-\vspace{1em}
-
 C'est dans le cadre de cette dernière analyse qu'il a été nécessaire de
 développer une approche spécifique pour quantifier les délétions du gène
 \textit{TP53}, gène suppresseur de tumeur dont l'altération est associée à un
@@ -86,8 +80,6 @@ constitue l'unique moyen d'accéder aux remaniements génomiques de grande taill
 (duplications, délétions, translocations, etc.). Ces informations permettent de
 dresser ce que l'on peut considérer comme un « carytoype moléculaire » de la
 cellule tumorale.
-
-\vspace{1em}
 
 Il est aisé, grâce à la technique de \gls{fish}, de quantifier ce type
 d'événement en comptant directement le nombre de cellules portant l'anomalie
@@ -135,11 +127,9 @@ posant les hypothèses suivantes :
 \end{figure}
 
 Il est alors possible de moyenner la valeur du $\log_2$ du ratio de profondeur
-pour les 10 sondes couvrant la région du gène \textit{TP53}, et de l'exprimer
-comme une fréquence estimée de cellules délétées selon la relation suivante, ou $\pi$ 
+pour les $n$ sondes couvrant la région du gène \textit{TP53}, et de l'exprimer
+comme une fréquence estimée de cellules délétées selon la relation suivante, où $\pi$ 
 désigne la pureté tumorale qui est le pourcentage de cellules tumorales dans l'échantillon analysé :
-
-% Perso dans le texte je ferai correspondre n
 
 \begin{equation}
     \text{Fréquence des cellules délétées (\%)} = \left( \frac{1 - 2^{\overline{\log_2\text{Ratio}}}}{0{,}5} \right)
@@ -190,14 +180,12 @@ région distante.} et \textit{discordantly aligned reads}\footnote{Les
 l'orientation ou la distance d'alignement est anormale par rapport à ce qui est
 attendu.}).
 
-\vspace{1em}
-
 Les résultats sont ainsi rendus sous forme de page web statique
 (\autoref{fig:translocation-web}), après filtrage des variants en dehors des
 régions d'intérêt, et en dessous d'un seuil de détection fixé à 10 événements
 supports (\textit{reads} ou paires de \textit{reads}). Des observations
 réalisées sur des analyses au laboratoire laissent à penser que certaines
-translocations veritables sont présentes en dessous de ce seuil fixé à 10,
+translocations véritables sont présentes en dessous de ce seuil fixé à 10,
 notamment sur des \gls{adnc}. C'est donc concernant ce dernier, initialement
 fixé de manière empirique, qu'un travail d'optimisation a été entrepris afin de
 déterminer s'il permettait effectivement de discriminer de manière fiable les
@@ -229,8 +217,6 @@ formulant des hypothèses et en s'appuyant sur quelques postulats biologiques :
           secondaires, et peuvent coexister avec d'autres anomalies.
 \end{itemize}
 
-\vspace{1em}
-
 Dans cette optique, on peut chercher à définir un seuil de détection optimisé,
 qui maximise le nombre de patients identifiés comme porteurs d'une
 translocation, tout en minimisant le nombre de patients présentant plusieurs
@@ -256,8 +242,8 @@ nous permet d'abaisser le seuil initialement à 10, à une valeur de 6
 \input{figures/translocation-threshold.tex}
 
 On récupère ainsi 34 patients initialements considérés comme négatifs, mais il reste 
-à confronter cette donnée au type d'anomalie et au reste du dossier pour évaluer l'impact 
-sur le pronostic.
+à confronter cette donnée au type d'anomalie et au reste des informations pour évaluer la 
+vraissemblance de ces anomalies et l'impact sur le pronostic le cas échéant.
 
 \section{Statistiques sur les données de \textit{Vidjil} issues du CHU de Lille}
 
@@ -265,14 +251,12 @@ Le dernier travail présenté dans ce rapport se situe à l'interface des deux
 sections précédentes. Il a consisté à réutiliser les données issues de
 \textit{Vidjil}, obtenues au \gls{chu}, afin d'établir des statistiques à
 grande échelle sur les résultats analysés. Deux types d'échantillons sont
-traités en routine : d'une part, des \glspl{lal}, pour identifier les
+traités en routine : d'une part, des \gls{lal}, pour identifier les
 réarrangements des clones tumoraux et concevoir des systèmes personnalisés de
 suivi de la \gls{mrd} par \gls{pcr} quantitative ; d'autre part, des
-\glspl{llc}, pour l'étude du taux d'hypermutation des gènes \textit{IGHV}.
+\gls{llc}, pour l'étude du taux d'hypermutation des gènes \textit{IGHV}.
 L'objectif est d'extraire et de visualiser des tendances générales à partir du
 volume important de données acquises.
-
-\vspace{1em}
 
 Le traitement des données brutes issues des analyses par \textit{Vidjil} est
 réalisé via un script Python (\texttt{clone.py}) qui importe les fichiers
@@ -287,16 +271,12 @@ des séquences V. Par ailleurs, les métadonnées associées aux échantillons s
 intégrées afin d'assurer une contextualisation clinique et biologique des
 résultats.
 
-\vspace{1em}
-
 Un second script (\texttt{process\_dir.py}) traite de manière automatisée un
 ensemble de fichiers d'analyse et de métadonnées situés dans un répertoire
 donné. Il agrège les informations des clones extraits selon le type
 d'échantillon (\gls{llc} ou \gls{lal}). Les résultats sont synthétisés dans un
 fichier TSV exploitable pour des analyses ultérieures, avec au total plus de
-4000 échantillons pour 11000 clones.
-
-\vspace{1em}
+4000 échantillons pour 11000 clones
 
 Pour finir un tableau de bord interactif a été développé à l'aide de
 \textit{Streamlit} (\texttt{stat\_display.py}) pour permettre l'exploration

@@ -6,7 +6,7 @@
             draw,
             align=center,
             font=\scriptsize,
-            text width=1.7cm,
+            text width=1.6cm,
             minimum height=0.7cm
         },
         lymphprecursor/.style={fill=Purple!20},
@@ -38,7 +38,7 @@
 
 
     % Lymphoid branch
-    \node (lymphoid) [right=9cm of myeloid, lymphprecursor] {Progéniteur  lymphoïde};
+    \node (lymphoid) [right=8cm of myeloid, lymphprecursor] {Progéniteur  lymphoïde};
 
     \node (bcell) [below=of lymphoid, lymphmature] {Lymphocyte B};
     \node (tcell) [right=of bcell, lymphmature] {Lymphocyte T};
@@ -103,7 +103,7 @@
         dotted, 
         ultra thick, 
         inner sep=5pt, 
-        label=left:{\textbf{\textcolor{Purple!60}{SLP/LNH}}}
+        label={[xshift=-15pt]above left:{\textbf{\textcolor{Purple!60}{SLP/LNH}}}}
     ] {};
 
     \draw[
@@ -120,13 +120,14 @@
     {\textbf{LLC}};
 
     \draw[
-    draw=Purple, 
-    dotted, 
-    ultra thick, 
+        draw=Purple,
+        line width=3pt,
+        line cap=rect,
+        dash pattern=on 0pt off 6pt,
     ]
-    ($(plasmocyte.south west) + (-3pt,-3pt)$)
-    rectangle
-    ($(plasmocyte.north east) + (3pt,3pt)$);
+        ($(plasmocyte.south west) + (-3pt,-3pt)$)
+        rectangle
+        ($(plasmocyte.north east) + (3pt,3pt)$);    
 
     \node[draw=none, thick, text=Purple] 
     at ($(plasmocyte.west) + (-0.5,0cm)$) 
