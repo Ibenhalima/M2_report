@@ -111,12 +111,16 @@ contre 32 \% en \gls{fr}3 au milieu de nombreuses séquences artéfactuelles et 
 \footnote{Traduction un peu libre de l'anglais \textit{off-target}} (\autoref{fig:fr3-vs-leader}).
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/diag_leader.png}
-    \vspace{0.5cm}
-    \includegraphics[width=1\textwidth]{images/diag_fr3.png}
+    \begin{minipage}{0.50\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/diag_leader.png}
+    \end{minipage}
+    \begin{minipage}{0.50\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/diag_fr3.png}
+    \end{minipage}
     \caption{
-        Répartition des clones identifiés en \textit{leader} (en haut) et en \gls{fr}3 (en bas)
+        Répartition des clones identifiés en \textit{leader} (à gauche) et en \gls{fr}3 (à droite)
         pour le patient 1 au diagnostic. On observe que le \textcolor{Magenta}{clone majoritaire (en rose)}
         en \textit{leader} devient plus minoritaire en \gls{fr}3, devant les \textcolor{ProcessBlue}{nombreux clones artéfactuels (en bleu)}
         et \textcolor{ForestGreen}{hors-cibles (en vert)}.
@@ -259,13 +263,17 @@ de \textit{vidjil-algo} correspondant à l'instruction \texttt{-c clones -z 100
 \textcolor{red}{-e 1e-15} (\autoref{fig:fr3-evalue}).
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{images/diah_fr3_e1.png}
-    \vspace{0.5cm}
-    \includegraphics[width=1\textwidth]{images/diag_fr3_e-15.png}
+    \begin{minipage}{0.50\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/diag_fr3.png}
+    \end{minipage}
+    \begin{minipage}{0.50\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{images/diag_fr3_e-15.png}
+    \end{minipage}
     \caption{
-        Répartition des clones identifiés en \gls{fr}3 avec une \textit{e-value} maximale de 1 (en haut)
-        et de $10^{-15}$ (en bas) pour le patient 1 au diagnostic. \textcolor{Magenta}{Clone majoritaire (en rose)},
+        Répartition des clones identifiés en \gls{fr}3 avec une \textit{e-value} maximale de 1 (à gauche)
+        et de $10^{-15}$ (à droite) pour le patient 1 au diagnostic. \textcolor{Magenta}{Clone majoritaire (en rose)},
         \textcolor{ProcessBlue}{clones artéfactuels (en bleu)} et \textcolor{ForestGreen}{hors-cibles (en vert)}.
     }
     \label{fig:fr3-evalue}
@@ -306,28 +314,14 @@ fonctionnalité permettant la suppression contrôlée des clonotypes, répondant
 La mise en œuvre de ce cahier des charges implique principalement des
 modifications de la partie client de \textit{Vidjil}, dont il est pertinent
 d'en présenter brièvement l'architecture avant de détailler la solution
-implémentée. Cette partie client est écrite en JavaScript natif et repose sur
+implémentée (\autoref{algo:removed-reads}). 
+Cette partie client est écrite en JavaScript natif et repose sur
 58 scripts, dont 2 sont particulièrement importants pour cette nouvelle
 fonctionnalité : \texttt{model.js} et \texttt{clone.js}. Le premier gère via un
 objet \texttt{model} l'ensemble des attributs et méthodes nécessaires à la
 gestion synchrone des données des clonotypes et métadonnées d'analyses, tandis
 que le second gère des objets \texttt{clone} comprenant les données et méthodes
 propres à chaque clonotype.
-
-L'idée est donc la suivante : un nouvel attribut booléen \texttt{removed}
-(initialisé par défaut sur la valeur \texttt{false}) est ajouté à l'objet
-\texttt{clone} pour indiquer si le clonotype doit être supprimé ou non. Cet
-attribut est contrôlé dans l'implémentation actuelle par un nouveau tag
-utilisateur \texttt{removed\ clonotype}. 
-
-Deux attributs \texttt{removed\_clones\_reads\_of\_active\_locus} et
-\texttt{removed\_clones\_reads\_total} sont ajoutés à l'objet \texttt{model}
-pour stocker le nombre de \textit{reads} des clonotypes supprimés indéxé par le
-temps sous forme d'\textit{array} (tableau), respectivement pour le locus actif
-et pour l'ensemble des loci (\autoref{algo:removed-reads}). Enfin la méthode
-\texttt{getSize} de l'objet \texttt{clone}, ainsi que d'autres indicateurs du
-nombre de \textit{reads} analysés sont modifiés pour soustraire de façon dynamique
-du total des \textit{reads} le nombre de \textit{reads} des clonotypes supprimés.
 
 \begin{algorithm}[H]
     \caption{Calcul des \textit{reads} des clonotypes supprimés à chaque temps}
@@ -364,6 +358,21 @@ du total des \textit{reads} le nombre de \textit{reads} des clonotypes supprimé
 
     Mise à jour des attributs \RemovedReadsLocus et \RemovedReadsTotal\
 \end{algorithm}
+
+L'idée est donc la suivante : un nouvel attribut booléen \texttt{removed}
+(initialisé par défaut sur la valeur \texttt{false}) est ajouté à l'objet
+\texttt{clone} pour indiquer si le clonotype doit être supprimé ou non. Cet
+attribut est contrôlé dans l'implémentation actuelle par un nouveau tag
+utilisateur \texttt{removed\ clonotype}. 
+
+Deux attributs \texttt{removed\_clones\_reads\_of\_active\_locus} et
+\texttt{removed\_clones\_reads\_total} sont ajoutés à l'objet \texttt{model}
+pour stocker le nombre de \textit{reads} des clonotypes supprimés indéxé par le
+temps sous forme d'\textit{array} (tableau), respectivement pour le locus actif
+et pour l'ensemble des loci. Enfin la méthode
+\texttt{getSize} de l'objet \texttt{clone}, ainsi que d'autres indicateurs du
+nombre de \textit{reads} analysés sont modifiés pour soustraire de façon dynamique
+du total des \textit{reads} le nombre de \textit{reads} des clonotypes supprimés.
 
 En parallèle, des modifications de l'interface utilisateur ont été réalisées
 afin d'afficher les clonotypes supprimés avec un format distinct permettant de
@@ -461,31 +470,26 @@ au seuil de confiance de $95\,\%$ (\autoref{tab:valeurs_n_volume}).
 \begin{table}[H]
     \centering
     \caption{
-        Nombre minimal de cellules $n$ et volume sanguin nécessaire pour différents $p$ et seuils $k$, avec $\varepsilon = 0.05$.
+        Nombre minimal de cellules $n$ et volumes sanguins ou médullaires nécessaires pour différents $p$ et seuils $k$, avec $\varepsilon = 0.05$.
         Les volumes en \colorbox{mygreen}{vert} et \colorbox{myyellow}{jaune} sont analysables en pratique clinique, tandis que les
         volumes en \colorbox{myorange}{orange} et nuances de \colorbox{myred}{rouge} sont considérés comme trop élevés.
     }
     \label{tab:valeurs_n_volume}
-    \begin{tabular}{c|cc|cc}
+    \begin{tabular}{c|c|cc|c|cc}
         \toprule
-        \multirow{2}{*}{$p$} & \multicolumn{2}{c|}{$k = 10$} & \multicolumn{2}{c}{$k = 100$}                                                        \\
-                             & $n$ (cellules)                & Volume (mL)                   & $n$ (cellules)        & Volume (mL)                  \\
+        \multirow{3}{*}{$p$} 
+        & \multicolumn{3}{c|}{$k = 10$} 
+        & \multicolumn{3}{c}{$k = 100$} \\
+        \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+        & \multirow{2}{*}{$n$ (cellules)} & \multicolumn{2}{c|}{Volume (mL)} & \multirow{2}{*}{$n$ (cellules)} & \multicolumn{2}{c}{Volume (mL)} \\
+        \cmidrule(lr){3-4} \cmidrule(lr){6-7}
+        & & $5\,\text{G/L}$ & $50\,\text{G/L}$ & & $5\,\text{G/L}$ & $50\,\text{G/L}$ \\
         \midrule
-        \multicolumn{5}{c}{Numération = $5\,\text{G/L}$}                                                                                            \\
-        \midrule
-        $10^{-4}$            & $1.57 \times 10^{5}$          & \cellcolor{mygreen}0.031      & $1.17 \times 10^{6}$  & \cellcolor{mygreen}0.234     \\
-        $10^{-5}$            & $1.57 \times 10^{6}$          & \cellcolor{mygreen}0.314      & $1.17 \times 10^{7}$  & \cellcolor{myyellow}2.340    \\
-        $10^{-6}$            & $1.57 \times 10^{7}$          & \cellcolor{myyellow}3.14      & $1.17 \times 10^{8}$  & \cellcolor{myorange}23.40    \\
-        $10^{-7}$            & $1.57 \times 10^{8}$          & \cellcolor{myred}31.43        & $1.17 \times 10^{9}$  & \cellcolor{mydarkred}234.00  \\
-        $10^{-8}$            & $1.57 \times 10^{9}$          & \cellcolor{mydarkred}314.29   & $1.17 \times 10^{10}$ & \cellcolor{mydeepred}2340.00 \\
-        \midrule
-        \multicolumn{5}{c}{Numération = $50\,\text{G/L}$}                                                                                           \\
-        \midrule
-        $10^{-4}$            & $1.57 \times 10^{5}$          & \cellcolor{mygreen}0.0031     & $1.17 \times 10^{6}$  & \cellcolor{mygreen}0.023     \\
-        $10^{-5}$            & $1.57 \times 10^{6}$          & \cellcolor{mygreen}0.031      & $1.17 \times 10^{7}$  & \cellcolor{mygreen}0.234     \\
-        $10^{-6}$            & $1.57 \times 10^{7}$          & \cellcolor{mygreen}0.31       & $1.17 \times 10^{8}$  & \cellcolor{myyellow}2.34     \\
-        $10^{-7}$            & $1.57 \times 10^{8}$          & \cellcolor{myyellow}3.14      & $1.17 \times 10^{9}$  & \cellcolor{myorange}23.40    \\
-        $10^{-8}$            & $1.57 \times 10^{9}$          & \cellcolor{myred}31.43        & $1.17 \times 10^{10}$ & \cellcolor{mydarkred}234.00  \\
+        $10^{-4}$ & $1.57\times10^{5}$ & \cellcolor{mygreen}0.031 & \cellcolor{mygreen}0.0031 & $1.17\times10^{6}$ & \cellcolor{mygreen}0.234 & \cellcolor{mygreen}0.023 \\
+        $10^{-5}$ & $1.57\times10^{6}$ & \cellcolor{mygreen}0.314 & \cellcolor{mygreen}0.031  & $1.17\times10^{7}$ & \cellcolor{myyellow}2.340 & \cellcolor{mygreen}0.234 \\
+        $10^{-6}$ & $1.57\times10^{7}$ & \cellcolor{myyellow}3.14 & \cellcolor{mygreen}0.31   & $1.17\times10^{8}$ & \cellcolor{myorange}23.40 & \cellcolor{myyellow}2.34 \\
+        $10^{-7}$ & $1.57\times10^{8}$ & \cellcolor{myred}31.43   & \cellcolor{myyellow}3.14  & $1.17\times10^{9}$ & \cellcolor{mydarkred}234.00 & \cellcolor{myorange}23.40 \\
+        $10^{-8}$ & $1.57\times10^{9}$ & \cellcolor{mydarkred}314.29 & \cellcolor{myred}31.43 & $1.17\times10^{10}$ & \cellcolor{mydeepred}2340.00 & \cellcolor{mydarkred}234.00 \\
         \bottomrule
     \end{tabular}
 \end{table}
